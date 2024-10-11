@@ -1,0 +1,35 @@
+import { SvgIcon, SvgIconProps } from "@mui/material";
+import React from "react";
+
+function IconFacebook(props:SvgIconProps) {
+  return (
+    <SvgIcon {...props}>
+      <svg
+        width="8"
+        height="18"
+        viewBox="0 0 8 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g clip-path="url(#clip0_58_5588)">
+          <path
+            d="M5 5.79787V3.74051C5 3.17268 5.448 2.71184 6 2.71184H7V0.140137H5C3.343 0.140137 2 1.52166 2 3.22617V5.79787H0V8.36957H2V16.599H5V8.36957H7L8 5.79787H5Z"
+            fill="white"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_58_5588">
+            <rect
+              width="8"
+              height="17"
+              fill="white"
+              transform="translate(0 0.140137)"
+            />
+          </clipPath>
+        </defs>
+      </svg>
+    </SvgIcon>
+  );
+}
+
+export default IconFacebook;
