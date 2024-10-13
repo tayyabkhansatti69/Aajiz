@@ -3,10 +3,6 @@ import {
   Container,
   styled,
   Button,
-  // Select,
-  MenuItem,
-  // InputLabel,
-  TextField,
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -25,10 +21,10 @@ const inter = Poppins({
 
 const pagesNavbar = [
   { id: 1, title: "Home", link: "" },
-  { id: 2, title: "Find Tutors", link: "" },
-  { id: 3, title: "Become A Tutor", link: "" },
-  { id: 4, title: "Business Training", link: "" },
-  { id: 5, title: "Blog", link: "" },
+  { id: 2, title: "Doner", link: "" },
+  { id: 3, title: "partner", link: "" },
+  { id: 4, title: "About US", link: "" },
+  { id: 5, title: "Contact US", link: "" },
 ];
 function SaleHeader() {
   const [isTop, setIsTop] = useState(true);
@@ -54,7 +50,7 @@ function SaleHeader() {
   return (
     <AppBar
       sx={{
-        background: "transparent",
+        background: "#FF00FF",
         position: "fixed",
         zIndex: 5,
         boxShadow: "none",
@@ -130,15 +126,20 @@ function SaleHeader() {
               alignItems="center"
               gap={2}
             >
-              <Box width={"100%"}>
-                <TextField
-                  id="outlined-select-currency"
-                  select
-                  label="English, USD"
-                  fullWidth
-                >
-                  <MenuItem>allset</MenuItem>
-                </TextField>
+              <Box width={"40%"}>
+                <Link href={"/sign-in"}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    color={"secondary"}
+                    fullWidth
+                    sx={{
+                      borderRadius:5
+                    }}
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
               </Box>
 
               <Box width={"40%"}>

@@ -63,19 +63,19 @@ function SaleFooter() {
                   }}
                 />
                 <Typography variant="subtitle1" sx={{ color: "common.white" }}>
-                  Who we are
+                text
                 </Typography>
                 <Typography variant="subtitle1" sx={{ color: "common.white" }}>
-                  How it works
+                text
                 </Typography>
                 <Typography variant="subtitle1" sx={{ color: "common.white" }}>
-                  Tutor reviews
+                text
                 </Typography>
                 <Typography variant="subtitle1" sx={{ color: "common.white" }}>
-                  Policies for Students
+                  text
                 </Typography>
                 <Typography variant="subtitle1" sx={{ color: "common.white" }}>
-                  Policies for Tutors
+                text
                 </Typography>
               </Box>
             </Box>
@@ -88,7 +88,7 @@ function SaleFooter() {
                   color: "common.white",
                 }}
               >
-                Tutor hub
+                Aajaiz
               </Typography>
               <Box
                 sx={{
@@ -110,10 +110,10 @@ function SaleFooter() {
                   Contact Us
                 </Typography>
                 <Typography variant="subtitle1" sx={{ color: "common.white" }}>
-                  Become Teacher
+                  Become Partner
                 </Typography>
                 <Typography variant="subtitle1" sx={{ color: "common.white" }}>
-                  Blog
+                  Post
                 </Typography>
                 <Typography variant="subtitle1" sx={{ color: "common.white" }}>
                   Legal Center
@@ -194,7 +194,7 @@ function SaleFooter() {
           component="span"
           variant="body2"
         >
-          ©{currentYear}.Tutor All rights reserved
+          ©{currentYear} All rights reserved
         </Typography>
         <Box ml="auto" display="flex" alignItems="center" gap={1}>
           <Typography
