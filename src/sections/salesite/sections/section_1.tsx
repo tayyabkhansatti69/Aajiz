@@ -1,6 +1,7 @@
 import bgIMG from "@/src/assets/auth/dashboard-bg.png";
 import landingImage from "@/src/assets/image/landingImage.png";
 import {
+
   Box,
   CardMedia,
   Container,
@@ -11,7 +12,7 @@ import {
 
 function Section_one() {
   return (
-    <Grid container>
+    <Grid container  sx={{ background: '#FF00FF',mt:8 }}>
       <Grid xs={12} item>
         <Box
           sx={{
@@ -122,4 +123,3 @@ function Section_one() {
 }
 
 export default Section_one;
-

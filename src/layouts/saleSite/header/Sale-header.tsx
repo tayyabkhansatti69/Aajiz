@@ -42,7 +42,7 @@ function SaleHeader() {
   return (
     <AppBar
       sx={{
-        background: "transparent",
+        background: "#FF00FF",
         position: "fixed",
         zIndex: 5,
         boxShadow: "none",
