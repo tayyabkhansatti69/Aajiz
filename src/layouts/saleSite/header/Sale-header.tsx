@@ -1,22 +1,10 @@
-import { LogoSsoAdmin } from "@/src/assets/logo-sso-admin";
-import {
-  Container,
-  styled,
-  Button,
-  // Select,
-  MenuItem,
-  // InputLabel,
-  TextField,
-} from "@mui/material";
+import { AajizLogo } from "@/src/assets/aajiz-logo";
+import { Button, Container, styled } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-
 import { Poppins } from "next/font/google";
-// import Image from "next/image";
 import Link from "next/link";
-// import mainLogo from "../../../assets/mainlogo.png";
-// import { LogoSsoAdmin } from "@/assets/logo-sso-admin";
 import { useEffect, useState } from "react";
 const inter = Poppins({
   weight: "400",
@@ -25,10 +13,10 @@ const inter = Poppins({
 
 const pagesNavbar = [
   { id: 1, title: "Home", link: "" },
-  { id: 2, title: "Find Tutors", link: "" },
-  { id: 3, title: "Become A Tutor", link: "" },
-  { id: 4, title: "Business Training", link: "" },
-  { id: 5, title: "Blog", link: "" },
+  { id: 2, title: "About Us", link: "" },
+  { id: 3, title: "Partner", link: "" },
+  { id: 4, title: "Doner", link: "" },
+  { id: 5, title: "Contact Us", link: "" },
 ];
 function SaleHeader() {
   const [isTop, setIsTop] = useState(true);
@@ -59,7 +47,7 @@ function SaleHeader() {
         zIndex: 5,
         boxShadow: "none",
         transition: "all 0.4s ease",
-        display:{xs:"none",lg:"block"}
+        display: { xs: "none", lg: "block" },
       }}
     >
       <Container maxWidth="xxl">
@@ -83,9 +71,9 @@ function SaleHeader() {
               transition: "all 0.4s ease",
             }}
           >
-            <LogoSsoAdmin
+            <AajizLogo
               sx={() => ({
-                width: "300px",
+                width: "100px",
                 height: "60px",
               })}
             />
@@ -123,39 +111,18 @@ function SaleHeader() {
               </StyledNavLink>
             ))}
 
-            <Box
-              width={"20%"}
-              ml="auto"
-              display="flex"
-              alignItems="center"
-              gap={2}
-            >
-              <Box width={"100%"}>
-                <TextField
-                  id="outlined-select-currency"
-                  select
-                  label="English, USD"
+            <Box width={"10%"} ml="auto" display="flex" alignItems="center">
+                <Button
+                  variant="contained"
+                  size="large"
+                  color={"secondary"}
                   fullWidth
+                  sx={{
+                    borderRadius: 5,
+                  }}
                 >
-                  <MenuItem>allset</MenuItem>
-                </TextField>
-              </Box>
-
-              <Box width={"40%"}>
-                <Link href={"/sign-in"}>
-                  <Button
-                    variant="contained"
-                    size="large"
-                    color={"secondary"}
-                    fullWidth
-                    sx={{
-                      borderRadius:5
-                    }}
-                  >
-                    Login
-                  </Button>
-                </Link>
-              </Box>
+                  Join Us
+                </Button>
             </Box>
           </Box>
         </Toolbar>
@@ -165,4 +132,4 @@ function SaleHeader() {
 }
 
 export default SaleHeader;
-const StyledNavLink = styled(Link)(({ }) => ({}));
+const StyledNavLink = styled(Link)(({}) => ({}));
