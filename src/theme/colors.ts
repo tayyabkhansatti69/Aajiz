@@ -56,11 +56,11 @@ export const indigo = withAlphas({
 });
 // done
 export const purple = withAlphas({
-  lightest: "#7ecee0",
-  light: "#3994a9",
-  main: "#47B9D3",
-  dark: "#47b9d3",
-  darkest: "#59c0d7",
+  lightest: "#fofdfb",
+  light: "#",
+  main: "#0ebdbe",
+  dark: "#09a4a6",
+  darkest: "#0b767a",
   contrastText: "#FFFFFF",
 });
 

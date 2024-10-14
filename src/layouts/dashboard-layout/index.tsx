@@ -63,6 +63,6 @@ const styles = {
 
   childrenStyles: () => ({
     mt:5,
-    mb:10
+    mb:3
   }),
 };

@@ -30,7 +30,7 @@ export const createPalette = (config: Config): PaletteOptions => {
       selected: alpha(neutral[900], 0.12),
     },
     background: {
-      default: contrast === "high" ? neutral[50] : neutral[100],
+      default: contrast === "high" ? neutral[50] : '#FFFFFF',
       paper: common.white,
     },
     divider: "#F2F4F7",
@@ -39,7 +39,7 @@ export const createPalette = (config: Config): PaletteOptions => {
     mode: "light",
     neutral,
     primary: getPrimary(colorPreset),
-    secondary:{main:"#3269d3"},
+    secondary:{main:"#09a4a8"},
     success,
     text: {
       primary: neutral[900],

@@ -51,7 +51,7 @@ const Styles = {
     py: 2,
     mr: 5,
     ...(pathname.includes(link) && {
-      backgroundColor: "#3CC2E0",
+      backgroundColor: "#0ebdbe",
       borderRadius: "0px 25px 20px 0px",
       "& .MuiListItemText-root": {
         color: "#ffff",
@@ -61,7 +61,7 @@ const Styles = {
       },
     }),
     "&:hover": {
-      backgroundColor: "#3CC2E0",
+      backgroundColor: "#0b767a",
       borderRadius: "0px 25px 20px 0px",
       "& .MuiListItemText-root": {
         color: "#ffff",
@@ -95,17 +95,17 @@ const Styles = {
 
     minWidth: 0,
     justifyContent: "center",
-    color: theme?.palette?.common?.white,
+    color:theme? theme?.palette?.text?.secondary :'#FFF',
   }),
   ListItemTextStyle: (props:any) => (
     {
     display: "flex",
     px: 3,
-    color: props?.theme?.palette?.common?.white,
+    color:props?.theme?.palette?.text?.secondary,
     lineHeight: "19.36px",
     fontWeight: 500,
     fontSize: "16px",
-    // backgroundColor: pathname === link ? "#ffff" : theme?.palette?.common?.white,
+    // backgroundColor: props ? "#fefdfb" : '#fefdfb',
     
 
   }),
