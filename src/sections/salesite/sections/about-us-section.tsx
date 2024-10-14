@@ -1,7 +1,7 @@
 import { Box, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
-function section_2_new() {
+function AboutUsFunction() {
   return (
     <section>
       <Container
@@ -46,4 +46,4 @@ function section_2_new() {
   );
 }
 
-export default section_2_new;
+export default AboutUsFunction;
