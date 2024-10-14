@@ -1,7 +1,6 @@
 // MUI IMPORTS
 import {
   Box,
-  Button,
   Grid,
   IconButton,
   Theme,
@@ -14,13 +13,13 @@ import {
 import person from "@/src/assets/png/person.png";
 import MenuIcon from "@mui/icons-material/Menu";
 //next imports
-import Iconbell from "@/src/assets/icons/dashboard-main/Icon-bell";
-import IconMassage from "@/src/assets/icons/dashboard-main/Icon-massage";
+
 import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
-import IconWallet from "@/src/assets/icons/dashboard-main/icon-wallet";
+
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { NavListData } from "../left-navbar/left-navbar.data";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 function TopNavBar(props: any) {
   const theme: any = useTheme();
@@ -31,9 +30,9 @@ function TopNavBar(props: any) {
 
   const title=NavListData.filter(nav => pathname.includes(nav.link))[0]?.label
   return (
-    <Box position={{md:"fixed",xs:"static"}} boxShadow={1} sx={Styles.mainBoxStyle(leftopen, theme)}>
+    <Box position={{md:"fixed",xs:"static"}} boxShadow={0} sx={Styles.mainBoxStyle(leftopen, theme)}>
       <Grid container>
-        <Grid xs={12} item display="flex" alignItems="center" flexWrap={"wrap"}>
+        <Grid xs={12} item display="flex" alignItems="center" flexWrap={"wrap"} px={3}>
           {screenSizeHandler && (
             <IconButton onClick={handleDrawer}>
               <MenuIcon />
@@ -48,25 +47,24 @@ function TopNavBar(props: any) {
             ml={"auto"}
             display={"flex"}
             alignItems={"center"}
-            gap={3}
+            gap={2}
             flexWrap={"wrap"}
           >
-            <Button variant="text" size="small" sx={{ color: "common.black" }}  startIcon={<IconWallet />}>
-              0 USD
-            </Button>
-            <Button variant="outlined" sx={{ color: "common.black" }} size="small">invite Friend</Button>
-            <IconButton>
-              <IconMassage />
-            </IconButton>
-            <IconButton>
-              <Iconbell />
-            </IconButton>
-            <IconButton>
-              <IconSetting sx={{ color: "#9A9A9A" }}/>
-            </IconButton>
-            <IconButton>
+            <Box display={'flex'} justifyContent={'center'} alignItems={'center'} flexDirection={'row'} border={'1px solid  var(--Color-Gray-100, #EDEDED)'} gap={1}>
+           <IconButton>
               <Image src={person} alt="person" />
             </IconButton>
+            <Box display={'flex'} flexDirection={'column'} alignItems={'flex-start'} justifyContent={'flex-start'}>
+            <Typography variant="body2" fontWeight={600}>Waden Warrne</Typography>
+            <Typography variant="caption">Partner</Typography>
+            </Box>
+            <KeyboardArrowDownIcon/>
+            </Box>
+            <IconButton>
+
+              <IconSetting sx={{ color: "#9A9A9A" }}/>
+            </IconButton>
+           
           </Box>
         </Grid>
       </Grid>

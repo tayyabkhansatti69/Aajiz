@@ -42,7 +42,7 @@ export const createPalette = (config: Config): PaletteOptions => {
     success,
     text: {
       primary: "#EDF2F7",
-      secondary: "#A0AEC0",
+      secondary: "#001213",
       disabled: "rgba(255, 255, 255, 0.48)",
     },
     warning,

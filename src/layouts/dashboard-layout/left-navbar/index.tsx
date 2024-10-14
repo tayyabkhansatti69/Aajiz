@@ -31,10 +31,10 @@ console.log(loginUser?.email,loginUser?.password ,"datata")
     <Drawer variant="permanent" open={open}>
       <Box sx={{ maxHeight: "100vh" }}>
         <DrawerHeader>
-          <Box display="flex" justifyContent="center" alignItems="center">
+          <Box display="flex" justifyContent="center" alignItems="center" mt={1}>
             <IconLeftNavbar sx={{
               fontSize: 200,
-              height: 50
+              height: 84
             }} />
             {screenSizeHandler && (
               <IconButton onClick={handleDrawer}>
@@ -45,7 +45,7 @@ console.log(loginUser?.email,loginUser?.password ,"datata")
         </DrawerHeader>
 
         {/* Left NavBar List Component  */}
-        <Stack flexDirection={"column"} gap={1} mt={5} pr={2}>
+        <Stack flexDirection={"column"} gap={1} mt={2} pr={2}>
           {loginUser?.email==='teacher@gmail.com' && loginUser.password==='123' && NavListData.map(({ label, icon, link }, index) => (
             <NavbarList
               key={index}
@@ -92,7 +92,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
   overflowX: "hidden",
   overflowy: "auto",
   zIndex: 5,
-  background: "#242459",
+  background: '#f0fdfb',
   "&::-webkit-scrollbar": {
     width: 4,
     height: 6,
