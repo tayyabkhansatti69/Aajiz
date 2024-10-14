@@ -1,11 +1,11 @@
 import { AajizLogo } from "@/src/assets/aajiz-logo";
-import { Button, Container, styled } from "@mui/material";
+import { Button,  styled } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 const inter = Poppins({
   weight: "400",
   subsets: ["latin"],
@@ -19,30 +19,30 @@ const pagesNavbar = [
   { id: 5, title: "Contact Us", link: "" },
 ];
 function SaleHeader() {
-  const [isTop, setIsTop] = useState(true);
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset;
+  // const [isTop, setIsTop] = useState(true);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollTop = window.pageYOffset;
 
-      // Check if the page is scrolled to the top
-      if (scrollTop === 0) {
-        setIsTop(true);
-      } else {
-        setIsTop(false);
-      }
-    };
+  //     // Check if the page is scrolled to the top
+  //     if (scrollTop === 0) {
+  //       setIsTop(true);
+  //     } else {
+  //       setIsTop(false);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    // Clean up event listener on unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   // Clean up event listener on unmount
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
   return (
     <AppBar
       sx={{
-        background: "#FF00FF",
+        background: "#0ebdbe",
         position: "fixed",
         zIndex: 5,
         boxShadow: "none",
@@ -50,25 +50,24 @@ function SaleHeader() {
         display: { xs: "none", lg: "block" },
       }}
     >
-      <Container maxWidth="xxl">
+      {/* <Container maxWidth="xxl"> */}
         <Toolbar disableGutters>
           <Box
             sx={{
-              flexGrow: 2,
+               flexGrow: 2,
               display: { xs: "none", lg: "flex" },
-              background: isTop
-                ? "rgba(255, 255, 255, 0.2)"
-                : "rgba(4, 164, 209, 1)",
+              background:  "#0ebdbe",
               alignItems: "center",
-              justifyContent: "center",
-              gap: 3,
-              px: 2,
-              py: 0.5,
-              mt: 0.8,
-              borderRadius: "5rem",
+              //  justifyContent: "center",
+              // gap: 3,
+               px: 1,
+               py: 0.5,
+               mt: 0.8,
+              // borderRadius: "5rem",
               backdropFilter: "blur(7px)",
-              border: "1px solid rgba(255, 255, 255, 1)",
+              // border: "1px solid rgba(255, 255, 255, 1)",
               transition: "all 0.4s ease",
+              width:'100%'
             }}
           >
             <AajizLogo
@@ -95,7 +94,7 @@ function SaleHeader() {
                   fontSize: "1.7rem",
 
                   "&:hover": {
-                    backgroundColor: "rgba(39, 33, 95, 1)",
+                    backgroundColor: "#0b767a",
                     color: "white",
                     boxShadow: " 0px 0px 14px 0px rgba(36, 36, 89, 0.7)",
                     borderRadius: "6px 0px 16px 0px",
@@ -115,10 +114,11 @@ function SaleHeader() {
                 <Button
                   variant="contained"
                   size="large"
-                  color={"secondary"}
+                 // color={"secondary"}
                   fullWidth
                   sx={{
                     borderRadius: 5,
+                    background:'#0b767a'
                   }}
                 >
                   Join Us
@@ -126,7 +126,7 @@ function SaleHeader() {
             </Box>
           </Box>
         </Toolbar>
-      </Container>
+      {/* </Container> */}
     </AppBar>
   );
 }

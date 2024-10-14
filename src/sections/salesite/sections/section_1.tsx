@@ -16,7 +16,7 @@ function Section_one() {
       <Grid xs={12} item>
         <Box
           sx={{
-            backgroundImage: `url(${bgIMG.src})`,
+          //  backgroundImage: `url(${landingImage.src})`,
             backgroundSize: "100%",
             backgroundRepeat: "no-repeat",
 
@@ -37,7 +37,7 @@ function Section_one() {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundColor: " rgba(85, 190, 230, 0.9)",
+              backgroundColor: "#27dad7",
               zIndex: 2,
               borderRadius: 1,
             }}
