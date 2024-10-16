@@ -6,15 +6,13 @@ import LeftNavbar from "./left-navbar";
 import TopNavBar from "./top-navbar";
 
 function DashboardLayout({ children, ...other }: any) {
-  console.log(other)
+  console.log(other);
   const theme = useTheme();
-  // to handle drawer in different size
   const screenSizeHandler = useMediaQuery(theme.breakpoints.up("md"));
-  // to handle drawer in different size
   const [open, setOpen] = useState(true);
 
   const handleDrawer = () => (open ? setOpen(false) : setOpen(true));
-  // open and close drawer in screen size
+
   useEffect(() => {
     if (screenSizeHandler) {
       setOpen(true);
@@ -22,16 +20,25 @@ function DashboardLayout({ children, ...other }: any) {
       setOpen(false);
     }
   }, [screenSizeHandler]);
-  const [linkName,setLinkName] = useState('Dashboard');
+
+  const [linkName, setLinkName] = useState("Dashboard");
 
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={styles.mainBoxStyles}>
-        {/* leftnavbar */}
-        <LeftNavbar setLinkName={setLinkName} handleDrawer={handleDrawer} open={open} />
+        <LeftNavbar
+          setLinkName={setLinkName}
+          handleDrawer={handleDrawer}
+          open={open}
+        />
         <Box overflow="auto" sx={styles.parentChildrenStyles(theme, open)}>
-          <TopNavBar linkName={linkName} leftopen={open} handleDrawer={handleDrawer} />
-          <Box className="allset" sx={styles.childrenStyles()}>
+          <TopNavBar
+            linkName={linkName}
+            leftopen={open}
+            handleDrawer={handleDrawer}
+          />
+          {/* Add padding to account for the fixed TopNavBar */}
+          <Box className="allset" sx={styles.childrenStyles(theme)}>
             {children}
           </Box>
         </Box>
@@ -40,7 +47,6 @@ function DashboardLayout({ children, ...other }: any) {
   );
 }
 
-export default DashboardLayout;
 // Styles for main dashboard layout
 const styles = {
   mainBoxStyles: {
@@ -57,12 +63,15 @@ const styles = {
         duration: "0.4s",
       }),
       width: open === true ? "calc(100% - 300px)" : "100%",
-      
     },
   }),
-
-  childrenStyles: () => ({
-    mt:5,
-    mb:3
+  childrenStyles: (theme: any) => ({
+    mt: theme.breakpoints.up("md") ? 8 : 2, // Add margin-top to avoid content overlap with TopNavBar
+    mb: 3,
+    px: 5,
+    py:2
   }),
 };
+
+export default DashboardLayout;
+// Styles for main dashboard layout

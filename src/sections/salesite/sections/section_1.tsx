@@ -1,7 +1,5 @@
-import bgIMG from "@/src/assets/auth/dashboard-bg.png";
 import landingImage from "@/src/assets/image/landingImage.png";
 import {
-
   Box,
   CardMedia,
   Container,
@@ -12,14 +10,13 @@ import {
 
 function Section_one() {
   return (
-    <Grid container  sx={{ background: '#FF00FF',mt:8 }}>
+    <Grid container>
       <Grid xs={12} item>
         <Box
           sx={{
-            backgroundImage: `url(${bgIMG.src})`,
+          //  backgroundImage: `url(${landingImage.src})`,
             backgroundSize: "100%",
             backgroundRepeat: "no-repeat",
-
             display: "flex",
             alignContent: "center",
             alignItems: "center",
@@ -37,7 +34,7 @@ function Section_one() {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundColor: " rgba(85, 190, 230, 0.9)",
+              backgroundColor: "#0b767a",
               zIndex: 2,
               borderRadius: 1,
             }}

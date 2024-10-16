@@ -1,12 +1,14 @@
 "use client";
 
-import SignInForm from "@/src/sections/appsite/auth/sign-in-form/sign-in-form";
+import SignInForm from "@/src/sections/appsite/auth/sign-in-form/signInForm";
 
-// import SignInForm from "@/sections/appsite/auth/sign-in-form/sign-in-form";
+
 
 function SignIn() {
   return (
-    <SignInForm/>
+  <>
+  <SignInForm/>
+  </>
   );
 }
 

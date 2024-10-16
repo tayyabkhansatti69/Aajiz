@@ -4,7 +4,7 @@ import {
   useMediaQuery,
   useTheme
 } from "@mui/material";
-function Section_2() {
+function ObjectiveSection() {
   // const classes = useStyles()
   const theme: any = useTheme();
   const screenSizeHandler = useMediaQuery(theme.breakpoints.down("md"));
@@ -52,4 +52,4 @@ function Section_2() {
   );
 }
 
-export default Section_2;
+export default ObjectiveSection;

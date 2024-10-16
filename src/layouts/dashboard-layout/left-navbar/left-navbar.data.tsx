@@ -16,9 +16,14 @@ import IconQuestionBank from "@/src/assets/icons/dashboard-main/icon-question-ba
 // CONST
 export const NavListData = [
   {
-    label: "Dashboard",
+    label: "Home",
     icon: HomeIcons,
     link: "/dashboard",
+  },
+  {
+    label: "Transaction",
+    icon: IconSetting,
+    link: "/schedule",
   },
   {
     label: "Setting",
@@ -26,7 +31,7 @@ export const NavListData = [
     link: "/schedule",
   },
   {
-    label: "Setting",
+    label: "Logout",
     icon: IconSetting,
     link: "/schedule",
   },
