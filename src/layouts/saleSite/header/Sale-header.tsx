@@ -7,6 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const inter = Poppins({
   weight: "400",
@@ -23,7 +24,7 @@ const pagesNavbar = [
 
 function SaleHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
-
+const router=useRouter()
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -171,6 +172,7 @@ function SaleHeader() {
                 borderRadius: 5,
                 background: "#0b767a",
               }}
+              onClick={()=>{router.push("sign-in")}}
             >
               Join Us
             </Button>
