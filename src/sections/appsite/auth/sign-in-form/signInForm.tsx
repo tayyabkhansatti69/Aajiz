@@ -1,17 +1,16 @@
 import { Box, Grid, Typography, Button, Link } from "@mui/material";
 import Image from "next/image";
-import forgetPaswword from "../../../../assets/signin/forget.png"; // Your actual image path
-
+import singPerson from "../../../../assets/signin/singIn.png"; // Your actual image path
+import { UseSignInForm } from "./useSignInForm";
 import { FormProvider, RHFTextField } from "@/src/components/rhf";
 import SignInIcon from "@/src/assets/icons/signin-icons/signin-icons";
-import { UseForgetYourForm } from "./useForgetYourForm";
 
 
 
-function ForgetYourForm() {
+function SignInForm() {
 
 
-    const { methods, handleSubmit, onSubmit } = UseForgetYourForm()
+    const { methods, handleSubmit, onSubmit } = UseSignInForm()
 
     return (
         <Grid
@@ -39,7 +38,7 @@ function ForgetYourForm() {
                     height="100vh"
                 >
                     <Image
-                        src={forgetPaswword}
+                        src={singPerson}
                         alt="signin"
                         quality={100}
                         priority={true}
@@ -60,13 +59,13 @@ function ForgetYourForm() {
                 alignItems="center"
                 sx={{ height: "100%" }}
             >
-                <Box width={{ xs: "90%", sm: "80%" ,md:'56%' }} textAlign="center">
+                <Box width={{ xs: "90%", sm: "80%" ,md:'70%' }} textAlign="center">
                     <SignInIcon sx={{
                         fontSize: 200,
                         height: 84
                     }} />
                     <Typography variant="h4" gutterBottom>
-                    Reset your Password
+                        Welcome Back to Aajiz!
                     </Typography>
                     <Link
                         href="#"
@@ -74,11 +73,11 @@ function ForgetYourForm() {
                         color="primary"
                         sx={{ display: "block", marginBottom: "1rem" }}
                     >
-                       Please enter the email address associated with your account.
+                        Sign in to your account
                     </Link>
 
                     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-                        <Grid container spacing={2} mb={4} mt={4}>
+                        <Grid container spacing={2}>
                             <Grid item xs={12} md={12}>
                             <RHFTextField
                                 name="email"
@@ -88,16 +87,30 @@ function ForgetYourForm() {
                             />
                             </Grid>
                             <Grid item xs={12} md={12}>
-                           
+                            <RHFTextField
+                                name="password"
+                                variant="outlined"
+                                fullWidth
+                                label="Password"
+                            />
                         </Grid>
                         </Grid>
-                       
+                        <Link
+                            href="/forgot-password"
+                            underline="none"
+                            color="#001213"
+                            sx={{ display: "flex", marginBottom: "3rem",marginTop:'1rem',alignItems:'start',fontWeight:500,fontSize:16 }}
+                        >
+                            Forgot password?
+                        </Link>
 
                         <Button variant="contained" type="submit" fullWidth color="primary">
-                        Reset Password
+                            Sign in
                         </Button>
 
-
+                        <Typography variant="body2"  fontWeight={600} marginTop="2rem">
+                            Have an account already? <Link href="#">Sign Up</Link>
+                        </Typography>
                     </FormProvider>
                 </Box>
             </Grid>
@@ -105,4 +118,4 @@ function ForgetYourForm() {
     );
 }
 
-export default ForgetYourForm;
+export default SignInForm;

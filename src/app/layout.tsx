@@ -22,7 +22,7 @@ const openSans = openSansFunc({
 });
 
 export const metadata: Metadata = {
-  title: "TutorHub",
+  title: "Aajizz",
   description: "The Mega-mart of technology",
   viewport: "initial-scale=1, width=device-width",
   // icons: {
