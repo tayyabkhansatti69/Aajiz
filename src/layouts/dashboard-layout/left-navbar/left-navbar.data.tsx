@@ -23,12 +23,12 @@ export const NavListData = [
   {
     label: "Transaction",
     icon: IconSetting,
-    link: "/schedule",
+    link: "/transaction",
   },
   {
     label: "Setting",
     icon: IconSetting,
-    link: "/schedule",
+    link: "/setting",
   },
   {
     label: "Logout",
