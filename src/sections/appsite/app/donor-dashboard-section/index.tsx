@@ -62,7 +62,14 @@ export function DonorDashboardSection() {
             Current Balance
           </Typography>
         </Box>
-        <Button variant="contained">Donate Now</Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            router.push("donate-now");
+          }}
+        >
+          Donate Now
+        </Button>
       </Stack>
       <Stack direction="row" justifyContent="space-between">
         <Typography variant="h5">Trusted Partner</Typography>
