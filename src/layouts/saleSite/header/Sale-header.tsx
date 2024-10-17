@@ -172,7 +172,7 @@ const router=useRouter()
                 borderRadius: 5,
                 background: "#0b767a",
               }}
-              onClick={()=>{router.push("sign-in")}}
+              onClick={()=>{router.push("/sign-in")}}
             >
               Join Us
             </Button>
