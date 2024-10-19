@@ -80,7 +80,7 @@ function SignInForm() {
                         <Grid container spacing={2}>
                             <Grid item xs={12} md={12}>
                             <RHFTextField
-                                name="email"
+                                name="username"
                                 fullWidth
                                 label="Email"
 
@@ -109,7 +109,7 @@ function SignInForm() {
                         </Button>
 
                         <Typography variant="body2"  fontWeight={600} marginTop="2rem">
-                            Have an account already? <Link href="#">Sign Up</Link>
+                            Have an account already? <Link href="/sign-up">Sign Up</Link>
                         </Typography>
                     </FormProvider>
                 </Box>

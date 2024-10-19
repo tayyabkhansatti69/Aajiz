@@ -2,7 +2,7 @@ import { Box, Grid, Typography, Button, Link, InputAdornment, IconButton } from 
 import Image from "next/image";
 import singPerson from "../../../../assets/signin/singIn.png"; // Your actual image path
 
-import { FormProvider, RHFCheckbox, RHFTextField } from "@/src/components/rhf";
+import { FormProvider, RHFCheckbox, RHFRadioGroup, RHFTextField } from "@/src/components/rhf";
 import SignInIcon from "@/src/assets/icons/signin-icons/signin-icons";
 import { UseSignUpForm } from "./useSignUpForm";
 import Visibility from '@mui/icons-material/Visibility';
@@ -12,7 +12,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 function SignUpForm() {
 
 
-    const { methods, handleSubmit, onSubmit,handleClickShowPassword,
+    const { methods, handleSubmit, onSubmit, handleClickShowPassword,
         showPassword } = UseSignUpForm()
 
     return (
@@ -83,7 +83,7 @@ function SignUpForm() {
                         <Grid container spacing={2}>
                             <Grid item xs={12} md={12}>
                                 <RHFTextField
-                                    name="fullname"
+                                    name="name"
                                     fullWidth
                                     label="Full Name"
 
@@ -137,8 +137,17 @@ function SignUpForm() {
                                     }}
                                 />
                             </Grid>
+                            <Grid item xs={12} md={12}>
+                                <RHFRadioGroup
+                                    name="account_type"
+                                    options={[
+                                        { label: 'Donor', value: 'donor' },
+                                        { label: 'Partner', value: 'partner' },
+                                    ]}
+                                />
+                            </Grid>
                             <Grid xs={12} md={12} alignItems={'flex-start'} display={'flex'} ml='2rem' mb={3}>
-                                <RHFCheckbox name="remberMe" label="I agree to Terms & Conditions and Privacy Policy"/>
+                                <RHFCheckbox name="remberMe" label="I agree to Terms & Conditions and Privacy Policy" />
                             </Grid>
                         </Grid>
 
@@ -148,7 +157,7 @@ function SignUpForm() {
                         </Button>
 
                         <Typography variant="body2" fontWeight={600} marginTop="2rem">
-                        I have an account?  <Link href="/sign-in">Login</Link>
+                            I have an account?  <Link href="/sign-in">Login</Link>
                         </Typography>
                     </FormProvider>
                 </Box>

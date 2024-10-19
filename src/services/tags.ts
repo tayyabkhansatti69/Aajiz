@@ -1,6 +1,6 @@
 
-
-export const TAGS = [];
+export const USERS = "USERS";
+export const TAGS = [USERS];
 export const generateTags = (result: any, TAG: string) => {
   return result
     ? [

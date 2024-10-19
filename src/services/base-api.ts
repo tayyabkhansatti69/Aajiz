@@ -2,21 +2,26 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // Store + configuration
-// import { BASE_URL } from "@root/config";
+ 
 import { TAGS } from "./tags";
-import { RootState } from "@/src/store";
+import { BASE_URL } from "@/config";
+import { getLocalStorage } from "../utils";
 
 
 // Create baseQuery instance
 const baseQuery = fetchBaseQuery({
-  baseUrl: "",
-  prepareHeaders: (headers, { getState }) => {
+  baseUrl: BASE_URL,
+  prepareHeaders: (headers) => {
+    
+    const rememberMeData:any = getLocalStorage("rememberMe");
+    
     // If we have a token in the store, then use that for authenticated requests
-    const token = (getState() as RootState).auth.accessToken;
+    const token:any = rememberMeData?.access_token;
 
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
+    console.log(headers,"header")
     return headers;
   },
 });
