@@ -34,7 +34,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 export function DonorDashboardSection() {
   const router = useRouter();
   return (
-    <Stack gap={1.5}>
+    <Stack gap={2.5}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography variant="h5">My Balance</Typography>
         <Button
@@ -79,7 +79,7 @@ export function DonorDashboardSection() {
       </Stack>
       <Box
         sx={{
-          py: 1,
+          py: 0.5,
           overflowX: "auto",
           width: "100%",
           "&::-webkit-scrollbar": {
@@ -105,7 +105,7 @@ export function DonorDashboardSection() {
                 component="img"
                 src={items.image.src}
                 alt="Landing Section Girl"
-                sx={{ height: "12rem" }}
+                sx={{ height: "10rem" }}
               />
               <Typography textAlign="center" fontWeight={500}>
                 {items?.name}
@@ -123,7 +123,7 @@ export function DonorDashboardSection() {
       </Stack>
       <Box
         sx={{
-          py: 1,
+          py: 0.5,
           overflowX: "auto",
           width: "100%",
           "&::-webkit-scrollbar": {
@@ -149,7 +149,7 @@ export function DonorDashboardSection() {
                 component="img"
                 src={items.image.src}
                 alt="Landing Section Girl"
-                sx={{ height: "12rem" }}
+                sx={{ height: "10rem" }}
               />
               <Stack py={1} px={1} gap={1}>
                 <Typography fontWeight={500}>{items?.name}</Typography>
