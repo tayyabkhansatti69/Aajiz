@@ -32,12 +32,15 @@ export const StyledTableCell = styled(TableCell)(({ }) => ({
     borderBottom: "none",
     whiteSpace: "pre-wrap",
     padding: "10px 15px",
+    borderTop: '4px solid #F0FDFB',
+  // borderBottom: '1px solid #F0FDFB',
   },
 }));
 
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
   background: theme.palette.background.paper,
+
   // hide last border
   "&:last-child th": {
     border: 0,
@@ -50,6 +53,7 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
   "&:first-of-type": {
     background: theme.palette.background.paper,
+    border: 0,
   },
 }));
 
