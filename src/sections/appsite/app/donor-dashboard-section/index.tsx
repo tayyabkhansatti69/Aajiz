@@ -12,6 +12,10 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 import { useRouter } from "next/navigation";
+import {
+  useGetDonorProfileQuery,
+  useGetTrustedPartnersListQuery,
+} from "@/src/services/donor/donor-dashboard/donor-dashboard";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 5,
@@ -33,6 +37,9 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 export function DonorDashboardSection() {
   const router = useRouter();
+  const params = { limit: 10, offset: 0 };
+  const { data: donorProfile } = useGetDonorProfileQuery({});
+  const { data } = useGetTrustedPartnersListQuery(params);
   return (
     <Stack gap={2.5}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -47,7 +54,7 @@ export function DonorDashboardSection() {
         </Button>
       </Stack>
       <Stack
-        direction="row"
+        direction={{ xl: "row", xs: "column" }}
         justifyContent="space-between"
         width="30%"
         bgcolor="#F8FFFE"
@@ -56,13 +63,20 @@ export function DonorDashboardSection() {
       >
         <Box>
           <Typography variant="h5" color="#0EBDBE">
-            Rs. 250000
+            Rs. {donorProfile?.body?.current_balance}
           </Typography>
           <Typography variant="body1" fontWeight={500}>
             Current Balance
           </Typography>
         </Box>
-        <Button variant="contained" onClick={()=>{router?.push('/donor-dashboard/donate')}}>Donate Now</Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            router?.push("/donor-dashboard/donate");
+          }}
+        >
+          Donate Now
+        </Button>
       </Stack>
       <Stack direction="row" justifyContent="space-between">
         <Typography variant="h5">Trusted Partner</Typography>
@@ -92,16 +106,20 @@ export function DonorDashboardSection() {
         }}
       >
         <Stack direction="row" spacing={3} sx={{ width: "max-content" }}>
-          {trustedPartnersData.map((items) => (
+          {data?.body?.map((items) => (
             <Card key={items?.id} sx={{ p: 1, minWidth: 200 }}>
               <CardMedia
                 component="img"
-                src={items.image.src}
+                src={items.Business_logo}
                 alt="Landing Section Girl"
                 sx={{ height: "10rem" }}
               />
-              <Typography textAlign="center" fontWeight={500}>
-                {items?.name}
+              <Typography
+                textAlign="center"
+                variant="subtitle1"
+                fontWeight={600}
+              >
+                {items?.Business_name}
               </Typography>
             </Card>
           ))}
