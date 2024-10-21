@@ -1,67 +1,77 @@
 
 
-import { CustomChip, CustomTable, } from "@/src/components";
+import {  CustomTable, } from "@/src/components";
+import { useGetTransactionListQuery } from "@/src/services/donor/transaction";
 import {
-    Box,
+    // Box,
     Grid,
     Paper,
 
 } from "@mui/material";
+import dayjs from "dayjs";
+import { useState } from "react";
 function TransactionSection() {
+    const [param, setParams] = useState({
+        offset: 0,
+        limit: 10
+    });
+
+    const { data, isLoading, isFetching, isError, isSuccess } = useGetTransactionListQuery({ ...param });
+
     const columns = [
 
-        {
-            accessorFn: (row: any) => row.recipientNumber ?? "-",
-            id: "recipientNumber",
-            cell: (info: any) => info.getValue(),
-            header: () => <span>Recipient Number</span>,
-            isSortable: false,
-        },
+        // {
+        //     accessorFn: (row: any) => row.recipientNumber ?? "-",
+        //     id: "recipientNumber",
+        //     cell: (info: any) => info.getValue(),
+        //     header: () => <span>Recipient Number</span>,
+        //     isSortable: false,
+        // },
 
         {
-            accessorFn: (row: any) => row.donationDate ?? "-",
+            accessorFn: (row: any) => row.donation_date ?? "-",
             id: "donationDate",
-            cell: (info: any) => info.getValue(),
+            cell: (info: any) => dayjs(info.getValue()).format('DD/MM/YYYY'),
             header: () => <span>Donation Date</span>,
             isSortable: false,
         },
         {
-            accessorFn: (row: any) => row.amountDonated ?? "-",
+            accessorFn: (row: any) => row.donation_amount ?? "-",
             id: "amountDonated",
             cell: (info: any) => `RS ${info.getValue()}`,
             header: () => <span>Amount Donated</span>,
             isSortable: false,
         },
         {
-            accessorFn: (row: any) => row.paymentMethod ?? "-",
+            accessorFn: (row: any) => row.donation_type ?? "-",
             id: "paymentMethod",
             cell: (info: any) => info.getValue(),
             header: () => <span>Payment Method</span>,
             isSortable: false,
         },
-        {
-            accessorFn: (row: any) => row.status ?? "-",
-            id: "status",
-            cell: (info: any) => {
-                return (
-                    <Box
-                        display="flex"
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                    >
-                        <CustomChip
-                            variant={info.getValue() === "Confirmed" ? "success" : "danger"}
-                            rootSx={{
-                                fontSize: 11,
-                            }}
-                            ChipProps={{ label: `${info.getValue()}` }}
-                        />
-                    </Box>
-                );
-            },
-            header: () => <span>Status</span>,
-            isSortable: false,
-        },
+        // {
+        //     accessorFn: (row: any) => row.status ?? "-",
+        //     id: "status",
+        //     cell: (info: any) => {
+        //         return (
+        //             <Box
+        //                 display="flex"
+        //                 justifyContent="flex-start"
+        //                 alignItems="flex-start"
+        //             >
+        //                 <CustomChip
+        //                     variant={info.getValue() === "Confirmed" ? "success" : "danger"}
+        //                     rootSx={{
+        //                         fontSize: 11,
+        //                     }}
+        //                     ChipProps={{ label: `${info.getValue()}` }}
+        //                 />
+        //             </Box>
+        //         );
+        //     },
+        //     header: () => <span>Status</span>,
+        //     isSortable: false,
+        // },
 
     ];
     const generateDummyData = (count: number) => {
@@ -89,23 +99,32 @@ function TransactionSection() {
     const dummyData = generateDummyData(10);
     console.log(dummyData);
     return (
-        <Grid  pt={2} container>
+        <Grid pt={2} container>
             <Grid xs={12} item>
                 <Paper variant="elevation" elevation={2}>
 
 
+
+
+
                     <CustomTable
+                        data={data?.donations}
                         columns={columns}
-                        data={dummyData}
-                        isLoading={false}
-                        isError={false}
-                        isSuccess={true}
-                        isFetching={false}
-                        isPagination={true}
+                        isLoading={isLoading}
+                        isFetching={isFetching}
+                        isError={isError}
+                        isSuccess={isSuccess}
+                        isPagination
+                        showSerialNo
+                        totalPages={data?.pages ?? 1}
+                        currentPage={data?.current_page ?? 1}
+                        onPageChange={(onPageData: any) => {
+                            setParams((prev) => {
+                                return { ...prev, offset: (onPageData - 1) * 10 };
+                            });
+                        }}
+
                     />
-
-
-
                 </Paper>
             </Grid>
         </Grid>
