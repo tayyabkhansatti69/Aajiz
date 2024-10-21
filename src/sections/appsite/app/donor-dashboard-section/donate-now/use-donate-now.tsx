@@ -6,11 +6,15 @@ import {
   useLoadCardMutation,
 } from "@/src/services/donor/donate-now/donate-now-api";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import validationSchema from "./validation-schema";
+import { yupResolver } from "@hookform/resolvers/yup";
 export const UseDonateNow = () => {
+  const [eStamp, setEStamp] = useState(true);
   const router = useRouter();
 
   const methods = useForm<any>({
-    // resolver: yupResolver(Schema),  // Pass Yup schema to the resolver
+    resolver: yupResolver(validationSchema),
     defaultValues: {
       amount: "",
       type: "eStamp",
@@ -61,5 +65,7 @@ export const UseDonateNow = () => {
     isLoading,
     loadCardLoading,
     industryTypeDropdownList,
+    eStamp,
+    setEStamp,
   };
 };

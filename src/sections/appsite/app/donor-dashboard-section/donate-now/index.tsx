@@ -8,6 +8,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { LoadingButton } from "@mui/lab";
 import { Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
 import { UseDonateNow } from "./use-donate-now";
+import { EStamps } from "../e-stamps";
 
 function DonateNowSection() {
   const {
@@ -19,8 +20,9 @@ function DonateNowSection() {
     isLoading,
     industryTypeDropdownList,
     loadCardLoading,
+    eStamp,
   } = UseDonateNow();
-  return (
+  return eStamp ? (
     <Stack>
       <Button
         variant="text"
@@ -65,7 +67,11 @@ function DonateNowSection() {
                     outerLabel="Select Type"
                     options={[
                       { id: 1, label: "E-Stamp", value: "eStamp" },
-                      { id: 2, label: "Physical Card", value: "physicalCard" },
+                      {
+                        id: 2,
+                        label: "Physical Card",
+                        value: "physicalCard",
+                      },
                     ]}
                   />
                 </Grid>
@@ -107,6 +113,14 @@ function DonateNowSection() {
         </Grid>
       </Grid>
     </Stack>
+  ) : (
+    <EStamps
+      eStampData={[
+        { id: 1, industryType: "food" },
+        { id: 2, industryType: "medical" },
+        { id: 3, industryType: "clothing" },
+      ]}
+    />
   );
 }
 
