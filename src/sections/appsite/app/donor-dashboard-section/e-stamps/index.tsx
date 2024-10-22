@@ -37,7 +37,7 @@ export function EStamps({ eStampData }: any) {
         // Split into rows and fit into the A4 size
         let currentHeight = margin;
 
-        for (let row = 0; row < eStampData.length / 4; row++) {
+        for (let row = 0; row < eStampData?.stamps.length / 4; row++) {
           if (currentHeight + rowHeight > a4Height - margin) {
             pdf.addPage(); // Create new page if row exceeds page height
             currentHeight = margin; // Reset height for new page
@@ -74,14 +74,14 @@ export function EStamps({ eStampData }: any) {
         startIcon={<KeyboardBackspaceIcon />}
         sx={{ mr: "auto" }}
         onClick={() => {
-          router.push("/donor-dashboard");
+          router.push("/dashboard");
         }}
       >
         Back
       </Button>
-      <Card sx={{ p: 2, height: "80vh" }}>
+      <Card sx={{ p: 2, height: "80vh", overflow: "scroll" }}>
         <Grid container px={2} pt={2} ref={gridContainerRef}>
-          {eStampData.map((items) => (
+          {eStampData?.stamps?.map((items) => (
             <Grid item md={3} key={items?.id}>
               {/* Ref points to the element to convert to PDF */}
               <Card
@@ -93,10 +93,14 @@ export function EStamps({ eStampData }: any) {
                   </Box>
                   <Typography color="white">Stamp QR Code</Typography>
                   <Card sx={{ width: "fit-content", p: 1, m: "auto" }}>
-                    <QRCodeCanvas value={items?.id} />
+                    <QRCodeCanvas value={items?.stamp_num} />
                   </Card>
                   <Box>
-                    <Image src={""} alt="Industry Type" />
+                    <img
+                      src={items?.industry_logo}
+                      alt="Industry Type"
+                      style={{ width: 50, height: 50 }}
+                    />
                   </Box>
                 </Stack>
               </Card>

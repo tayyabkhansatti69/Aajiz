@@ -30,6 +30,9 @@ function TopNavBar(props: any) {
     ?.label;
   const myValue: any = localStorage.getItem("rememberMe");
   const data: any = JSON.parse(myValue);
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
   return (
     <Box
       position={{ md: "fixed", xs: "static" }}
@@ -71,7 +74,7 @@ function TopNavBar(props: any) {
               gap={1}
             >
               <IconButton>
-                <Avatar src={data?.profile_image_url} alt="person" />
+                <Avatar src={data?.Data_User?.profile_image_url} alt="person" />
               </IconButton>
               <Box
                 display={"flex"}
@@ -81,9 +84,11 @@ function TopNavBar(props: any) {
                 sx={{ pr: 1 }}
               >
                 <Typography variant="body2" fontWeight={600}>
-                  {data?.name}
+                  {data?.Data_User?.name}
                 </Typography>
-                <Typography variant="caption">{data?.account_type}</Typography>
+                <Typography variant="caption">
+                  {capitalizeFirstLetter(data?.Data_User?.account_type)}
+                </Typography>
               </Box>
             </Box>
             <IconButton>
