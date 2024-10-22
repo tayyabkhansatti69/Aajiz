@@ -80,12 +80,20 @@ export function EStamps({ eStampData }: any) {
         Back
       </Button>
       <Card sx={{ p: 2, height: "80vh", overflow: "scroll" }}>
-        <Grid container px={2} pt={2} ref={gridContainerRef}>
+        <Grid
+          container
+          px={2}
+          spacing={2}
+          ref={gridContainerRef}
+        >
           {eStampData?.stamps?.map((items) => (
-            <Grid item md={3} key={items?.id}>
-              {/* Ref points to the element to convert to PDF */}
+            <Grid item xl={3} md={6} xs={12} key={items?.id}>
               <Card
-                sx={{ backgroundColor: "primary.main", width: "fit-content" }}
+                sx={{
+                  backgroundColor: "primary.main",
+                  width: "fit-content",
+                  m: "auto",
+                }}
               >
                 <Stack textAlign="center" rowGap={4} py={3} px={8}>
                   <Box>
