@@ -48,7 +48,7 @@ const router=useRouter()
       // Perform login mutation using RTK Query
       const respsone = await loginPost(credentials).unwrap();
       console.log(respsone,"lklkkk")
-      setLocalStorage('rememberMe', respsone?.Data_User);
+      setLocalStorage('rememberMe', respsone);
       
       toast.success(respsone?.message || "Sign in successfully!");
   

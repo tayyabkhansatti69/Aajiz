@@ -1,5 +1,6 @@
 export const USERS = "USERS";
 export const DONOR_DASHBOARD = "DONOR_DASHBOARD";
+export const DONOR_TRANSACTION = "DONOR_TRANSACTION";
 
 export const TAGS = [USERS];
 export const generateTags = (result: any, TAG: string) => {

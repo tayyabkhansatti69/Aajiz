@@ -46,7 +46,7 @@ console.log(loginUser,"datata")
 
         {/* Left NavBar List Component  */}
         <Stack flexDirection={"column"} gap={1} mt={2} pr={2}>
-          {loginUser?.account_type==='donor'  && NavListData.map(({ label, icon, link }, index) => (
+          {(loginUser?.Data_User?.account_type==='donor' || loginUser?.account_type==='donor')  && NavListData.map(({ label, icon, link }, index) => (
             <NavbarList
               key={index}
               link={link}
