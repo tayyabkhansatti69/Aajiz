@@ -73,7 +73,7 @@ export function DonorDashboardSection() {
         <Button
           variant="contained"
           onClick={() => {
-            router?.push("/donor-dashboard/donate");
+            router?.push("/donate");
           }}
         >
           Donate Now

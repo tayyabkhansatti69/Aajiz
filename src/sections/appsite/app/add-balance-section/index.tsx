@@ -20,7 +20,7 @@ export function AddBalanceSection() {
         startIcon={<KeyboardBackspaceIcon />}
         sx={{ mr: "auto" }}
         onClick={() => {
-          router.push("donor-dashboard");
+          router.push("dashboard");
         }}
       >
         Back
@@ -29,7 +29,7 @@ export function AddBalanceSection() {
         <Stack
           direction={{ lg: "row", xs: "column-reverse" }}
           justifyContent="space-between"
-          gap={{lg:20,xs:5}}
+          gap={{ lg: 20, xs: 5 }}
         >
           <Stack width={{ lg: "40%", xs: "100%" }} gap={2}>
             <Typography variant="h6">Payment Method</Typography>

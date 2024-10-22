@@ -21,6 +21,7 @@ function DonateNowSection() {
     industryTypeDropdownList,
     loadCardLoading,
     eStamp,
+    eStampData,
   } = UseDonateNow();
   return eStamp ? (
     <Stack>
@@ -29,7 +30,7 @@ function DonateNowSection() {
         startIcon={<KeyboardBackspaceIcon />}
         sx={{ mr: "auto" }}
         onClick={() => {
-          router.push("/donor-dashboard");
+          router.push("/dashboard");
         }}
       >
         Back
@@ -114,13 +115,7 @@ function DonateNowSection() {
       </Grid>
     </Stack>
   ) : (
-    <EStamps
-      eStampData={[
-        { id: 1, industryType: "food" },
-        { id: 2, industryType: "medical" },
-        { id: 3, industryType: "clothing" },
-      ]}
-    />
+    <EStamps eStampData={eStampData} />
   );
 }
 
