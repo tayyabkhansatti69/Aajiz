@@ -1,3 +1,4 @@
+
 import {
   // Box,
   ListItem,
@@ -22,6 +23,7 @@ interface INavBarListProps {
 function NavbarList(props: INavBarListProps) {
   const theme: any = useTheme();
   const { open, link, Icon, label,setLinkName } = props;
+  
   console.log(props,open);
   const pathName = usePathname();
   
