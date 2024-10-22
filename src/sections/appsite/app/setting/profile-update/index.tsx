@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/system"; // Added styled import
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import profileImg from '../../../../../assets/image/profile.png';
+import { useUpdateProfileMutation } from "@/src/services/donor/setting/setting-api";
+import toast from "react-hot-toast";
 
 
 const ImgStyled = styled('img')(({ theme }) => ({
@@ -11,10 +13,17 @@ const ImgStyled = styled('img')(({ theme }) => ({
     borderRadius: '92px',
 }));
 
-function ProfileUpdate() {
+function ProfileUpdate(profile_image) {
+const[updateProfile]=useUpdateProfileMutation()
 
+const [imgSrc, setImgSrc] = useState<string>(profileImg?.src);
+useEffect(() => {
+    if (profile_image) {
+      setImgSrc(profile_image?.profile_image);
+    }
+  }, [profile_image]);
 
-    const [imgSrc, setImgSrc] = useState<string>(profileImg?.src);
+console.log(imgSrc)
     const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
         const reader = new FileReader();
         const { files } = event.target;
@@ -24,35 +33,22 @@ function ProfileUpdate() {
             reader.readAsDataURL(files[0]);
 
             // Commented out the image upload logic for future use.
-            /*
-            const formData = new FormData();
-            formData.append('file', files[0]);
-      
+            
+            
             try {
-              const accessToken = localStorage.getItem('accessToken');
-      
-              if (!accessToken) {
-                console.log('Access token is missing');
-                setError('Access token is missing');
-                setLoading(false);
-                return;
+                const formData = new FormData();
+                formData.append('file', files[0]);
+                const response = await updateProfile(formData).unwrap();
+                
+                toast.success(response?.message || "Profile Updated successfully!");
+                
+                
+              } catch (error: any) {
+                console.error(error);
+                toast.error(error?.data?.message || "Something went wrong!");
               }
-      
-              const response = await fetch(`${process.env.NEXT_PUBLIC_AAC_APP_BASE_URL}profile_image`, {
-                method: 'POST',
-                headers: {
-                  Authorization: `Bearer ${accessToken}`,
-                },
-                body: formData,
-              });
-      
-              const responseData = await response.json();
-              console.log('Image uploaded successfully:', responseData);
-      
-            } catch (error) {
-              console.error('Error uploading image:', error);
-            }
-            */
+            
+            
         }
     };
 

@@ -40,6 +40,7 @@ export function DonorDashboardSection() {
   const params = { limit: 10, offset: 0 };
   const { data: donorProfile } = useGetDonorProfileQuery({});
   const { data } = useGetTrustedPartnersListQuery(params);
+
   return (
     <Stack gap={2.5}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
