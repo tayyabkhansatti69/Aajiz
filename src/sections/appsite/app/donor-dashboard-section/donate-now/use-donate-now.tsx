@@ -11,6 +11,8 @@ import validationSchema from "./validation-schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 export const UseDonateNow = () => {
   const [eStamp, setEStamp] = useState(true);
+  const [eStampData, setEStampData] = useState();
+
   const router = useRouter();
 
   const methods = useForm<any>({
@@ -43,12 +45,13 @@ export const UseDonateNow = () => {
       if (stampType === "eStamp") {
         const res: any = await donateNow(body).unwrap();
         reset();
-        // router.push("candidates");
         toast.success(res?.message ?? `Donated Successfully!`);
+        setEStampData(res);
+        setEStamp(false);
       } else {
         const res: any = await loadCard(loadCardData).unwrap();
         reset();
-        router.push("/donor-dashboard");
+        router.push("/dashboard");
         toast.success(res?.message ?? `Donated Successfully!`);
       }
     } catch (error: any) {
@@ -67,5 +70,6 @@ export const UseDonateNow = () => {
     industryTypeDropdownList,
     eStamp,
     setEStamp,
+    eStampData,
   };
 };

@@ -1,10 +1,18 @@
 "use client";
 
-import DashboardSection from '@/src/sections/appsite/app/dashboard';
-import React from 'react'
+import DashboardSection from "@/src/sections/appsite/app/dashboard";
+import { DonorDashboardSection } from "@/src/sections/appsite/app/donor-dashboard-section";
+import React from "react";
 
 function Home() {
-  return <DashboardSection/>
+  const myValue: any = localStorage.getItem("rememberMe");
+  const data: any = JSON.parse(myValue);
+
+  return data?.Data_User?.kyc ? (
+    <DashboardSection />
+  ) : (
+    <DonorDashboardSection />
+  );
 }
 
-export default Home
+export default Home;
