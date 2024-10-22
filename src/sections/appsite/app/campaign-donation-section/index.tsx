@@ -34,7 +34,7 @@ export function CampaignDonationSection() {
         startIcon={<KeyboardBackspaceIcon />}
         sx={{ mr: "auto" }}
         onClick={() => {
-          router.push("donor-dashboard");
+          router.push("dashboard");
         }}
       >
         Back
