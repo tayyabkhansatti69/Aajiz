@@ -35,10 +35,10 @@ export function CustomModal({
   return (
     <Modal open={isOpen} onClose={onClose} closeAfterTransition>
       <Box width="100%" sx={Style.root(rootSx)}>
-        <Box display="flex" justifyContent="center" alignContent="center" alignItems="center" gap={1} sx={{ background: "#16A2C4", p: 1 }}>
-         {headerIconProp && (
-          <IconModel/>
-        )}
+        <Box display="flex" justifyContent="center" alignContent="center" alignItems="center" gap={1} sx={{ p: 1 }}>
+          {headerIconProp && (
+            <IconModel />
+          )}
           {headerLabel && (
             <Box display={'flex'} alignItems={'center'} justifyContent={'center'} flexDirection={'row'}>
               <Typography variant="h6" {...headerTypographyProps}>
@@ -52,7 +52,7 @@ export function CustomModal({
 
             </Box>
           )}
-          <Box sx={{ ml: 'auto' }}>
+          <Box sx={{ ml: 'auto' ,px:2,py:1}}>
             {headerMic && (
               <IconButton  {...headerMicProps}>
                 <AttachFileIcon sx={{ color: '#FFF' }} />
@@ -74,7 +74,11 @@ export function CustomModal({
               </IconButton>
             )}
 
-            <IconButton  {...closeButtonProps}>
+            <IconButton sx={{
+              background: "#0ebdbe", ":hover": {
+                background: "#0ebdbe"
+              }
+            }}  {...closeButtonProps}>
               <CloseIcon sx={{ color: '#FFF' }} />
             </IconButton>
           </Box>
