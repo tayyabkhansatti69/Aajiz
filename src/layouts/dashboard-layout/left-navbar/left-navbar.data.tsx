@@ -8,7 +8,6 @@ import TransactionIcon from "@/src/assets/icons/left-navbar-icons/transaction-ic
 // import TransactionsIcons from "@/assets/icons/left-navbar-icons/transactions-icons";
 import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
 // import IconMassage from "@/src/assets/icons/dashboard-main/Icon-massage";
-import IconChat from "@/src/assets/icons/dashboard-main/icon-chat";
 
 import IconQuestionBank from "@/src/assets/icons/dashboard-main/icon-question-bank";
 
@@ -44,18 +43,18 @@ export const NavListDataStudent = [
     link: "/dashboard",
   },
   {
-    label: "My Lesson",
+    label: "Add Account",
     icon: AccountsIcons,
-    link: "/schedule",
+    link: "/add-account",
   },
   {
-    label: "Schedule",
+    label: "Transaction",
     icon: AccountsIcons,
-    link: "/schedule",
+    link: "/",
   },
   {
-    label: 'message',
-    icon: IconChat,
+    label: 'Support',
+    icon: IconSetting,
     link: '/message'
   },
   {
@@ -96,7 +95,7 @@ export const NavListDataAdmine = [
     icon: InvestmentsIcons,
     link: "/students",
   },
-{
+  {
     label: "Settings",
     icon: IconSetting,
     link: "/settings",
