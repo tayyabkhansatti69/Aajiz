@@ -8,10 +8,10 @@ import TransactionIcon from "@/src/assets/icons/left-navbar-icons/transaction-ic
 // import TransactionsIcons from "@/assets/icons/left-navbar-icons/transactions-icons";
 import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
 // import IconMassage from "@/src/assets/icons/dashboard-main/Icon-massage";
-import IconChat from "@/src/assets/icons/dashboard-main/icon-chat";
 
 import IconQuestionBank from "@/src/assets/icons/dashboard-main/icon-question-bank";
-
+import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 //==========================================================================================
 // CONST
 export const NavListData = [
@@ -33,9 +33,8 @@ export const NavListData = [
   {
     label: "Logout",
     icon: IconSetting,
-    link: "/schedule",
+    link: "/logout",
   },
-
 ];
 export const NavListDataStudent = [
   {
@@ -44,26 +43,25 @@ export const NavListDataStudent = [
     link: "/dashboard",
   },
   {
-    label: "My Lesson",
-    icon: AccountsIcons,
-    link: "/schedule",
+    label: "Add Account",
+    icon: SettingsOutlinedIcon,
+    link: "/add-account",
   },
   {
-    label: "Schedule",
-    icon: AccountsIcons,
-    link: "/schedule",
+    label: "Transaction",
+    icon: MonetizationOnOutlinedIcon,
+    link: "/transactions",
   },
   {
-    label: 'message',
-    icon: IconChat,
-    link: '/message'
+    label: "Support",
+    icon: SettingsOutlinedIcon,
+    link: "/support",
   },
   {
     label: "Settings",
-    icon: IconSetting,
+    icon: SettingsOutlinedIcon,
     link: "/settings",
   },
-
 ];
 export const NavListDataAdmine = [
   {
@@ -96,10 +94,9 @@ export const NavListDataAdmine = [
     icon: InvestmentsIcons,
     link: "/students",
   },
-{
+  {
     label: "Settings",
     icon: IconSetting,
     link: "/settings",
   },
-
 ];

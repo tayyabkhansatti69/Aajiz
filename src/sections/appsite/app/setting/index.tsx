@@ -6,6 +6,7 @@ import ProfileUpdate from "./profile-update";
 import { useEditPasswordMutation, useEditProfileMutation, useGetDonorProfileQuery } from "@/src/services/donor/setting/setting-api";
 import * as Yup from 'yup';
 import toast from "react-hot-toast";
+import OrdeNowCard from "./order-now";
 
 export const Schema = Yup.object().shape({
     address: Yup.string().required('Address is required'),
@@ -18,6 +19,7 @@ export const Schema = Yup.object().shape({
 function SettingSection() {
     const { data: profileData } = useGetDonorProfileQuery({});
     const [enable, setEnable] = useState(true);
+    const [orderNow,setOrderNow]=useState(false)
     const [editProfile] = useEditProfileMutation();
     const [editPassword] = useEditPasswordMutation();
     const methods = useForm({
@@ -85,7 +87,7 @@ function SettingSection() {
                         <Button variant="outlined" sx={{ minWidth: '213px' }} onClick={() => setEnable(false)}>
                             Edit Profile
                         </Button>
-                        <Button variant="contained" sx={{ minWidth: '213px' }}>
+                        <Button variant="contained" sx={{ minWidth: '213px' }} onClick={()=>{setOrderNow(true)}}>
                             Order Card
                         </Button>
                     </Box>
@@ -205,6 +207,7 @@ function SettingSection() {
 
                 </FormProvider>
             </Stack>
+            <OrdeNowCard orderNow={orderNow} setOrderNow={setOrderNow} Curreaddress={profileData?.body?.address}/>
         </div>
     );
 }

@@ -16,11 +16,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { NavListData } from "../left-navbar/left-navbar.data";
 
 function TopNavBar(props: any) {
   const theme: any = useTheme();
+  const router=useRouter()
   const { handleDrawer, leftopen } = props;
   // to handle drawer in different size
   const screenSizeHandler = useMediaQuery(theme.breakpoints.down("md"));
@@ -30,8 +31,9 @@ function TopNavBar(props: any) {
     ?.label;
   const myValue: any = localStorage.getItem("rememberMe");
   const data: any = JSON.parse(myValue);
+  console.log(data,"data")
   const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string?.charAt(0)?.toUpperCase() + string?.slice(1);
   };
   return (
     <Box
@@ -91,7 +93,7 @@ function TopNavBar(props: any) {
                 </Typography>
               </Box>
             </Box>
-            <IconButton>
+            <IconButton onClick={()=>{router?.push('/notifications')}} sx={{cursor:'pointer'}}>
               <IconSetting sx={{ color: "#9A9A9A" }} />
             </IconButton>
           </Box>

@@ -29,10 +29,18 @@ export const authAPI = baseAPI.injectEndpoints({
         method: "GET",
       }),
     }),
+    orderCard: builder.mutation({
+      query: (body: any) => ({
+        url: "/order_card",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
 export const {
+  useOrderCardMutation,
     useEditPasswordMutation,
   useEditProfileMutation,
   useUpdateProfileMutation,

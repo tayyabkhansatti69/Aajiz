@@ -14,9 +14,19 @@ export const authAPI = baseAPI.injectEndpoints({
       }),
       providesTags: [DONOR_TRANSACTION],
     }),
-
+    getBalance: builder.query({
+      query: (params) => ({
+        url: `/get_balance`,
+        method: "GET",
+        params: {
+            limit: params.limit,
+            offset: params.offset
+          },
+      }),
+      providesTags: [DONOR_TRANSACTION],
+    }),
   }),
 });
 
-export const { useGetTransactionListQuery  } =
+export const { useGetTransactionListQuery,useGetBalanceQuery  } =
   authAPI;

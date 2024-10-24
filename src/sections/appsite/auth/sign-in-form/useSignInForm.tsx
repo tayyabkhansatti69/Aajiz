@@ -6,13 +6,14 @@ import { useRouter } from 'next/navigation';
 import { useLoginMutation } from '@/src/services/auth-api';
 // import { removeLocalStorage } from '@/src/utils';
 import toast from 'react-hot-toast';
+import { useState } from 'react';
 // import { useState } from 'react';
 
 
 // Yup schema
 export const Schema = Yup.object().shape({
   username : Yup.string().email('Invalid email address').required('Email is required'),
-  password: Yup.string().min(3, 'Password must be at least 8 characters long').required('Password is required'),
+  password: Yup.string().min(8, 'Password must be at least 8 characters long').required('Password is required'),
 });
 
 // Default values
@@ -24,7 +25,11 @@ export const defaultValues = {
 // Custom hook
 export const UseSignInForm = () => {
   const [loginPost]=useLoginMutation()
-  
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => {
+    setShowPassword((prev) => !prev);
+};
+
 const router=useRouter()
     const methods = useForm<any>({
     resolver: yupResolver(Schema),  // Pass Yup schema to the resolver
@@ -35,6 +40,7 @@ const router=useRouter()
   
 
   async function onSubmit(data: any): Promise<any> {
+
     const { username, password } = data;
   
     // Save the 'remember me' data to local storage
@@ -57,8 +63,8 @@ const router=useRouter()
         case "donor":
           router.push("/dashboard");
           break;
-        case "student":
-          router.push("/dashboard/student");
+        case "partner":
+          router.push("/dashboard");
           break;
         case "admin":
           router.push("/dashboard/admin");
@@ -80,5 +86,7 @@ const router=useRouter()
     methods,
     handleSubmit,
     onSubmit,
+    handleClickShowPassword,
+    showPassword,
   };
 };

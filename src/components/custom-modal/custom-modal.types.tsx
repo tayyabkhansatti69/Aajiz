@@ -14,13 +14,4 @@ export interface CustomModalProps {
   headerTypographyProps?: TypographyProps;
   rootSx?: object | undefined;
   headerSubLabel?: string | ReactNode;
-  headerMic?:boolean;
-  headerMicProps?:ButtonProps;
-  headerAttachment?:boolean,
-  headerAttachmentProps?:ButtonProps,
-  headerDuplicate?:boolean,
-  headerDuplicateProps?:ButtonProps,
-  headerDelete?:boolean,
-  headerDeleteProps?:ButtonProps,
-  headerIconProp?:boolean
 }

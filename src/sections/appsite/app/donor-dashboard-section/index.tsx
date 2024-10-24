@@ -64,7 +64,7 @@ export function DonorDashboardSection() {
       >
         <Box>
           <Typography variant="h5" color="#0EBDBE">
-            Rs. {donorProfile?.body?.current_balance}
+            Rs. {donorProfile?.body?.current_balance ?? donorProfile?.body?.balance }
           </Typography>
           <Typography variant="body1" fontWeight={500}>
             Current Balance
