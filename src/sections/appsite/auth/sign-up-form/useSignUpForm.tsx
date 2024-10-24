@@ -31,7 +31,7 @@ export const defaultValues = {
 // Custom hook
 export const UseSignUpForm = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [postSignUp] = useSignUpMutation();
+    const [postSignUp,{isLoading}] = useSignUpMutation();
     const router = useRouter();
     const methods = useForm<any>({
         resolver: yupResolver(Schema),  // Pass Yup schema to the resolver
@@ -73,5 +73,6 @@ export const UseSignUpForm = () => {
         onSubmit,
         handleClickShowPassword,
         showPassword,
+        isLoading
     };
 };

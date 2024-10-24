@@ -1,16 +1,17 @@
-import { Box, Grid, Typography, Button, Link } from "@mui/material";
+import { Box, Grid, Typography, Button, Link, InputAdornment, IconButton } from "@mui/material";
 import Image from "next/image";
 import singPerson from "../../../../assets/signin/singIn.png"; // Your actual image path
 import { UseSignInForm } from "./useSignInForm";
 import { FormProvider, RHFTextField } from "@/src/components/rhf";
 import SignInIcon from "@/src/assets/icons/signin-icons/signin-icons";
-
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 
 function SignInForm() {
 
 
-    const { methods, handleSubmit, onSubmit } = UseSignInForm()
+    const { methods, handleSubmit, onSubmit, handleClickShowPassword,showPassword } = UseSignInForm()
 
     return (
         <Grid
@@ -88,11 +89,23 @@ function SignInForm() {
                             </Grid>
                             <Grid item xs={12} md={12}>
                             <RHFTextField
-                                name="password"
-                                variant="outlined"
-                                fullWidth
-                                label="Password"
-                            />
+                                    name="password"
+                                    fullWidth
+                                    label="Password"
+                                    type={showPassword ? 'text' : 'password'} // Toggle between text and password
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    onClick={handleClickShowPassword}
+                                                    edge="end"
+                                                >
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
                         </Grid>
                         </Grid>
                         <Link

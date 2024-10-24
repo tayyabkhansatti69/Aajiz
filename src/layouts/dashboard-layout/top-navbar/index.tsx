@@ -30,6 +30,7 @@ function TopNavBar(props: any) {
     ?.label;
   const myValue: any = localStorage.getItem("rememberMe");
   const data: any = JSON.parse(myValue);
+  console.log(data,"data")
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };

@@ -32,7 +32,7 @@ export const NavListData = [
   {
     label: "Logout",
     icon: IconSetting,
-    link: "/schedule",
+    link: "/logout",
   },
 
 ];

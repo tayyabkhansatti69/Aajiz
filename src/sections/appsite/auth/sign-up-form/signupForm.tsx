@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Button, Link, InputAdornment, IconButton } from "@mui/material";
+import { Box, Grid, Typography, Link, InputAdornment, IconButton } from "@mui/material";
 import Image from "next/image";
 import singPerson from "../../../../assets/signin/singIn.png"; // Your actual image path
 
@@ -7,13 +7,14 @@ import SignInIcon from "@/src/assets/icons/signin-icons/signin-icons";
 import { UseSignUpForm } from "./useSignUpForm";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { LoadingButton } from "@mui/lab";
 
 
 function SignUpForm() {
 
 
     const { methods, handleSubmit, onSubmit, handleClickShowPassword,
-        showPassword } = UseSignUpForm()
+        showPassword,isLoading } = UseSignUpForm()
 
     return (
         <Grid
@@ -152,9 +153,9 @@ function SignUpForm() {
                         </Grid>
 
 
-                        <Button variant="contained" type="submit" fullWidth color="primary">
+                        <LoadingButton variant="contained" type="submit" fullWidth color="primary" loading={isLoading}>
                             Create Account
-                        </Button>
+                        </LoadingButton>
 
                         <Typography variant="body2" fontWeight={600} marginTop="2rem">
                             I have an account?  <Link href="/sign-in">Login</Link>

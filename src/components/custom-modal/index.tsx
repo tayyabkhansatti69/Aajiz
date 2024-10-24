@@ -4,11 +4,7 @@ import { Modal, Box, Typography, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Style } from "./custom-modal.styles";
 import type { CustomModalProps } from "./custom-modal.types";
-import MicIcon from '@mui/icons-material/Mic';
-import AttachFileIcon from '@mui/icons-material/AttachFile';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconModel from "@/src/assets/icons/model-icon";
+
 export function CustomModal({
   isOpen,
   onClose,
@@ -21,71 +17,37 @@ export function CustomModal({
   headerTypographyProps,
   rootSx,
   footer,
-  headerMic,
-  headerMicProps,
-  headerAttachment,
-  headerAttachmentProps,
-  headerDuplicate,
-  headerDuplicateProps,
-  headerDelete,
-  headerDeleteProps,
   headerSubLabel,
-  headerIconProp,
 }: CustomModalProps): JSX.Element {
   return (
-    <Modal open={isOpen} onClose={onClose} closeAfterTransition>
+    <Modal open={isOpen} onClose={onClose} closeAfterTransition sx={{ mx: 1 }}>
       <Box width="100%" sx={Style.root(rootSx)}>
-        <Box display="flex" justifyContent="center" alignContent="center" alignItems="center" gap={1} sx={{ p: 1 }}>
-          {headerIconProp && (
-            <IconModel />
-          )}
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignContent="center"
+          alignItems="center"
+        >
           {headerLabel && (
-            <Box display={'flex'} alignItems={'center'} justifyContent={'center'} flexDirection={'row'}>
+            <Box>
               <Typography variant="h6" {...headerTypographyProps}>
                 {headerLabel}
               </Typography>
               {headerSubLabel && (
-                <Typography variant="subtitle2" sx={{ color: "text.secondary", mt: 0.5 }}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{ color: "text.secondary", mt: 0.5 }}
+                >
                   {headerSubLabel}
                 </Typography>
               )}
-
             </Box>
           )}
-          <Box sx={{ ml: 'auto' ,px:2,py:1}}>
-            {headerMic && (
-              <IconButton  {...headerMicProps}>
-                <AttachFileIcon sx={{ color: '#FFF' }} />
-              </IconButton>
-            )}
-            {headerAttachment && (
-              <IconButton  {...headerAttachmentProps}>
-                <MicIcon sx={{ color: '#FFF' }} />
-              </IconButton>
-            )}
-            {headerDelete && (
-              <IconButton  {...headerDeleteProps}>
-                <DeleteIcon sx={{ color: '#FFF' }} />
-              </IconButton>
-            )}
-            {headerDuplicate && (
-              <IconButton  {...headerDuplicateProps}>
-                <ContentCopyIcon sx={{ color: '#FFF' }} />
-              </IconButton>
-            )}
-
-            <IconButton sx={{
-              background: "#0ebdbe", ":hover": {
-                background: "#0ebdbe"
-              }
-            }}  {...closeButtonProps}>
-              <CloseIcon sx={{ color: '#FFF' }} />
-            </IconButton>
-          </Box>
+          <IconButton sx={{ ml: "auto" }} {...closeButtonProps}>
+            <CloseIcon />
+          </IconButton>
         </Box>
-        <Box p={1}>
-          {children}
-        </Box>
+        {children}
         {footer && (
           <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 1 }}>
             <Button {...cancelButtonsProps}>Cancel</Button>
