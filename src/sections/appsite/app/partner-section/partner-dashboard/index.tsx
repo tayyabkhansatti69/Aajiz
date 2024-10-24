@@ -1,13 +1,18 @@
-import { Box, Button, Card, CardMedia, Stack, Typography } from "@mui/material";
-import { trustedPartnersData } from "../../donor-dashboard-section/donor-dashboard-data";
+import { Box, Button, Card, Grid, Stack, Typography } from "@mui/material";
 import { WithdrawBalanceSection } from "../withdraw-balance-section";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useGetRecentStampQuery } from "@/src/services/partner/partner-dashboard/partner-dashboard-api";
+import { useGetDonorProfileQuery } from "@/src/services/donor/donor-dashboard/donor-dashboard";
+import { QRCodeCanvas } from "qrcode.react";
 
 export function PartnerDashboardSection() {
   const [openModal, setOpenModal] = useState(false);
   const router = useRouter();
+  const params = { limit: 10, offset: 0 };
+  const { data: donorProfile } = useGetDonorProfileQuery({});
 
+  const { data } = useGetRecentStampQuery({ params });
   return (
     <>
       <Stack gap={2.5}>
@@ -22,7 +27,7 @@ export function PartnerDashboardSection() {
         >
           <Box>
             <Typography variant="h5" color="#0EBDBE">
-              Rs. 5000
+              Rs. {donorProfile?.body?.current_balance}
             </Typography>
             <Typography variant="body1" fontWeight={500}>
               Available Balance
@@ -48,50 +53,39 @@ export function PartnerDashboardSection() {
             Scan new stamp
           </Button>
         </Stack>
-        <Box
-          sx={{
-            py: 0.5,
-            overflowX: "auto",
-            width: "100%",
-            "&::-webkit-scrollbar": {
-              height: 8, // Reducing the height of the scrollbar
-            },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "#0ebdbe", // Custom color for the scrollbar thumb
-              borderRadius: 8, // Rounded scrollbar thumb
-            },
-            "&::-webkit-scrollbar-thumb:hover": {
-              backgroundColor: "#09a4a6", // Change color on hover
-            },
-            "&::-webkit-scrollbar-track": {
-              backgroundColor: "#f0f0f0", // Track background color
-              borderRadius: 8,
-            },
-          }}
-        >
-          <Stack direction="row" spacing={3} sx={{ width: "max-content" }}>
-            {trustedPartnersData.map((items) => (
-              <Card key={items?.id} sx={{ minWidth: 200 }}>
-                <CardMedia
-                  component="img"
-                  src={items.image.src}
-                  alt="Landing Section Girl"
-                  sx={{ height: "15rem" }}
-                />
-                <Stack py={1} px={2} gap={1}>
-                  <Typography fontWeight={600}>{items?.name}</Typography>
-                  <Typography variant="subtitle1">
-                    Stamp Type: Physical
-                  </Typography>
+        <Grid container columnSpacing={8} rowSpacing={3}>
+          {data?.notifications.map((items) => (
+            <Grid item md={6} xs={12} key={items?.id}>
+              <Card sx={{ minWidth: 200, background: "#F8FFFE" }}>
+                <Stack
+                  py={2}
+                  px={2}
+                  gap={1}
+                  direction="row"
+                  justifyContent="space-between"
+                >
+                  <Stack spacing={2}>
+                    <Typography variant="subtitle1">
+                      <b>Stamp Type:</b> {items?.Card_Type}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      <b>Card No:</b> {items?.card_num}
+                    </Typography>
 
-                  <Typography variant="subtitle1" color="#0ebdbe">
-                    Price: 25000 Rs.
-                  </Typography>
+                    <Typography
+                      variant="subtitle1"
+                      color="#0ebdbe"
+                      fontWeight={600}
+                    >
+                      Price: {items?.amount} Rs.
+                    </Typography>
+                  </Stack>
+                  <QRCodeCanvas value={items?.card_num} />
                 </Stack>
               </Card>
-            ))}
-          </Stack>
-        </Box>
+            </Grid>
+          ))}
+        </Grid>
       </Stack>
       <WithdrawBalanceSection
         openModal={openModal}
