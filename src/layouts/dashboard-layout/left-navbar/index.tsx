@@ -55,7 +55,7 @@ function LeftNavbar(props: any) {
               setLinkName={setLinkName}
             />
           ))}
-          {loginUser?.email === 'student@gmail.com' && NavListDataStudent.map(({ label, icon, link }, index) => (
+          {(loginUser?.Data_User?.account_type === 'partner' || loginUser?.account_type === 'partner') && NavListDataStudent.map(({ label, icon, link }, index) => (
             <NavbarList
               key={index}
               link={link}
@@ -64,7 +64,7 @@ function LeftNavbar(props: any) {
               setLinkName={setLinkName}
             />
           ))}
-          {loginUser?.email === 'admine@gmail.com' && NavListDataAdmine.map(({ label, icon, link }, index) => (
+          {(loginUser?.Data_User?.account_type === 'admin' || loginUser?.account_type === 'admin') && NavListDataAdmine.map(({ label, icon, link }, index) => (
             <NavbarList
               key={index}
               link={link}
