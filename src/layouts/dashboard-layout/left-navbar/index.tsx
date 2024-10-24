@@ -20,12 +20,12 @@ export const drawerWidth = "300px";
 //============================================================
 function LeftNavbar(props: any) {
   const theme: any = useTheme();
-  const { open, handleDrawer,setLinkName } = props;
+  const { open, handleDrawer, setLinkName } = props;
   const screenSizeHandler = useMediaQuery(theme.breakpoints.down("md"));
 
-console.log(getLocalStorage('rememberMe'),"remn")
-const loginUser:any=getLocalStorage('rememberMe')
-console.log(loginUser,"datata")
+  console.log(getLocalStorage('rememberMe'), "remn")
+  const loginUser: any = getLocalStorage('rememberMe')
+  console.log(loginUser, "datata")
 
   return (
     <Drawer variant="permanent" open={open}>
@@ -46,7 +46,7 @@ console.log(loginUser,"datata")
 
         {/* Left NavBar List Component  */}
         <Stack flexDirection={"column"} gap={1} mt={2} pr={2}>
-          {(loginUser?.Data_User?.account_type==='donor' || loginUser?.account_type==='donor')  && NavListData.map(({ label, icon, link }, index) => (
+          {(loginUser?.Data_User?.account_type === 'donor' || loginUser?.account_type === 'donor') && NavListData.map(({ label, icon, link }, index) => (
             <NavbarList
               key={index}
               link={link}
@@ -55,7 +55,7 @@ console.log(loginUser,"datata")
               setLinkName={setLinkName}
             />
           ))}
-          {loginUser?.email==='student@gmail.com' && NavListDataStudent.map(({ label, icon, link }, index) => (
+          {loginUser?.email === 'student@gmail.com' && NavListDataStudent.map(({ label, icon, link }, index) => (
             <NavbarList
               key={index}
               link={link}
@@ -64,7 +64,7 @@ console.log(loginUser,"datata")
               setLinkName={setLinkName}
             />
           ))}
-           {loginUser?.email==='admine@gmail.com' && NavListDataAdmine.map(({ label, icon, link }, index) => (
+          {loginUser?.email === 'admine@gmail.com' && NavListDataAdmine.map(({ label, icon, link }, index) => (
             <NavbarList
               key={index}
               link={link}
