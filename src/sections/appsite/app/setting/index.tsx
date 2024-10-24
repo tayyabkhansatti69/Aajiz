@@ -207,7 +207,7 @@ function SettingSection() {
 
                 </FormProvider>
             </Stack>
-            <OrdeNowCard orderNow={orderNow} setOrderNow={setOrderNow}/>
+            <OrdeNowCard orderNow={orderNow} setOrderNow={setOrderNow} Curreaddress={profileData?.body?.address}/>
         </div>
     );
 }

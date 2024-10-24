@@ -63,8 +63,8 @@ const router=useRouter()
         case "donor":
           router.push("/dashboard");
           break;
-        case "student":
-          router.push("/dashboard/student");
+        case "partner":
+          router.push("/dashboard");
           break;
         case "admin":
           router.push("/dashboard/admin");
