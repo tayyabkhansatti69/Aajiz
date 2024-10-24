@@ -1,7 +1,7 @@
 import { CustomModal } from "@/src/components";
 import {
   FormProvider,
-  RHFCustomSelect,
+  RHFAutocompleteAsync,
   RHFRadioGroup,
   RHFTextField,
 } from "@/src/components/rhf";
@@ -9,7 +9,9 @@ import { Button, Stack } from "@mui/material";
 import { UseWithdrawBalance } from "./use-withdraw-balance";
 
 export function WithdrawBalanceSection({ openModal, setOpenModal }: any) {
-  const { methods, handleSubmit, onSubmit } = UseWithdrawBalance();
+  const { methods, handleSubmit, onSubmit, getAccount } = UseWithdrawBalance({
+    setOpenModal,
+  });
   return (
     <CustomModal
       isOpen={openModal}
@@ -35,17 +37,13 @@ export function WithdrawBalanceSection({ openModal, setOpenModal }: any) {
             ]}
           />
 
-          <RHFCustomSelect
+          <RHFAutocompleteAsync
             name="paymentMethod"
             outerLabel="Select Payment Method"
-            options={[
-              { id: 1, value: "bank", label: "Bank Account" },
-              { id: 2, value: "easypaisa", label: "Easypaisa" },
-              { id: 3, value: "jazzcash", label: "Jazzcash" },
-            ]}
+            apiQuery={getAccount}
+            transformResponse={(res) => res?.body}
+            getOptionLabel={(option: any) => option.account_name}
           />
-
-          <RHFTextField name="accountNumber" outerLabel="Account Number" />
           <RHFTextField name="amount" outerLabel="Amount" />
           <Button variant="contained" type="submit">
             Withdraw

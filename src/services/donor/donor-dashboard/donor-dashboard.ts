@@ -1,5 +1,5 @@
 import { baseAPI } from "../../base-api";
-import { DONOR_DASHBOARD } from "../../tags";
+import { DONOR_DASHBOARD, WITHDRAW_AMOUNT } from "../../tags";
 
 export const authAPI = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
@@ -16,7 +16,7 @@ export const authAPI = baseAPI.injectEndpoints({
         url: `/get_profile`,
         method: "GET",
       }),
-      providesTags: [DONOR_DASHBOARD],
+      providesTags: [DONOR_DASHBOARD, WITHDRAW_AMOUNT],
     }),
   }),
 });

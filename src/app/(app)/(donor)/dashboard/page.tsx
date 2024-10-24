@@ -9,7 +9,7 @@ function Home() {
   const myValue: any = localStorage.getItem("rememberMe");
   const data: any = JSON.parse(myValue);
 
-  return data?.Data_User?.kyc ? (
+  return !data?.Data_User?.kyc ? (
     <DashboardSection />
   ) : data?.Data_User?.account_type === "donor" ? (
     <DonorDashboardSection />
