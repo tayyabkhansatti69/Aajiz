@@ -3,7 +3,7 @@ import type { Theme } from "@mui/material";
 
 export const styles = {
     tabsWrapper: ({ palette: { neutral, common, mode } }: Theme) => ({
-        background: mode === 'dark' ? neutral[900] : neutral[200],
+        background: mode === 'dark' ? neutral[900] : '#F0FDFB',
         borderRadius: '8px',
         display: 'inline-block',
         border: `1px solid ${neutral[200]}`,
