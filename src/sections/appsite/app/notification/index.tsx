@@ -1,41 +1,27 @@
-import HorizontalTabs from "@/src/components/Horizontal-tab";
+
+import { useGetNotificationQuery } from "@/src/services/donor/notification/notification-api";
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
+import { useState } from "react";
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from "dayjs";
+import CustomPagination from "@/src/components/custom-pagination";
+
+// Extend dayjs with the relativeTime plugin
+dayjs.extend(relativeTime);
 
 function NotificationSection() {
-    const notificationsData = [
-        {
-            section: 'New',
-            items: [
-                {
-                    title: 'Your Donation offer is about to expire',
-                    time: 'about an hour ago',
-                    actionText: 'Recharge',
-                },
-                {
-                    title: 'Your Donation has been received',
-                    time: 'about an hour ago',
-                    actionText: 'View Details',
-                },
-                {
-                    title: 'Your Balance Expired on Card #126567213',
-                    time: 'about an hour ago',
-                },
-                {
-                    title: 'System will undergo scheduled maintenance on 24th October 2024',
-                    time: 'about an hour ago',
-                },
-            ],
-        },
-        {
-            section: 'Earlier',
-            items: [
-                {
-                    title: 'Your Balance Expired on Card #126567213',
-                    time: 'about an hour ago',
-                },
-            ],
-        },
-    ];
+    
+    
+    const [param, setParams] = useState({
+        offset: 0,
+        limit: 10
+    });
+
+    const { data, } = useGetNotificationQuery({ ...param });
+    console.log(data)
+    const [page, setPage] = useState(data?.current_page);
+    const [pageLimit, setPageLimit] = useState(data?.limit)
+
 
     return (
         <Grid pt={2} container>
@@ -43,49 +29,39 @@ function NotificationSection() {
                 <Typography variant='h4'>Notification</Typography>
             </Grid>
 
-            <Grid xs={12} item>
+            <Grid xs={12} item mt={2}>
                 <Paper variant="elevation" elevation={2}>
 
-                    <HorizontalTabs tabsArray={['Read', 'UnRead']}>
-                        <Box px={2}>
-                        {notificationsData.map((sectionData, sectionIndex) => (
+
+                    <Box px={2}>
+                        {data?.notifications?.map((sectionData, sectionIndex) => (
                             <Grid item xs={12} key={sectionIndex}>
-                                {/* Section Title */}
-                                <Box px={1} py={1}>
-                                <Typography variant="h6">{sectionData.section}</Typography>
-                                </Box>
+
                                 {/* Map through each notification item */}
-                                {sectionData.items.map((item, itemIndex) => (
-                                    <NotificationItem
-                                        key={itemIndex}
-                                        title={item.title}
-                                        time={item.time}
-                                        button={item.actionText}
-                                    />
-                                ))}
+
+                                <NotificationItem
+                                    key={sectionData?.id}
+                                    title={sectionData?.notification_message}
+                                    time={sectionData?.notification_date}
+
+                                />
+
                             </Grid>
                         ))}
-                        </Box>
-                        <Box px={2}>
-                        {notificationsData.map((sectionData, sectionIndex) => (
-                            <Grid item xs={12} key={sectionIndex}>
-                                {/* Section Title */}
-                                <Box px={1}>
-                                <Typography variant="h6">{sectionData.section}</Typography>
-                                </Box>
-                                {/* Map through each notification item */}
-                                {sectionData.items.map((item, itemIndex) => (
-                                    <NotificationItem
-                                        key={itemIndex}
-                                        title={item.title}
-                                        time={item.time}
-                                        button={item.actionText}
-                                    />
-                                ))}
-                            </Grid>
-                        ))}
-                        </Box>
-                    </HorizontalTabs>
+                    </Box>
+                    <Box p={2}>
+                    <CustomPagination
+                        count={data?.total_pages}
+                        currentPage={page}
+                        totalRecords={data?.total_pages}
+                        onPageChange={(newPage: any) => { setPage?.(newPage);  setParams((prev) => {
+                            return { ...prev, offset: (newPage - 1) * 10 };
+                        }); }}
+                        setPage={setPage}
+                        pageLimit={pageLimit}
+                        setPageLimit={setPageLimit}
+                    />
+</Box>
                 </Paper>
             </Grid>
         </Grid>
@@ -94,24 +70,37 @@ function NotificationSection() {
 export default NotificationSection
 
 
-const NotificationItem = ({ title, time, button }) => (
-    <Grid item xs={12}>
-        <Box sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            borderBottom: '1px solid #e0e0e0',
-            padding: '12px 0px',
-        }}>
-            <Box>
-                <Typography variant="body1" sx={{ fontWeight: 'bold' }}>{title}</Typography>
-                <Typography variant="body2" color="textSecondary">{time}</Typography>
+const NotificationItem = ({ title, time }) => {
+    // Check if the message includes the word "expired"
+    const isExpired = title?.includes("expired");
+
+    return (
+        <Grid item xs={12}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    borderBottom: '1px solid #e0e0e0',
+                    padding: '12px 0px',
+                }}
+            >
+                <Box>
+                    <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                        {title}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                        {dayjs(time).fromNow()}
+                    </Typography>
+                </Box>
+
+                {/* Conditionally render the button if the message contains "expired" */}
+                {isExpired && (
+                    <Button variant="contained" size="small" sx={{ marginLeft: 2 }}>
+                        Retry Donation
+                    </Button>
+                )}
             </Box>
-            {button && (
-                <Button variant="contained" size="small" sx={{ marginLeft: 2 }}>
-                    {button}
-                </Button>
-            )}
-        </Box>
-    </Grid>
-);
+        </Grid>
+    );
+};

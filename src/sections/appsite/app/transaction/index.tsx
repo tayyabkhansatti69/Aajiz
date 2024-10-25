@@ -111,18 +111,20 @@ const {data:getHistor,isLoading:hisltoryLoading,isFetching:historyFetching,isErr
             accessorFn: (row: any) => row.status ?? "-",
             id: "status",
             cell: (info: any) => {
+                const statusValue = info.getValue() === true ? "Approved": "Pending"
                 return (
                     <Box
                         display="flex"
                         justifyContent="flex-start"
                         alignItems="flex-start"
                     >
+                     
                         <CustomChip
                             variant={info.getValue() === true ? "success" : "danger"}
                             rootSx={{
                                 fontSize: 11,
                             }}
-                            ChipProps={{ label: `${info.getValue()}` }}
+                            ChipProps={{ label: `${statusValue}` }}
                         />
                     </Box>
                 );
@@ -132,30 +134,7 @@ const {data:getHistor,isLoading:hisltoryLoading,isFetching:historyFetching,isErr
         },
 
     ];
-    // const generateDummyData = (count: number) => {
-    //     const recipientNumber = [112, 110, 103, 104];
-    //     const donationDates = ["27/02/2024", "25/02/2024", "23/02/2024", "22/02/2024"];
-    //     const amountDonated = [22000, 25000, 3000, 35000];
-    //     const paymentMethod = ["JazzCash", "Bank Transfer", "Bank Transfer", "JazzCash"];
-    //     const status = ["Confirmed", "Rejected"];
 
-    //     const getRandomElement = (arr: any) =>
-    //         arr[Math.floor(Math.random() * arr.length)];
-
-    //     return Array.from({ length: count }, (_, index) => ({
-    //         id: index,
-    //         recipientNumber: getRandomElement(recipientNumber),
-    //         donationDate: getRandomElement(donationDates),
-    //         amountDonated: getRandomElement(amountDonated),
-    //         paymentMethod: getRandomElement(paymentMethod),
-    //         status: getRandomElement(status),
-    //         Assigned: Math.random() < 0.5, // Randomly assign Assigned as true or false
-    //     }));
-    // };
-
-    // // Example usage:
-    // const dummyData = generateDummyData(10);
-    // console.log(dummyData);
     return (
         <Grid pt={2} container>
             <Grid xs={12} item>
