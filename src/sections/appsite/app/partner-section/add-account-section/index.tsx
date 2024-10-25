@@ -8,7 +8,8 @@ import {
 } from "@/src/components/rhf";
 
 export function AddAccountSection() {
-  const { methods, handleSubmit, onSubmit, router } = UseAddAccount();
+  const { methods, handleSubmit, onSubmit, router, paymentOption } =
+    UseAddAccount();
   return (
     <Stack>
       <Button
@@ -31,14 +32,26 @@ export function AddAccountSection() {
               name="paymentOption"
               outerLabel="Select Payment Option"
               options={[
-                { id: 1, name: "accountNumber", label: "Bank Account" },
-                { id: 2, name: "easypaisa", label: "Easypaisa" },
-                { id: 3, name: "jazzcash", label: "Jazzcash" },
+                { id: 1, value: "bank", label: "Bank Account" },
+                { id: 2, value: "easypaisa", label: "Easypaisa" },
+                { id: 3, value: "jazzcash", label: "Jazzcash" },
               ]}
             />
-            <RHFTextField name="bank" outerLabel="Bank Name" />
             <RHFTextField name="accountTitle" outerLabel="Account Title" />
-            <RHFTextField name="accountNumber" outerLabel="Account Number" />
+            {paymentOption === "bank" ? (
+              <>
+                <RHFTextField name="bank" outerLabel="Bank Name" />
+                <RHFTextField
+                  name="bankAccountNumber"
+                  outerLabel="Bank Account Number"
+                />
+              </>
+            ) : (
+              <>
+                <RHFTextField name="phoneNumber" outerLabel="Account Number" />
+              </>
+            )}
+
             <Button type="submit" variant="contained" sx={{ width: "50%" }}>
               Add Account
             </Button>

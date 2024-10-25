@@ -10,7 +10,8 @@ import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
 // import IconMassage from "@/src/assets/icons/dashboard-main/Icon-massage";
 
 import IconQuestionBank from "@/src/assets/icons/dashboard-main/icon-question-bank";
-
+import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 //==========================================================================================
 // CONST
 export const NavListData = [
@@ -34,7 +35,6 @@ export const NavListData = [
     icon: IconSetting,
     link: "/logout",
   },
-
 ];
 export const NavListDataStudent = [
   {
@@ -44,25 +44,24 @@ export const NavListDataStudent = [
   },
   {
     label: "Add Account",
-    icon: AccountsIcons,
+    icon: SettingsOutlinedIcon,
     link: "/add-account",
   },
   {
     label: "Transaction",
-    icon: AccountsIcons,
-    link: "/",
+    icon: MonetizationOnOutlinedIcon,
+    link: "/transactions",
   },
   {
-    label: 'Support',
-    icon: IconSetting,
-    link: '/message'
+    label: "Support",
+    icon: SettingsOutlinedIcon,
+    link: "/support",
   },
   {
     label: "Settings",
-    icon: IconSetting,
+    icon: SettingsOutlinedIcon,
     link: "/settings",
   },
-
 ];
 export const NavListDataAdmine = [
   {
@@ -100,5 +99,4 @@ export const NavListDataAdmine = [
     icon: IconSetting,
     link: "/settings",
   },
-
 ];
