@@ -31,11 +31,13 @@ export function ScanStampSection() {
               name="stampType"
               outerLabel="Select Stamp Type"
               options={[
-                { id: 1, name: "eStamp", label: "E Stamp" },
-                { id: 2, name: "physicalCard", label: "Physical Card" },
+                { id: 1, value: "eStamp", label: "E-Stamp" },
+                { id: 2, value: "physicalCard", label: "Physical Card" },
               ]}
             />
-            <RHFTextField name="scanQrCode" outerLabel="Scan QR Code" />
+            <RHFTextField name="cardNumber" outerLabel="Scan QR Code" />
+            <RHFTextField name="amount" outerLabel="Amount To Deduct" />
+
             <Button type="submit" variant="contained" sx={{ width: "50%" }}>
               Scan Stamp
             </Button>

@@ -80,7 +80,14 @@ export const authAPI = baseAPI.injectEndpoints({
         method: "POST",
         body,
       }),
-    })
+    }),
+    partnerKyc: builder.mutation({
+      query: (body) => ({
+        url: "/partner_kyc",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -95,5 +102,6 @@ export const {
   useChangePasswordMutation,
   useSetNewPasswordMutation,
   useResetPasswordMutation,
-  useDonorKycMutation
+  useDonorKycMutation,
+  usePartnerKycMutation
 } = authAPI;

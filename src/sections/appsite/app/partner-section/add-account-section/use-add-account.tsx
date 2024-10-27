@@ -2,12 +2,14 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useAddAccountMutation } from "@/src/services/partner/add-account/add-account-api";
 import toast from "react-hot-toast";
+import { yupResolver } from "@hookform/resolvers/yup";
+import validationSchema from "./validation-schema";
 
 export const UseAddAccount = () => {
   const router = useRouter();
   const [addAccount] = useAddAccountMutation();
   const methods = useForm<any>({
-    // resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema),
     defaultValues: {
       paymentOption: "jazzcash",
       bank: "",
