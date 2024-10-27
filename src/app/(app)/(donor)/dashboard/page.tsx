@@ -9,6 +9,8 @@ import React from "react";
 function Home() {
   const myValue: any = localStorage.getItem("rememberMe");
   const data: any = JSON.parse(myValue);
+
+  console.log(data,'dataofff')
   return !data?.Data_User?.kyc_verify ? (
     data?.Data_User?.account_type === "donor" ? (
       <DashboardSection />

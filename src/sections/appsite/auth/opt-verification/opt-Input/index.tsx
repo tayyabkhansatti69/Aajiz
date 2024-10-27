@@ -1,5 +1,5 @@
 import { useForgotPasswordOtpMutation, useOtpVerificationMutation } from "@/src/services/auth-api";
-import { getLocalStorage } from "@/src/utils";
+import { setLocalStorage } from "@/src/utils";
 // import { setLocalStorage } from "@/src/utils";
 import { Box, Button } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -18,8 +18,7 @@ const [forgetOtpVerification]=useForgotPasswordOtpMutation()
     const searchParams = useSearchParams();
     const type = searchParams.get('type');
     const email = searchParams.get('email');
-    const loginUser:any=getLocalStorage('rememberMe')
-    console.log(loginUser,"lklkl")
+    
   
   const onSubmit = async () => {
     
@@ -52,20 +51,9 @@ const [forgetOtpVerification]=useForgotPasswordOtpMutation()
 
         // setLocalStorage('rememberMe', response?.body);
         toast.success(response?.message || "Signed up successfully!");
-        switch (loginUser?.account_type) {
-          case "donor":
-            router.push("/dashboard");
-            break;
-          case "partner":
-            router.push("/dashboard");
-            break;
-          case "admin":
-            router.push("/dashboard/admin");
-            break;
-          default:
-            null
-            break;
-        }
+        setLocalStorage('rememberMe', response);
+        router.push("/dashboard");
+        
     } catch (error: any) {
         console.error(error);
         toast.error(error?.data?.message || "Something went wrong!");
