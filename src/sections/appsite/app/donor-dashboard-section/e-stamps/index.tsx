@@ -14,13 +14,13 @@ interface EStamp {
   stamp_num: string;
 }
 
-interface EStampsProps {
-  eStampData: {
-    stamps: EStamp[];
-  };
-}
+// interface EStampsProps {
+//   eStampData: {
+//     stamps: EStamp[];
+//   };
+// }
 
-export function EStamps({ eStampData }: EStampsProps) {
+export function EStamps({ eStampData }: any) {
   const router = useRouter();
   const gridContainerRef = useRef<HTMLDivElement>(null);
   const [pdfDownloaded, setPdfDownloaded] = useState(false);
@@ -114,9 +114,12 @@ export function EStamps({ eStampData }: EStampsProps) {
 
         // Ensure images are fully loaded
         await ensureImagesLoaded(stampElement);
-        console.log(stampElement ,"stampElement");
+        console.log(stampElement, "stampElement");
 
-        const canvas = await html2canvas(stampElement, { scale: 2, useCORS: true });
+        const canvas = await html2canvas(stampElement, {
+          scale: 2,
+          useCORS: true,
+        });
         const imgData = canvas.toDataURL("image/png");
 
         const imgProps = pdf.getImageProperties(imgData);
@@ -129,8 +132,16 @@ export function EStamps({ eStampData }: EStampsProps) {
           itemsOnCurrentPage = 0;
         }
 
-        const xPosition = margin + (itemsOnCurrentPage % itemsPerRow) * (pdfWidth + margin);
-        pdf.addImage(imgData, "PNG", xPosition, currentHeight, pdfWidth, pdfHeight);
+        const xPosition =
+          margin + (itemsOnCurrentPage % itemsPerRow) * (pdfWidth + margin);
+        pdf.addImage(
+          imgData,
+          "PNG",
+          xPosition,
+          currentHeight,
+          pdfWidth,
+          pdfHeight
+        );
 
         if (itemsOnCurrentPage % itemsPerRow === itemsPerRow - 1) {
           currentHeight += pdfHeight + rowPadding;
@@ -185,14 +196,15 @@ export function EStamps({ eStampData }: EStampsProps) {
                   <Card sx={{ width: "fit-content", p: 1, m: "auto" }}>
                     <QRCodeCanvas value={item.stamp_num} />
                   </Card>
-                  <Typography variant='body1' color="white">{item.stamp_num}</Typography>
+                  <Typography variant="body1" color="white">
+                    {item.stamp_num}
+                  </Typography>
                   <Box>
                     <Image
                       src={item.industry_logo} // This should now be Base64
                       alt="Industry Type"
                       width={50}
                       height={50}
-                      
                     />
                   </Box>
                 </Stack>
