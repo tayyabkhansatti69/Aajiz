@@ -1,6 +1,6 @@
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Box, Button, Card, Grid, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import Image from "next/image"; // Distinguishing from the global Image
 import { useRouter } from "next/navigation";
 import { QRCodeCanvas } from "qrcode.react";
 import eStampLogo from "../../../../../assets/image/eStamp_logo.png";
@@ -8,64 +8,151 @@ import { useEffect, useRef, useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-export function EStamps({ eStampData }: any) {
+interface EStamp {
+  id: number;
+  industry_logo: string;
+  stamp_num: string;
+}
+
+interface EStampsProps {
+  eStampData: {
+    stamps: EStamp[];
+  };
+}
+
+export function EStamps({ eStampData }: EStampsProps) {
   const router = useRouter();
-  const gridContainerRef = useRef(null);
-  const [pdfDownloaded, setPdfDownloaded] = useState(false); // State to track if PDF is downloaded
+  const gridContainerRef = useRef<HTMLDivElement>(null);
+  const [pdfDownloaded, setPdfDownloaded] = useState(false);
+  const [preloadedData, setPreloadedData] = useState<EStamp[]>([]);
+
+  // Helper function to check if all images are loaded
+  const ensureImagesLoaded = async (container: HTMLElement) => {
+    const images = Array.from(container.getElementsByTagName("img"));
+    await Promise.all(
+      images.map((img) => {
+        return new Promise<void>((resolve) => {
+          if (img.complete) {
+            resolve();
+          } else {
+            img.onload = () => resolve();
+            img.onerror = () => {
+              console.error(`Image failed to load: ${img.src}`); // Logging image load failure
+              resolve(); // Resolve even if image fails to load
+            };
+          }
+        });
+      })
+    );
+  };
+
+  const toBase64 = (url: string): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const img = new window.Image();
+      img.crossOrigin = "Anonymous";
+      img.src = url;
+
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+
+        if (ctx) {
+          ctx.drawImage(img, 0, 0);
+          resolve(canvas.toDataURL("image/png"));
+        } else {
+          reject(new Error("Canvas context not available"));
+        }
+      };
+
+      img.onerror = () => {
+        console.error(`Failed to load image: ${url}`); // Logging load failure
+        reject(new Error("Failed to load image"));
+      };
+    });
+  };
+
+  // Preload all industry logos as base64
+  useEffect(() => {
+    const preloadLogos = async () => {
+      const stampsWithBase64 = await Promise.all(
+        eStampData.stamps.map(async (item) => {
+          try {
+            const industryLogoBase64 = await toBase64(item.industry_logo);
+            return { ...item, industry_logo: industryLogoBase64 }; // Replace URL with Base64
+          } catch (error) {
+            console.error(`Failed to convert logo for ${item.id}:`, error);
+            return { ...item, industry_logo: item.industry_logo }; // Fallback to original
+          }
+        })
+      );
+      setPreloadedData(stampsWithBase64);
+    };
+
+    preloadLogos();
+  }, [eStampData]);
 
   useEffect(() => {
     const generatePdf = async () => {
-      if (pdfDownloaded) return; // Prevent PDF from generating again
+      if (pdfDownloaded || !gridContainerRef.current) return;
 
       const pdf = new jsPDF("p", "mm", "a4");
-      const a4Width = 210; // A4 width in mm
-      const a4Height = 297; // A4 height in mm
-      const margin = 10; // Margin for the PDF
-      const rowHeight = 70; // Approximate height of each row in mm
-      const rowPadding = 5;
+      const a4Width = 210;
+      const a4Height = 297;
+      const margin = 5;
+      const rowPadding = 10;
+      const itemsPerRow = 2;
+      const itemsPerPage = 4;
 
-      if (gridContainerRef.current) {
-        const gridElement = gridContainerRef.current;
-        const canvas = await html2canvas(gridElement, { scale: 2 });
+      const stampElements = gridContainerRef.current.children;
+      let currentHeight = margin;
+      let itemsOnCurrentPage = 0;
+
+      for (let i = 0; i < preloadedData.length; i++) {
+        const stampElement = stampElements[i] as HTMLElement;
+
+        // Ensure images are fully loaded
+        await ensureImagesLoaded(stampElement);
+        console.log(stampElement ,"stampElement");
+
+        const canvas = await html2canvas(stampElement, { scale: 2, useCORS: true });
         const imgData = canvas.toDataURL("image/png");
 
-        // Calculate scaling factor to fit 4 cards per row and adjust height
         const imgProps = pdf.getImageProperties(imgData);
-        const pdfWidth = a4Width - margin * 2; // Width of content minus margins
+        const pdfWidth = (a4Width - margin * 3) / itemsPerRow;
         const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-        // Split into rows and fit into the A4 size
-        let currentHeight = margin;
-
-        for (let row = 0; row < eStampData?.stamps.length / 4; row++) {
-          if (currentHeight + rowHeight > a4Height - margin) {
-            pdf.addPage(); // Create new page if row exceeds page height
-            currentHeight = margin; // Reset height for new page
-          }
-
-          pdf.addImage(
-            imgData,
-            "PNG",
-            margin,
-            currentHeight,
-            pdfWidth,
-            pdfHeight
-          );
-          currentHeight += rowHeight + rowPadding; // Move to the next row position
+        if (currentHeight + pdfHeight > a4Height - margin) {
+          pdf.addPage();
+          currentHeight = margin;
+          itemsOnCurrentPage = 0;
         }
 
-        // Automatically download the PDF and mark it as downloaded
-        pdf.save("eStamp-cards.pdf");
-        setPdfDownloaded(true); // Set state to true to avoid re-downloading
-      }
-    };
-    // Function to generate PDF
+        const xPosition = margin + (itemsOnCurrentPage % itemsPerRow) * (pdfWidth + margin);
+        pdf.addImage(imgData, "PNG", xPosition, currentHeight, pdfWidth, pdfHeight);
 
-    if (!pdfDownloaded) {
-      // Only generate the PDF if it hasn't been downloaded yet
+        if (itemsOnCurrentPage % itemsPerRow === itemsPerRow - 1) {
+          currentHeight += pdfHeight + rowPadding;
+        }
+
+        itemsOnCurrentPage++;
+
+        if (itemsOnCurrentPage === itemsPerPage) {
+          pdf.addPage();
+          currentHeight = margin;
+          itemsOnCurrentPage = 0;
+        }
+      }
+
+      pdf.save("eStamp-cards.pdf");
+      setPdfDownloaded(true);
+    };
+
+    if (!pdfDownloaded && preloadedData.length > 0) {
       generatePdf();
     }
-  }, [eStampData, pdfDownloaded]); // Include pdfDownloaded in dependencies
+  }, [preloadedData, pdfDownloaded]);
 
   return (
     <Stack>
@@ -80,14 +167,9 @@ export function EStamps({ eStampData }: any) {
         Back
       </Button>
       <Card sx={{ p: 2, height: "80vh", overflow: "scroll" }}>
-        <Grid
-          container
-          px={2}
-          spacing={2}
-          ref={gridContainerRef}
-        >
-          {eStampData?.stamps?.map((items) => (
-            <Grid item xl={3} md={6} xs={12} key={items?.id}>
+        <Grid container px={2} spacing={2} ref={gridContainerRef}>
+          {preloadedData.map((item) => (
+            <Grid item xl={3} md={6} xs={12} key={item.id}>
               <Card
                 sx={{
                   backgroundColor: "primary.main",
@@ -101,13 +183,16 @@ export function EStamps({ eStampData }: any) {
                   </Box>
                   <Typography color="white">Stamp QR Code</Typography>
                   <Card sx={{ width: "fit-content", p: 1, m: "auto" }}>
-                    <QRCodeCanvas value={items?.stamp_num} />
+                    <QRCodeCanvas value={item.stamp_num} />
                   </Card>
+                  <Typography variant='body1' color="white">{item.stamp_num}</Typography>
                   <Box>
-                    <img
-                      src={items?.industry_logo}
+                    <Image
+                      src={item.industry_logo} // This should now be Base64
                       alt="Industry Type"
-                      style={{ width: 50, height: 50 }}
+                      width={50}
+                      height={50}
+                      
                     />
                   </Box>
                 </Stack>

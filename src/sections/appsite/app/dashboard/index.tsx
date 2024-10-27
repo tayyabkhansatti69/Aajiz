@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useDonorKycMutation } from "@/src/services/auth-api";
 import * as Yup from 'yup';
 import toast from "react-hot-toast";
+import { clearLocalStorage } from "@/src/utils";
 
 const steps = ['Basic Details', 'Personal Identification'];
 export const Schema = Yup.object().shape({
@@ -69,9 +70,9 @@ function DashboardSection() {
         formData.append("back_card", data.back_card);
         // Perform login mutation using RTK Query
         const response = await dononorKyc(formData).unwrap();
-        
         toast.success(response?.message || "Your request was sent for verification successfully!");
-        router?.push('/donor-dashboard');
+        clearLocalStorage()
+        router?.push('/sign-in');
         
       } catch (error: any) {
         console.error(error);
