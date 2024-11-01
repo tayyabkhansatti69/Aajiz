@@ -9,6 +9,7 @@ import { Box, Button, Card, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import addBalanceLogo from "../../../../assets/image/addBalanceLogo.png";
 import { UseAddBalance } from "./use-add-balance";
+import { LoadingButton } from "@mui/lab";
 
 export function AddBalanceSection() {
   const { methods, handleSubmit, onSubmit, router, paymentMethodType } =
@@ -61,9 +62,19 @@ export function AddBalanceSection() {
                   </>
                 )}
 
-                <Button type="submit" variant="contained" sx={{ width: "50%" }}>
+                <LoadingButton
+                  type="submit"
+                  variant="outlined"
+                  sx={{
+                    width: "50%",
+                    ":hover": {
+                      backgroundColor: "primary.main",
+                      color: "white",
+                    },
+                  }}
+                >
                   Pay
-                </Button>
+                </LoadingButton>
               </Stack>
             </FormProvider>
           </Stack>

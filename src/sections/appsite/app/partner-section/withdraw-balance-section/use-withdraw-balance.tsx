@@ -11,7 +11,7 @@ import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
   account: Yup.string().required("Account is required"),
-  paymentMethod: Yup.string().required("Payment method is required"),
+  // paymentMethod: Yup.string().required("Payment method is required"),
   amount: Yup.number()
     .required("Amount is required")
     .typeError("Amount must be a number"),
