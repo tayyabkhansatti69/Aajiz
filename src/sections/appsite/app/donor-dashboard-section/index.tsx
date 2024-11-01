@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardMedia,
+  Skeleton,
   Stack,
   Typography,
   styled,
@@ -39,9 +40,27 @@ export function DonorDashboardSection() {
   const router = useRouter();
   const params = { limit: 10, offset: 0 };
   const { data: donorProfile } = useGetDonorProfileQuery({});
-  const { data } = useGetTrustedPartnersListQuery(params);
+  const { data, isLoading } = useGetTrustedPartnersListQuery(params);
 
-  return (
+  return isLoading ? (
+    <Stack>
+      <Stack direction="row" justifyContent="space-between">
+        <Skeleton width={150} height={70} />
+        <Skeleton width={100} height={70} />
+      </Stack>
+      <Skeleton width={400} height={200} />
+      <Stack direction="row" justifyContent="space-between">
+        <Skeleton width={150} height={70} />
+        <Skeleton width={100} height={70} />
+      </Stack>
+      <Skeleton width={"100%"} height={220} />
+      <Stack direction="row" justifyContent="space-between">
+        <Skeleton width={150} height={70} />
+        <Skeleton width={100} height={70} />
+      </Stack>
+      <Skeleton width={"100%"} height={200} />
+    </Stack>
+  ) : (
     <Stack gap={2.5}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography variant="h5">My Balance</Typography>
@@ -49,6 +68,12 @@ export function DonorDashboardSection() {
           variant="outlined"
           onClick={() => {
             router.push("/add-balance");
+          }}
+          sx={{
+            ":hover": {
+              backgroundColor: "primary.main",
+              color: "white",
+            },
           }}
         >
           Add Balance
@@ -64,16 +89,23 @@ export function DonorDashboardSection() {
       >
         <Box>
           <Typography variant="h5" color="#0EBDBE">
-            Rs. {donorProfile?.body?.current_balance ?? donorProfile?.body?.balance }
+            Rs.{" "}
+            {donorProfile?.body?.current_balance ?? donorProfile?.body?.balance}
           </Typography>
           <Typography variant="body1" fontWeight={500}>
             Current Balance
           </Typography>
         </Box>
         <Button
-          variant="contained"
+          variant="outlined"
           onClick={() => {
             router?.push("/donate");
+          }}
+          sx={{
+            ":hover": {
+              backgroundColor: "primary.main",
+              color: "white",
+            },
           }}
         >
           Donate Now
@@ -173,8 +205,14 @@ export function DonorDashboardSection() {
                   </Typography>
                 </Stack>
                 <Button
-                  variant="contained"
-                  sx={{ width: "50%" }}
+                  variant="outlined"
+                  sx={{
+                    width: "50%",
+                    ":hover": {
+                      backgroundColor: "primary.main",
+                      color: "white",
+                    },
+                  }}
                   onClick={() => {
                     router.push("campaign-donation");
                   }}
