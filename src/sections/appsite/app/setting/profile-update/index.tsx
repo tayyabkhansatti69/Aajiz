@@ -1,16 +1,16 @@
-import { Avatar, Box, Typography } from "@mui/material";
-import { styled } from "@mui/system"; // Added styled import
-import { ChangeEvent, useEffect, useState } from "react";
-import profileImg from "../../../../../assets/image/profile.png";
 import { useUpdateProfileMutation } from "@/src/services/donor/setting/setting-api";
+import { Avatar, Box, Typography } from "@mui/material";
+// import { styled } from "@mui/system"; // Added styled import
+import { ChangeEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import profileImg from "../../../../../assets/image/profile.png";
 
-const ImgStyled = styled("img")(({ theme }) => ({
-  width: "127px",
-  height: "127px",
-  marginRight: theme.spacing(6.25),
-  borderRadius: "92px",
-}));
+// const ImgStyled = styled("img")(({ theme }) => ({
+//   width: "127px",
+//   height: "127px",
+//   marginRight: theme.spacing(6.25),
+//   borderRadius: "92px",
+// }));
 
 function ProfileUpdate(profile_image) {
   const [updateProfile] = useUpdateProfileMutation();
