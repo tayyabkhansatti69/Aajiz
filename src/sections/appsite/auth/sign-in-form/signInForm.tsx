@@ -12,7 +12,7 @@ import Image from "next/image";
 import singPerson from "../../../../assets/signin/singIn.png"; // Your actual image path
 import { UseSignInForm } from "./useSignInForm";
 import { FormProvider, RHFTextField } from "@/src/components/rhf";
-// import SignInIcon from "@/src/assets/icons/signin-icons/signin-icons";
+
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import AnimateLog from "@/src/assets/gif/heart filling 1.gif";
@@ -75,12 +75,7 @@ function SignInForm() {
                 sx={{ height: "100%" }}
             >
                 <Box width={{ xs: "90%", sm: "80%", md: "70%" }} textAlign="center">
-                    {/* <SignInIcon
-            sx={{
-              fontSize: 200,
-              height: 84,
-            }}
-          /> */}
+                
                     <Image
                         src={AnimateLog?.src}
                         alt="Loading..."
