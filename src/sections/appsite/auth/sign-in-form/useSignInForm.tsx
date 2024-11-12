@@ -27,7 +27,7 @@ export const defaultValues = {
 
 // Custom hook
 export const UseSignInForm = () => {
-  const [loginPost] = useLoginMutation();
+  const [loginPost,{isLoading}] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -104,5 +104,6 @@ export const UseSignInForm = () => {
     onSubmit,
     handleClickShowPassword,
     showPassword,
+    isLoading
   };
 };

@@ -100,9 +100,15 @@ function DonateNowSection() {
                 )}
                 <Grid item xs={12}>
                   <LoadingButton
-                    variant="contained"
+                    variant="outlined"
                     type="submit"
-                    sx={{ minWidth: "300px" }}
+                    sx={{
+                      minWidth: "300px",
+                      ":hover": {
+                        backgroundColor: "primary.main",
+                        color: "white",
+                      },
+                    }}
                     loading={isLoading || loadCardLoading}
                   >
                     Proceed
