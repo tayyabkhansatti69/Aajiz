@@ -3,15 +3,15 @@ import Image from "next/image";
 import singPerson from "../../../../assets/signin/singIn.png"; // Your actual image path
 import { UseSignInForm } from "./useSignInForm";
 import { FormProvider, RHFTextField } from "@/src/components/rhf";
-import SignInIcon from "@/src/assets/icons/signin-icons/signin-icons";
+// import SignInIcon from "@/src/assets/icons/signin-icons/signin-icons";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+import AnimateLog from "@/src/assets/gif/heart filling 1.gif";
 
 function SignInForm() {
 
 
-    const { methods, handleSubmit, onSubmit, handleClickShowPassword,showPassword } = UseSignInForm()
+    const { methods, handleSubmit, onSubmit, handleClickShowPassword, showPassword } = UseSignInForm()
 
     return (
         <Grid
@@ -60,11 +60,18 @@ function SignInForm() {
                 alignItems="center"
                 sx={{ height: "100%" }}
             >
-                <Box width={{ xs: "90%", sm: "80%" ,md:'70%' }} textAlign="center">
-                    <SignInIcon sx={{
+                <Box width={{ xs: "90%", sm: "80%", md: '70%' }} textAlign="center">
+                    {/* <SignInIcon sx={{
                         fontSize: 200,
                         height: 84
-                    }} />
+                    }} /> */}
+                    <Image
+                        src={AnimateLog?.src}
+                        alt="Loading..."
+                        width={220} // max width
+                        height={180} // max height
+                        
+                    />
                     <Typography variant="h4" gutterBottom>
                         Welcome Back to Aajiz!
                     </Typography>
@@ -80,15 +87,15 @@ function SignInForm() {
                     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} md={12}>
-                            <RHFTextField
-                                name="username"
-                                fullWidth
-                                label="Email"
+                                <RHFTextField
+                                    name="username"
+                                    fullWidth
+                                    label="Email"
 
-                            />
+                                />
                             </Grid>
                             <Grid item xs={12} md={12}>
-                            <RHFTextField
+                                <RHFTextField
                                     name="password"
                                     fullWidth
                                     label="Password"
@@ -106,13 +113,13 @@ function SignInForm() {
                                         ),
                                     }}
                                 />
-                        </Grid>
+                            </Grid>
                         </Grid>
                         <Link
                             href="/forgot-password"
                             underline="none"
                             color="#001213"
-                            sx={{ display: "flex", marginBottom: "3rem",marginTop:'1rem',alignItems:'start',fontWeight:500,fontSize:16 }}
+                            sx={{ display: "flex", marginBottom: "3rem", marginTop: '1rem', alignItems: 'start', fontWeight: 500, fontSize: 16 }}
                         >
                             Forgot password?
                         </Link>
@@ -121,7 +128,7 @@ function SignInForm() {
                             Sign in
                         </Button>
 
-                        <Typography variant="body2"  fontWeight={600} marginTop="2rem">
+                        <Typography variant="body2" fontWeight={600} marginTop="2rem">
                             Have an account already? <Link href="/sign-up">Sign Up</Link>
                         </Typography>
                     </FormProvider>

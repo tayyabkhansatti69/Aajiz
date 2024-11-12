@@ -65,7 +65,7 @@ function SignUpForm() {
             >
                 <Box width={{ xs: "90%", sm: "80%", md: '70%' }} textAlign="center">
                     <SignInIcon sx={{
-                        fontSize: 200,
+                        fontSize: 100,
                         height: 84
                     }} />
                     <Typography variant="h4" gutterBottom>
@@ -81,7 +81,7 @@ function SignUpForm() {
                     </Link>
 
                     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={1.22}>
                             <Grid item xs={12} md={12}>
                                 <RHFTextField
                                     name="name"
@@ -140,6 +140,7 @@ function SignUpForm() {
                             </Grid>
                             <Grid item xs={12} md={12}>
                                 <RHFRadioGroup
+                                size="small"
                                     name="account_type"
                                     options={[
                                         { label: 'Donor', value: 'donor' },
@@ -147,7 +148,7 @@ function SignUpForm() {
                                     ]}
                                 />
                             </Grid>
-                            <Grid xs={12} md={12} alignItems={'flex-start'} display={'flex'} ml='2rem' mb={3}>
+                            <Grid xs={12} md={12} alignItems={'flex-start'} display={'flex'} ml='1rem' mb={0}>
                                 <RHFCheckbox name="remberMe" label="I agree to Terms & Conditions and Privacy Policy" />
                             </Grid>
                         </Grid>
@@ -157,7 +158,7 @@ function SignUpForm() {
                             Create Account
                         </LoadingButton>
 
-                        <Typography variant="body2" fontWeight={600} marginTop="2rem">
+                        <Typography variant="body2" fontWeight={600} marginTop="1rem">
                             I have an account?  <Link href="/sign-in">Login</Link>
                         </Typography>
                     </FormProvider>
