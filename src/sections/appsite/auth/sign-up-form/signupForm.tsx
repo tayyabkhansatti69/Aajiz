@@ -65,17 +65,18 @@ function SignUpForm() {
             >
                 <Box width={{ xs: "90%", sm: "80%", md: '70%' }} textAlign="center">
                     <SignInIcon sx={{
-                        fontSize: 100,
-                        height: 84
+                        fontSize: 70,
+                        height: 54
                     }} />
-                    <Typography variant="h4" gutterBottom>
+                    <Typography variant="h6" gutterBottom>
                         Create your Account
                     </Typography>
                     <Link
                         href="#"
                         underline="none"
                         color="primary"
-                        sx={{ display: "block", marginBottom: "1rem" }}
+
+                        sx={{ display: "block", marginBottom: "1rem",fontSize:'1.4rem' }}
                     >
                         Submit your data for Sign up
                     </Link>
@@ -149,7 +150,7 @@ function SignUpForm() {
                                 />
                             </Grid>
                             <Grid xs={12} md={12} alignItems={'flex-start'} display={'flex'} ml='1rem' mb={0}>
-                                <RHFCheckbox name="remberMe" label="I agree to Terms & Conditions and Privacy Policy" />
+                                <RHFCheckbox name="remberMe" label="I agree to Terms & Conditions and Privacy Policy" style={{fontSize:'1rem'}} />
                             </Grid>
                         </Grid>
 
@@ -158,7 +159,7 @@ function SignUpForm() {
                             Create Account
                         </LoadingButton>
 
-                        <Typography variant="body2" fontWeight={600} marginTop="1rem">
+                        <Typography variant="subtitle2" fontWeight={600} marginTop="0.8rem">
                             I have an account?  <Link href="/sign-in">Login</Link>
                         </Typography>
                     </FormProvider>
