@@ -21,7 +21,7 @@ function SignUp() {
     <>
       {isSplashComplete ?
         <SplashScreen>
-          <img src={SplashScree?.src} alt="Loading..." style={{ width: '100%', height: '100%' }} />
+          <img src={SplashScree?.src} alt="Loading..." style={{ width: '530px', height: 'auto' }} />
         </SplashScreen>
         :
    <SignUpForm/>

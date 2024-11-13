@@ -1,5 +1,5 @@
 import { FormProvider, RHFRadioGroup, RHFTextField } from "@/src/components/rhf";
-import { Button, Grid, Paper, Stepper, Step, StepLabel, Typography } from "@mui/material";
+import { Button, Grid, Paper, Stepper, Step, StepLabel, Typography, Box } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { RHFUploadSingleFileWithPreview } from "@/src/components/rhf/rhf-upload";
@@ -8,7 +8,9 @@ import { useDonorKycMutation } from "@/src/services/auth-api";
 import * as Yup from 'yup';
 import toast from "react-hot-toast";
 import { clearLocalStorage } from "@/src/utils";
-
+import BasicInfo from "@/src/assets/gif/basic info.gif";
+import IdCardVerification from "@/src/assets/gif/id card verification.gif";
+import BusinessVerification from "@/src/assets/gif/business verification.gif";
 const steps = ['Basic Details', 'Personal Identification'];
 export const Schema = Yup.object().shape({
   address: Yup.string().required('Address is required'),
@@ -22,7 +24,7 @@ export const Schema = Yup.object().shape({
   individual_or_company: Yup.boolean().required('individual_or_company is required'),
 });
 function DashboardSection() {
-  const [ dononorKyc ] = useDonorKycMutation()
+  const [dononorKyc] = useDonorKycMutation()
   const router = useRouter()
   const methods = useForm({
     defaultValues: {
@@ -54,9 +56,9 @@ function DashboardSection() {
 
   const onSubmit = async (data: any) => {
     if (activeStep === steps.length - 1) {
-      
+
       console.log(data);
-      const value:any = data.individual_or_company==='individual'?true:false
+      const value: any = data.individual_or_company === 'individual' ? true : false
       try {
         const formData = new FormData(); // Use FormData for multipart/form-data
         formData.append("contact_num", data.contact_num);
@@ -73,7 +75,7 @@ function DashboardSection() {
         toast.success(response?.message || "Your request was sent for verification successfully!");
         clearLocalStorage()
         router?.push('/sign-in');
-        
+
       } catch (error: any) {
         console.error(error);
         toast.error(error?.data?.message || "Something went wrong!");
@@ -82,7 +84,7 @@ function DashboardSection() {
       handleNext();
     }
   };
-  
+
 
   return (
     <Grid container px={2} pt={7}>
@@ -109,18 +111,35 @@ function DashboardSection() {
               {/* Conditional rendering based on active step */}
               {activeStep === 0 && (
                 <>
-                  <Grid item xs={12} md={6}>
-                    <RHFTextField name="contact_num" label="Contact No" size="small" />
+                  <Grid container spacing={1} display={'flex'} alignItems={'center'} padding={'0rem 2rem'} justifyContent={'flex-start'}>
+                    <Grid item xs={12} md={6}>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <RHFTextField name="contact_num" label="Contact No" size="small" />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <RHFTextField name="address" label="Address" size="small" />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <RHFTextField name="description" label="Description" size="small" multiline rows={5} />
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      md={5}
+                      justifyContent={'end'}
+                      alignItems={'end'}
+                      display={'flex'}
+
+                    >
+                      <Box>
+                        <img src={BasicInfo?.src} alt="Loading..." style={{ width: '200px', height: 'auto' }} />
+                      </Box>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12} md={6} />
-                  <Grid item xs={12} md={6}>
-                    <RHFTextField name="address" label="Address" size="small" />
-                  </Grid>
-                  <Grid item xs={12} md={6} />
-                  <Grid item xs={12} md={6}>
-                    <RHFTextField name="description" size="small" label="Description" multiline rows={5} />
-                  </Grid>
-                  <Grid item xs={12} md={6} />
+
                 </>
               )}
 
@@ -141,30 +160,58 @@ function DashboardSection() {
                   {/* Conditional rendering based on typeValue */}
                   {typeValue === 'individual' ? (
                     <>
-                      <Grid item xs={12} md={6}>
-                        <RHFTextField name="id_card_num" size="small" label="ID Card No" />
+                      <Grid container spacing={1} display="flex" alignItems="center" padding="0rem 2rem" justifyContent="space-between">
+                        {/* Left side fields */}
+                        <Grid item xs={12} md={6}>
+                          <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                              <RHFTextField name="id_card_num" size="small" fullWidth label="ID Card No" />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                              <RHFUploadSingleFileWithPreview name="front_card" fullWidth outerLabel="Upload ID Card Front Pic" />
+                            </Grid>
+
+                            <Grid item xs={12}>
+                              <RHFUploadSingleFileWithPreview name="back_card" fullWidth outerLabel="Upload ID Card Back Pic" />
+                            </Grid>
+                          </Grid>
+                        </Grid>
+
+                        {/* Right side image */}
+                        <Grid item xs={12} md={6} display="flex" justifyContent="center" alignItems="flex-start">
+                          <Box>
+                            <img src={IdCardVerification?.src} alt="Loading..." style={{ width: '300px', height: 'auto' }} />
+                          </Box>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={12} md={6} />
-                      <Grid item xs={12} md={6}>
-                        <RHFUploadSingleFileWithPreview name="front_card" outerLabel="Upload ID Card Front Pic" />
-                      </Grid>
-                      <Grid item xs={12} md={6} />
-                      <Grid item xs={12} md={6}>
-                        <RHFUploadSingleFileWithPreview name="back_card" outerLabel="Upload ID Card Back Pic" />
-                      </Grid>
-                      <Grid item xs={12} md={6} />
+
+
                     </>
                   ) : (
                     <>
+                      <Grid container spacing={1} display="flex" alignItems="center" padding="0rem 2rem" justifyContent="space-between">
+                        {/* Left side fields */}
+                        <Grid item xs={12} md={6}>
+                          <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                              <RHFTextField name="ntn" label="Company NTN Number" fullWidth />
+                            </Grid>
 
-                      <Grid item xs={12} md={6}>
-                        <RHFTextField name="ntn" label="Company NTN Number" />
+                            <Grid item xs={12}>
+                              <RHFTextField name="company_name" label="Company Registration Number" fullWidth />
+                            </Grid>
+                          </Grid>
+                        </Grid>
+
+                        {/* Right side image */}
+                        <Grid item xs={12} md={6} display="flex" justifyContent="center" alignItems="flex-start">
+                          <Box>
+                            <img src={BusinessVerification?.src} alt="Loading..." style={{ width: '220px', height: 'auto' }} />
+                          </Box>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={12} md={6} />
-                      <Grid item xs={12} md={6}>
-                        <RHFTextField name="company_name" label="Company Registeration Number" />
-                      </Grid>
-                      <Grid item xs={12} md={6} />
+
 
                     </>
                   )}
