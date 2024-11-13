@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Card,
@@ -17,6 +18,11 @@ import {
   useGetDonorProfileQuery,
   useGetTrustedPartnersListQuery,
 } from "@/src/services/donor/donor-dashboard/donor-dashboard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/pagination";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 5,
@@ -117,46 +123,33 @@ export function DonorDashboardSection() {
           See All
         </Typography>
       </Stack>
-      <Box
-        sx={{
-          py: 0.5,
-          overflowX: "auto",
-          width: "100%",
-          "&::-webkit-scrollbar": {
-            height: 8, // Reducing the height of the scrollbar
-          },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "#0ebdbe", // Custom color for the scrollbar thumb
-            borderRadius: 8, // Rounded scrollbar thumb
-          },
-          "&::-webkit-scrollbar-thumb:hover": {
-            backgroundColor: "#09a4a6", // Change color on hover
-          },
-          "&::-webkit-scrollbar-track": {
-            backgroundColor: "#f0f0f0", // Track background color
-            borderRadius: 8,
-          },
-        }}
-      >
-        <Stack direction="row" spacing={3} sx={{ width: "max-content" }}>
-          {data?.body?.map((items) => (
-            <Card key={items?.id} sx={{ p: 1, minWidth: 200 }}>
-              <CardMedia
-                component="img"
-                src={items.Business_logo}
-                alt="Landing Section Girl"
-                sx={{ height: "10rem" }}
-              />
-              <Typography
-                textAlign="center"
-                variant="subtitle1"
-                fontWeight={600}
-              >
-                {items?.Business_name}
-              </Typography>
-            </Card>
+      <Box sx={{ width: "100%", overflow: "hidden" }}>
+        <Swiper
+          spaceBetween={10} // Space between each avatar
+          slidesPerView={5} // Show 10 avatars per slide
+          autoplay={{ delay: 1500, disableOnInteraction: false }}
+          loop={true}
+          pagination={{ clickable: true, dynamicBullets: true }} // Pagination with clickable dots
+          modules={[Autoplay, Pagination]} // Directly pass modules here
+        >
+          {data?.body?.map((item) => (
+            <SwiperSlide
+              key={item.id}
+              style={{ display: "flex", justifyContent: "center" }}
+            >
+              <Box textAlign="center" sx={{ p: 1 }}>
+                <Avatar
+                  src={item.Business_logo}
+                  alt={`${item.Business_name} logo`}
+                  sx={{ width: 90, height: 90, margin: "auto", boxShadow: 1 }} // Smaller size to fit 10 per slide
+                />
+                <Typography variant="subtitle1" fontWeight={600} my={2}>
+                  {item.Business_name}
+                </Typography>
+              </Box>
+            </SwiperSlide>
           ))}
-        </Stack>
+        </Swiper>
       </Box>
 
       <Stack direction="row" justifyContent="space-between">
