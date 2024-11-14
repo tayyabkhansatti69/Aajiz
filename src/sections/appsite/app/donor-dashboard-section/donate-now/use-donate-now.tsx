@@ -10,6 +10,7 @@ import { useState } from "react";
 import validationSchema from "./validation-schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 export const UseDonateNow = () => {
+  const [selectedType, setSelectedType] = useState("eStamp");
   const [eStamp, setEStamp] = useState(true);
   const [eStampData, setEStampData] = useState();
 
@@ -19,7 +20,7 @@ export const UseDonateNow = () => {
     resolver: yupResolver(validationSchema),
     defaultValues: {
       amount: "",
-      type: "eStamp",
+      type: selectedType,
       industryType: null,
       cardAmount: "",
       cardNo: "",
@@ -28,8 +29,14 @@ export const UseDonateNow = () => {
   const industryTypeDropdownList = useLazyGetIndustryTypeDropdownListQuery();
   const [donateNow, { isLoading }] = useDonateNowMutation();
   const [loadCard, { isLoading: loadCardLoading }] = useLoadCardMutation();
-  const { handleSubmit, reset, watch } = methods;
+  const { handleSubmit, reset, watch, setValue } = methods;
   const stampType = watch("type");
+
+  const handleSelect = (type) => {
+    setSelectedType(type);
+    setValue("type", type);
+  };
+
   const onSubmit = async (data: any): Promise<void> => {
     const body = {
       amount: data?.amount,
@@ -71,5 +78,9 @@ export const UseDonateNow = () => {
     eStamp,
     setEStamp,
     eStampData,
+    setValue,
+    selectedType,
+    setSelectedType,
+    handleSelect,
   };
 };
