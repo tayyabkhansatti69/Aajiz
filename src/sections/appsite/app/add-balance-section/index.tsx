@@ -10,6 +10,7 @@ import Image from "next/image";
 import addBalanceLogo from "../../../../assets/image/addBalanceLogo.png";
 import { UseAddBalance } from "./use-add-balance";
 import { LoadingButton } from "@mui/lab";
+import addBalanceGif from "../../../../assets/gif/addBalance.gif";
 
 export function AddBalanceSection() {
   const { methods, handleSubmit, onSubmit, router, paymentMethodType } =
@@ -29,10 +30,10 @@ export function AddBalanceSection() {
       <Card sx={{ p: 2 }}>
         <Stack
           direction={{ lg: "row", xs: "column-reverse" }}
-          justifyContent="space-between"
-          gap={{ lg: 20, xs: 5 }}
+          justifyContent="space-evenly"
+          gap={{ lg: 10, xs: 5 }}
         >
-          <Stack width={{ lg: "40%", xs: "100%" }} gap={2}>
+          <Stack width={{ lg: "40%", xs: "100%" }} gap={2} mr="auto">
             <Typography variant="h6">Payment Method</Typography>
             <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
               <Stack gap={5}>
@@ -78,30 +79,38 @@ export function AddBalanceSection() {
               </Stack>
             </FormProvider>
           </Stack>
-          <Card
-            sx={{
-              p: 2,
-              width: { lg: "40%", xs: "100%" },
-              height: "fit-content",
-              borderRadius: 2,
-            }}
-          >
-            <Stack gap={2} textAlign="center">
-              <Box>
-                <Image src={addBalanceLogo} alt="Logo" />
-              </Box>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Typography fontWeight={600}>Total Payment</Typography>
-                <Typography color="#0EBDBE" fontWeight={600}>
-                  5000 Rs.
-                </Typography>
+          <Stack>
+            <Card
+              sx={{
+                p: 2,
+                width: { lg: "100%", xs: "100%" },
+                height: "fit-content",
+                borderRadius: 2,
+              }}
+            >
+              <Stack gap={2} textAlign="center">
+                <Box>
+                  <Image src={addBalanceLogo} alt="Logo" />
+                </Box>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Typography fontWeight={600}>Total Payment</Typography>
+                  <Typography color="#0EBDBE" fontWeight={600}>
+                    5000 Rs.
+                  </Typography>
+                </Stack>
               </Stack>
-            </Stack>
-          </Card>
+            </Card>
+
+            <Image
+              src={addBalanceGif}
+              alt="add balance"
+              style={{ width: "auto", height: "auto" }}
+            />
+          </Stack>
         </Stack>
       </Card>
     </Stack>
