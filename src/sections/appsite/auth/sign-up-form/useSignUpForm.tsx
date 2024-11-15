@@ -31,6 +31,7 @@ export const defaultValues = {
 // Custom hook
 export const UseSignUpForm = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [showPassword1, setShowPassword1] = useState(false);
     const [postSignUp,{isLoading}] = useSignUpMutation();
     const router = useRouter();
     const methods = useForm<any>({
@@ -42,6 +43,9 @@ export const UseSignUpForm = () => {
         setShowPassword((prev) => !prev);
     };
 
+    const handleClickShowPassword1 = () => {
+        setShowPassword1((prev) => !prev);
+    };
     const { handleSubmit } = methods;
 
     const onSubmit = async (data: any) => {
@@ -73,6 +77,8 @@ export const UseSignUpForm = () => {
         onSubmit,
         handleClickShowPassword,
         showPassword,
-        isLoading
+        isLoading,
+        handleClickShowPassword1,
+        showPassword1
     };
 };

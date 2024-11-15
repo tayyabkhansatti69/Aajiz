@@ -12,7 +12,8 @@ import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
 import IconQuestionBank from "@/src/assets/icons/dashboard-main/icon-question-bank";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import LogoutIcon from "@mui/icons-material/Logout";
+// import LogoutIcon from "@mui/icons-material/Logout";
+import LogOutIcon from "@/src/assets/icons/logout-icons";
 //==========================================================================================
 // CONST
 export const NavListData = [
@@ -23,17 +24,17 @@ export const NavListData = [
   },
   {
     label: "Transaction",
-    icon: IconSetting,
+    icon: MonetizationOnOutlinedIcon,
     link: "/transaction",
   },
   {
     label: "Setting",
-    icon: IconSetting,
+    icon: SettingsOutlinedIcon,
     link: "/setting",
   },
   {
     label: "Logout",
-    icon: LogoutIcon,
+    icon: LogOutIcon,
     link: "/logout",
   },
 ];
@@ -65,7 +66,7 @@ export const NavListDataStudent = [
   },
   {
     label: "Logout",
-    icon: LogoutIcon,
+    icon: LogOutIcon,
     link: "/logout",
   },
 ];

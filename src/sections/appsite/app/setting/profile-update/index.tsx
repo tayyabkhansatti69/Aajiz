@@ -4,6 +4,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 import { ChangeEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import profileImg from "../../../../../assets/image/profile.png";
+import { useRouter } from "next/navigation";
 
 // const ImgStyled = styled("img")(({ theme }) => ({
 //   width: "127px",
@@ -14,13 +15,13 @@ import profileImg from "../../../../../assets/image/profile.png";
 
 function ProfileUpdate(profile_image) {
   const [updateProfile] = useUpdateProfileMutation();
-
+const router=useRouter()
   const [imgSrc, setImgSrc] = useState<string>(profileImg?.src);
   useEffect(() => {
     if (profile_image) {
       setImgSrc(profile_image?.profile_image);
     }
-  }, [profile_image]);
+  }, [profile_image,router]);
 
   console.log(imgSrc);
   const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
