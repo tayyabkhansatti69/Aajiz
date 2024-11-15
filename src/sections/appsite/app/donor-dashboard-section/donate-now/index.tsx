@@ -106,7 +106,7 @@ function DonateNowSection() {
                   columnSpacing={2}
                   rowGap={2}
                 >
-                  <Grid item md={4}>
+                  <Grid item  xs={12} md={6} lg={4}>
                     <Card
                       onClick={() => handleSelect("eStamp")}
                       sx={{
@@ -140,7 +140,7 @@ function DonateNowSection() {
                       </Stack>
                     </Card>
                   </Grid>
-                  <Grid item md={4}>
+                  <Grid item  xs={12} md={6} lg={4}>
                     <Card
                       onClick={() => handleSelect("physicalCard")}
                       sx={{

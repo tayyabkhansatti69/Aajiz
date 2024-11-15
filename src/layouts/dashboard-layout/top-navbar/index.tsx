@@ -14,10 +14,11 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 //next imports
 
-import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
+// import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
 
 import { usePathname, useRouter } from "next/navigation";
 import { NavListData } from "../left-navbar/left-navbar.data";
+import NotificationIcon from "@/src/assets/icons/notification-icon";
 
 function TopNavBar(props: any) {
   const theme: any = useTheme();
@@ -94,7 +95,8 @@ function TopNavBar(props: any) {
               </Box>
             </Box>
             <IconButton onClick={()=>{router?.push('/notifications')}} sx={{cursor:'pointer'}}>
-              <IconSetting sx={{ color: "#9A9A9A" }} />
+              {/* <IconSetting sx={{ color: "#9A9A9A" }} /> */}
+              <NotificationIcon sx={{width:'40px',height:'40px'}}/>
             </IconButton>
           </Box>
         </Grid>
