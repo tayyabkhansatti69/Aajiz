@@ -30,6 +30,7 @@ export const UseRegisterForm = () => {
     const [chnagePassword] = useChangePasswordMutation()
     const email = searchParams.get('email');
     const [showPassword, setShowPassword] = useState(false);
+    const [showPassword1, setShowPassword1] = useState(false);
 
     const router = useRouter()
     const methods = useForm<any>({
@@ -40,6 +41,9 @@ export const UseRegisterForm = () => {
 
     const handleClickShowPassword = () => {
         setShowPassword((prev) => !prev);
+    };
+    const handleClickShowPassword1 = () => {
+        setShowPassword1((prev) => !prev);
     };
     const { handleSubmit } = methods;
     const onSubmit = async (data: any) => {
@@ -68,6 +72,8 @@ export const UseRegisterForm = () => {
         handleSubmit,
         onSubmit,
         handleClickShowPassword,
-        showPassword
+        showPassword,
+        handleClickShowPassword1,
+        showPassword1 
     };
 };

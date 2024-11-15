@@ -14,7 +14,8 @@ function SignUpForm() {
 
 
     const { methods, handleSubmit, onSubmit, handleClickShowPassword,
-        showPassword,isLoading } = UseSignUpForm()
+        showPassword,isLoading,handleClickShowPassword1,
+        showPassword1 } = UseSignUpForm()
 
     return (
         <Grid
@@ -124,15 +125,15 @@ function SignUpForm() {
                                     name="confirmPassword"
                                     fullWidth
                                     label="Confirm Password"
-                                    type={showPassword ? 'text' : 'password'} // Toggle between text and password
+                                    type={showPassword1 ? 'text' : 'password'} // Toggle between text and password
                                     InputProps={{
                                         endAdornment: (
                                             <InputAdornment position="end">
                                                 <IconButton
-                                                    onClick={handleClickShowPassword}
+                                                    onClick={handleClickShowPassword1}
                                                     edge="end"
                                                 >
-                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                    {showPassword1 ? <VisibilityOff /> : <Visibility />}
                                                 </IconButton>
                                             </InputAdornment>
                                         ),
