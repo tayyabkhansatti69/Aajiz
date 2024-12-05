@@ -1,7 +1,7 @@
 import { FormProvider, RHFRadioGroup, RHFTextField } from "@/src/components/rhf";
 import { Button, Grid, Paper, Stepper, Step, StepLabel, Typography, Box } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RHFUploadSingleFileWithPreview } from "@/src/components/rhf/rhf-upload";
 import { useRouter } from "next/navigation";
 import { useDonorKycMutation } from "@/src/services/auth-api";
@@ -11,22 +11,80 @@ import { clearLocalStorage } from "@/src/utils";
 import BasicInfo from "@/src/assets/gif/basic info.gif";
 import IdCardVerification from "@/src/assets/gif/id card verification.gif";
 import BusinessVerification from "@/src/assets/gif/business verification.gif";
+import { yupResolver } from "@hookform/resolvers/yup";
 const steps = ['Basic Details', 'Personal Identification'];
-export const Schema = Yup.object().shape({
-  address: Yup.string().required('Address is required'),
-  contact_num: Yup.string().required('contact_num is required'),
-  description: Yup.string().required('Description is required'),
-  company_name: Yup.string(),
-  ntn: Yup.string(),
-  id_card_num: Yup.string(),
-  front_card: Yup.string(),
-  back_card: Yup.string(),
-  individual_or_company: Yup.boolean().required('individual_or_company is required'),
-});
+// export const Schema=(typeofRegistery)=>{
+//   return (  Yup.object().shape({
+//   address: Yup.string().required('Address is required'),
+//   contact_num: Yup.string().required('contact_num is required'),
+//   description: Yup.string().required('Description is required'),
+//   company_name: Yup.string(),
+//   ntn: Yup.string(),
+//   id_card_num: Yup.string(),
+//   front_card: Yup.string(),
+//   back_card: Yup.string(),
+//   individual_or_company: Yup.string().required('individual_or_company is required'),
+// });
+// import * as Yup from 'yup';
+
+export const Schema = (typeofRegistery, activeStep) => {
+  return Yup.object().shape({
+    address: Yup.string().required('Address is required'),
+    contact_num: Yup.string()
+      .required('Contact number is required')
+      .matches(/^\d+$/, 'Contact number must be numeric'),
+    description: Yup.string().required('Description is required'),
+    company_name: (typeofRegistery === 'company' && activeStep === 1)
+      ? Yup.string().required('Company name is required')
+      : Yup.string(),
+    ntn: (typeofRegistery === 'company' && activeStep === 1)
+      ? Yup.string().required('NTN is required')
+      : Yup.string(),
+    id_card_num: (typeofRegistery === 'individual' && activeStep === 1)
+      ? Yup.string().required('ID card number is required')
+      : Yup.string(),
+      front_card: (typeofRegistery === 'individual' && activeStep === 1)
+      ? Yup.mixed()
+          .required('Front card is required')
+          .test(
+            'fileRequired',
+            'A file must be uploaded for the front card',
+            (value) => {
+              if (!value) return false; // Required validation
+              if (typeof value === 'string') return value.trim().length > 0; // String validation
+              if (value instanceof File) return value.size > 0; // File validation
+              return false;
+            }
+          )
+      : Yup.mixed(),
+    
+    back_card: (typeofRegistery === 'individual' && activeStep === 1)
+      ? Yup.mixed()
+          .required('Back card is required')
+          .test(
+            'fileRequired',
+            'A file must be uploaded for the back card',
+            (value) => {
+              if (!value) return false; // Required validation
+              if (typeof value === 'string') return value.trim().length > 0; // String validation
+              if (value instanceof File) return value.size > 0; // File validation
+              return false;
+            }
+          )
+      : Yup.mixed(),
+    
+
+    individual_or_company: activeStep === 1 ? Yup.string().required('Type is required') : Yup?.string(),
+  });
+};
+
 function DashboardSection() {
+  const [activeStep, setActiveStep] = useState(0);
   const [dononorKyc] = useDonorKycMutation()
+  const [valueOfRegister, setValueOfRegister] = useState<any>('individual')
   const router = useRouter()
   const methods = useForm({
+    resolver: yupResolver(Schema(valueOfRegister, activeStep)),
     defaultValues: {
       individual_or_company: 'individual',
       address: '',
@@ -36,15 +94,19 @@ function DashboardSection() {
       ntn: '',
       id_card_num: '',
       front_card: '',
-      back_card: ''
+      back_card: '',
 
 
     },
   });
 
   const { handleSubmit, watch } = methods;
-  const [activeStep, setActiveStep] = useState(0);
+
   const typeValue = watch('individual_or_company');
+
+  useEffect(() => {
+    setValueOfRegister(typeValue)
+  }, [typeValue])
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

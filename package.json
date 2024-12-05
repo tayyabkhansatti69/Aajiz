@@ -21,6 +21,8 @@
     "@mui/material": "^6.1.2",
     "@mui/x-date-pickers": "^7.19.0",
     "@reduxjs/toolkit": "^1.9.7",
+    "@stripe/react-stripe-js": "^3.0.0",
+    "@stripe/stripe-js": "^5.2.0",
     "@tanstack/react-table": "^8.20.5",
     "apexcharts": "^3.53.0",
     "date-fns": "^3.2.0",
@@ -56,6 +58,7 @@
     "redux-persist": "^6.0.0",
     "sass": "^1.79.3",
     "socket.io-client": "^4.8.0",
+    "stripe": "^17.4.0",
     "swiper": "^11.1.14",
     "tss-react": "^4.9.13",
     "yup": "^1.4.0"
