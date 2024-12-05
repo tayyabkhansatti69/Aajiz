@@ -6,8 +6,37 @@ import { Box } from "@mui/material";
 import { BlockContent } from "./block-content";
 import { Image } from "../image";
 import { RejectionFiles } from "./rejection-files";
+import { useState } from "react";
 
-// ----------------------------------------------------------------------
+// // ----------------------------------------------------------------------
+function validateCNICImage(file: File): Promise<boolean> {
+  // const validDimensions = { width: 500, height: 300 }; // Example dimensions for CNIC
+  const imageTypes = ["image/jpeg", "image/png"];
+
+  return new Promise((resolve) => {
+    if (!imageTypes.includes(file.type)) {
+      resolve(false);
+      return;
+    }
+
+    const img = new window.Image(); // Explicitly use the browser's Image object
+
+    img.src = URL.createObjectURL(file);
+    img.onload = () => {
+      const aspectRatio=img.width/img.height;
+      if(aspectRatio>1.5 && aspectRatio<1.7)
+      resolve(
+        // img.width === validDimensions.width &&
+        // img.height === validDimensions.height
+        true
+      );
+      else{
+        resolve(false)
+      }
+    };
+    img.onerror = () => resolve(false); // Handle errors loading the image
+  });
+}
 
 const DropZoneStyle = styled("div")(({ theme }: any) => ({
   outline: "none",
@@ -43,15 +72,26 @@ export function UploadSingleFile({
     onDropAccepted,
     ...other,
   });
-
+  const [validationError, setValidationError] = useState<any>(
+    null
+  );
+  async function onDropAccepted(files: any): Promise<any> {
+    const isValid = await validateCNICImage(files[0]);
+    if (isValid) {
+      setValidationError(null);
+      onChange(files[0]);
+    } else {
+      setValidationError("Uploaded image is not a valid CNIC image.");
+    }
+  }
   const isImage =
     file?.type?.includes("image") || (type === "image" && isString(file));
   const isVideo =
     file?.type?.includes("video") || (type === "video" && isString(file));
 
-  function onDropAccepted(files: any): any {
-    onChange(files[0]);
-  }
+  // function onDropAccepted(files: any): any {
+  //   onChange(files[0]);
+  // }
 
   return (
     <Box sx={{ width: "100%", ...sx }}>
@@ -59,7 +99,7 @@ export function UploadSingleFile({
         {...getRootProps()}
         sx={{
           ...(isDragActive && { opacity: 0.72 }),
-          ...((isDragReject || error) && {
+          ...((isDragReject || error || validationError) && {
             color: "error.main",
             borderColor: "error.light",
             bgcolor: "error.lighter",
@@ -70,7 +110,7 @@ export function UploadSingleFile({
         }}
       >
         <input {...getInputProps()} />
-        <BlockContent supportedFormats={supportedFormats}/>
+        <BlockContent supportedFormats={supportedFormats} validationError={validationError}/>
         {isImage && (
           <Image
             alt="file preview"
