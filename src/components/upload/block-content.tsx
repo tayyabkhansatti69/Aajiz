@@ -6,9 +6,10 @@ import { Typography, Stack } from "@mui/material";
 // ----------------------------------------------------------------------
 interface BlockContentProps {
   supportedFormats?: string;
+  validationError?:string;
 }
 
-export function BlockContent({supportedFormats}:BlockContentProps): JSX.Element {
+export function BlockContent({supportedFormats,validationError}:BlockContentProps): JSX.Element {
   return (
     <Stack alignItems="center" justifyContent="center">
       {/* <UploadFileIcon sx={{ color: "primary.main", mb: "1.6rem" }} /> */}
@@ -24,6 +25,9 @@ export function BlockContent({supportedFormats}:BlockContentProps): JSX.Element 
       </Typography>
       <Typography variant="caption" sx={{ color: "text.secondary" }}>
         {`Supported formats: ${supportedFormats ? supportedFormats : 'JPEG, PNG, GIF'}`}
+      </Typography>
+      <Typography variant="subtitle2" sx={{ color: "red", }}>
+        {validationError}
       </Typography>
     </Stack>
   );
