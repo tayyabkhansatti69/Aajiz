@@ -77,33 +77,49 @@ export const NavListDataAdmine = [
     link: "/dashboard",
   },
   {
-    label: "User Managment",
+    label: "Scanned Stamps",
     icon: HomeIcons,
     link: "/dashboard",
   },
   {
-    label: "Transaction",
+    label: "KYC Request",
     icon: TransactionIcon,
     link: "/transaction",
   },
   {
-    label: "Question bank",
+    label: "Database",
     icon: IconQuestionBank,
     link: "/questionbank",
   },
   {
-    label: "Schedule",
+    label: "Transaction",
     icon: AccountsIcons,
     link: "/schedule",
   },
   {
-    label: "Notification",
+    label: "Withdraw Request",
     icon: InvestmentsIcons,
     link: "/students",
   },
   {
-    label: "Settings",
+    label: "Create Campaign",
     icon: IconSetting,
     link: "/settings",
   },
+  {
+    label: "Queries",
+    icon: IconSetting,
+    link: "/settings",
+  },
+  {
+    label: "Super Admin",
+    icon: IconSetting,
+    link: "/settings",
+  },
+  {
+    label: "Logout",
+    icon: IconSetting,
+    link: "/settings",
+  },
+
 ];
