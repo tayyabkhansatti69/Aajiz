@@ -79,12 +79,12 @@ export const NavListDataAdmine = [
   {
     label: "Scanned Stamps",
     icon: HomeIcons,
-    link: "/dashboard",
+    link: "/scanned-stamps",
   },
   {
     label: "KYC Request",
     icon: TransactionIcon,
-    link: "/transaction",
+    link: "/kyc-requests",
   },
   {
     label: "Database",
@@ -94,32 +94,31 @@ export const NavListDataAdmine = [
   {
     label: "Transaction",
     icon: AccountsIcons,
-    link: "/schedule",
+    link: "/admin-transactions",
   },
   {
     label: "Withdraw Request",
     icon: InvestmentsIcons,
-    link: "/students",
+    link: "/withdraw-requests",
   },
   {
     label: "Create Campaign",
     icon: IconSetting,
-    link: "/settings",
+    link: "/create-campaigns",
   },
   {
     label: "Queries",
     icon: IconSetting,
-    link: "/settings",
+    link: "/queries",
   },
-  {
-    label: "Super Admin",
-    icon: IconSetting,
-    link: "/settings",
-  },
-  {
-    label: "Logout",
-    icon: IconSetting,
-    link: "/settings",
-  },
-
+  // {
+  //   label: "Super Admin",
+  //   icon: IconSetting,
+  //   link: "/super-admin",
+  // },
+  // {
+  //   label: "Logout",
+  //   icon: IconSetting,
+  //   link: "/settings",
+  // },
 ];
