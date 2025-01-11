@@ -28,6 +28,13 @@ function KycRequestSection() {
       isSortable: false,
     },
     {
+      accessorFn: (row: any) => row.contactNumber ?? "-",
+      id: "contactNumber",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Email</span>,
+      isSortable: false,
+    },
+    {
       accessorFn: (row: any) => row.businessType ?? "-",
       id: "businessType",
       cell: (info: any) => info.getValue(),
@@ -39,13 +46,6 @@ function KycRequestSection() {
       id: "profile",
       cell: (info: any) => `${info.getValue()} RS.`,
       header: () => <span>Profile</span>,
-      isSortable: false,
-    },
-    {
-      accessorFn: (row: any) => row.profile ?? "-",
-      id: "profile",
-      cell: (info: any) => info.getValue(),
-      header: () => <span>Action</span>,
       isSortable: false,
     },
   ];
@@ -61,21 +61,65 @@ function KycRequestSection() {
       accessorFn: (row: any) => row.contactNumber ?? "-",
       id: "contactNumber",
       cell: (info: any) => info.getValue(),
-      header: () => <span>Stamp Type</span>,
+      header: () => <span>Industry Type</span>,
       isSortable: false,
     },
     {
       accessorFn: (row: any) => row.businessType ?? "-",
       id: "businessType",
       cell: (info: any) => info.getValue(),
-      header: () => <span>Card Number</span>,
+      header: () => <span>Email</span>,
       isSortable: false,
     },
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
       cell: (info: any) => `${info.getValue()} RS.`,
-      header: () => <span>profile</span>,
+      header: () => <span>Business Type</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.profile ?? "-",
+      id: "profile",
+      cell: (info: any) => `${info.getValue()} RS.`,
+      header: () => <span>Profile</span>,
+      isSortable: false,
+    },
+  ];
+  const columns2 = [
+    {
+      accessorFn: (row: any) => row.donorName ?? "-",
+      id: "donorName",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Donor Name</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.contactNumber ?? "-",
+      id: "contactNumber",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Contact No</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.businessType ?? "-",
+      id: "businessType",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Email</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.profile ?? "-",
+      id: "profile",
+      cell: (info: any) => `${info.getValue()} RS.`,
+      header: () => <span>Business Type</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.profile ?? "-",
+      id: "profile",
+      cell: (info: any) => `${info.getValue()} RS.`,
+      header: () => <span>Queries</span>,
       isSortable: false,
     },
   ];
@@ -83,7 +127,7 @@ function KycRequestSection() {
     <Stack rowGap={2}>
       <Typography variant="h5">KYC Requests</Typography>
       <Card sx={{ p: 4 }}>
-        <HorizontalTabs tabsArray={["Donor", "Partner"]}>
+        <HorizontalTabs tabsArray={["Donor", "Partner", "Cancel KYC"]}>
           <CustomTable
             data={data}
             columns={columns}
@@ -104,6 +148,23 @@ function KycRequestSection() {
           <CustomTable
             data={data}
             columns={columns1}
+            //   isLoading={hisltoryLoading}
+            //   isFetching={historyFetching}
+            //   isError={historyError}
+            //   isSuccess={historySuccess}
+            isPagination
+            showSerialNo
+            //   totalPages={getHistor?.pages ?? 1}
+            //   currentPage={getHistor?.current_page ?? 1}
+            //   onPageChange={(onPageData: any) => {
+            //     setParams((prev) => {
+            //       return { ...prev, offset: (onPageData - 1) * 10 };
+            //     });
+            //   }}
+          />
+          <CustomTable
+            data={data}
+            columns={columns2}
             //   isLoading={hisltoryLoading}
             //   isFetching={historyFetching}
             //   isError={historyError}
