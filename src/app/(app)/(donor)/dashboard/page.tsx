@@ -1,5 +1,6 @@
 "use client";
 
+import AdminDashboardSection from "@/src/sections/appsite/app/admin/admin-dashboard";
 import DashboardSection from "@/src/sections/appsite/app/dashboard";
 import { DonorDashboardSection } from "@/src/sections/appsite/app/donor-dashboard-section";
 import { PartnerDashboardSection } from "@/src/sections/appsite/app/partner-section/partner-dashboard";
@@ -22,6 +23,8 @@ function Home() {
     <DonorDashboardSection />
   ) : data?.Data_User?.account_type === "partner" ? (
     <PartnerDashboardSection />
+  ) : data?.Data_User?.account_type === "admin" ? (
+    <AdminDashboardSection />
   ) : (
     ""
   );
