@@ -87,9 +87,19 @@ export const NavListDataAdmine = [
     link: "/kyc-requests",
   },
   {
-    label: "Database",
+    label: "Card Requests",
     icon: IconQuestionBank,
-    link: "/questionbank",
+    link: "/card-requests",
+  },
+  {
+    label: "Donors",
+    icon: IconQuestionBank,
+    link: "/donors",
+  },
+  {
+    label: "Partners",
+    icon: IconQuestionBank,
+    link: "/partners",
   },
   {
     label: "Transaction",
@@ -111,11 +121,11 @@ export const NavListDataAdmine = [
     icon: IconSetting,
     link: "/queries",
   },
-  // {
-  //   label: "Super Admin",
-  //   icon: IconSetting,
-  //   link: "/super-admin",
-  // },
+  {
+    label: "Super Admin",
+    icon: IconSetting,
+    link: "/super-admin",
+  },
   // {
   //   label: "Logout",
   //   icon: IconSetting,

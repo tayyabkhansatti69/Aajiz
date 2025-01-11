@@ -17,7 +17,7 @@ function ScannedStampSection() {
       accessorFn: (row: any) => row.businessName ?? "-",
       id: "businessName",
       cell: (info: any) => info.getValue(),
-      header: () => <span>Business Name</span>,
+      header: () => <span>Donor Name</span>,
       isSortable: false,
     },
     {
@@ -31,7 +31,21 @@ function ScannedStampSection() {
       accessorFn: (row: any) => row.cardNumber ?? "-",
       id: "cardNumber",
       cell: (info: any) => info.getValue(),
-      header: () => <span>Card Number</span>,
+      header: () => <span>Card No</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.cardNumber ?? "-",
+      id: "cardNumber",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Donation Date</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.cardNumber ?? "-",
+      id: "cardNumber",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Donation Time</span>,
       isSortable: false,
     },
     {
@@ -71,11 +85,18 @@ function ScannedStampSection() {
       header: () => <span>Price</span>,
       isSortable: false,
     },
+    {
+      accessorFn: (row: any) => row.price ?? "-",
+      id: "price",
+      cell: (info: any) => `${info.getValue()} RS.`,
+      header: () => <span>Action</span>,
+      isSortable: false,
+    },
   ];
   return (
     <Stack rowGap={2}>
       <Typography variant="h5">Recent Donations</Typography>
-      <Card sx={{p:4}}>
+      <Card sx={{ p: 4 }}>
         <HorizontalTabs tabsArray={["Donor", "Partner"]}>
           <CustomTable
             data={data}
