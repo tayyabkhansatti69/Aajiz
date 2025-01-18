@@ -1,9 +1,8 @@
 "use client";
+import KycRequestSection from "@/src/sections/appsite/app/admin/kyc-request";
 
-import CardRequestsSection from "@/src/sections/appsite/app/admin/card-requests";
-
-function CardRequests() {
-  return <CardRequestsSection />;
+function KYCRequests() {
+  return <KycRequestSection />;
 }
 
-export default CardRequests;
+export default KYCRequests;
