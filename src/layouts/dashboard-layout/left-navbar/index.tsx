@@ -3,7 +3,11 @@ import React from "react";
 import { styled, Theme, CSSObject, useTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import NavbarList from "./navbar-list";
-import { NavListData, NavListDataAdmine, NavListDataStudent } from "./left-navbar.data";
+import {
+  NavListData,
+  NavListDataAdmine,
+  NavListDataStudent,
+} from "./left-navbar.data";
 //icons
 import MenuIcon from "@mui/icons-material/Menu";
 // import LogoIcon from "@/assets/icons/logo-icon";
@@ -23,19 +27,26 @@ function LeftNavbar(props: any) {
   const { open, handleDrawer, setLinkName } = props;
   const screenSizeHandler = useMediaQuery(theme.breakpoints.down("md"));
 
-  console.log(getLocalStorage('rememberMe'), "remn")
-  const loginUser: any = getLocalStorage('rememberMe')
-  console.log(loginUser, "datata")
+  console.log(getLocalStorage("rememberMe"), "remn");
+  const loginUser: any = getLocalStorage("rememberMe");
+  console.log(loginUser, "datata");
 
   return (
     <Drawer variant="permanent" open={open}>
       <Box sx={{ maxHeight: "100vh" }}>
         <DrawerHeader>
-          <Box display="flex" justifyContent="center" alignItems="center" mt={1}>
-            <IconLeftNavbar sx={{
-              fontSize: 200,
-              height: 84
-            }} />
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            mt={1}
+          >
+            <IconLeftNavbar
+              sx={{
+                fontSize: 200,
+                height: 84,
+              }}
+            />
             {screenSizeHandler && (
               <IconButton onClick={handleDrawer}>
                 <MenuIcon />
@@ -46,33 +57,39 @@ function LeftNavbar(props: any) {
 
         {/* Left NavBar List Component  */}
         <Stack flexDirection={"column"} gap={1} mt={2} pr={2}>
-          {(loginUser?.Data_User?.account_type === 'donor' || loginUser?.account_type === 'donor') && NavListData.map(({ label, icon, link }, index) => (
-            <NavbarList
-              key={index}
-              link={link}
-              Icon={icon}
-              label={label}
-              setLinkName={setLinkName}
-            />
-          ))}
-          {(loginUser?.Data_User?.account_type === 'partner' || loginUser?.account_type === 'partner') && NavListDataStudent.map(({ label, icon, link }, index) => (
-            <NavbarList
-              key={index}
-              link={link}
-              Icon={icon}
-              label={label}
-              setLinkName={setLinkName}
-            />
-          ))}
-          {(loginUser?.Data_User?.account_type === 'admin' || loginUser?.account_type === 'admin') && NavListDataAdmine.map(({ label, icon, link }, index) => (
-            <NavbarList
-              key={index}
-              link={link}
-              Icon={icon}
-              label={label}
-              setLinkName={setLinkName}
-            />
-          ))}
+          {(loginUser?.Data_User?.account_type === "donor" ||
+            loginUser?.account_type === "donor") &&
+            NavListData.map(({ label, icon, link }, index) => (
+              <NavbarList
+                key={index}
+                link={link}
+                Icon={icon}
+                label={label}
+                setLinkName={setLinkName}
+              />
+            ))}
+          {(loginUser?.Data_User?.account_type === "partner" ||
+            loginUser?.account_type === "partner") &&
+            NavListDataStudent.map(({ label, icon, link }, index) => (
+              <NavbarList
+                key={index}
+                link={link}
+                Icon={icon}
+                label={label}
+                setLinkName={setLinkName}
+              />
+            ))}
+          {(loginUser?.Data_User?.account_type === "admin" ||
+            loginUser?.account_type === "admin") &&
+            NavListDataAdmine.map(({ label, icon, link }, index) => (
+              <NavbarList
+                key={index}
+                link={link}
+                Icon={icon}
+                label={label}
+                setLinkName={setLinkName}
+              />
+            ))}
         </Stack>
       </Box>
     </Drawer>
@@ -92,7 +109,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
   overflowX: "hidden",
   overflowy: "auto",
   zIndex: 5,
-  background: '#f0fdfb',
+  background: "#f0fdfb",
   "&::-webkit-scrollbar": {
     width: 4,
     height: 6,

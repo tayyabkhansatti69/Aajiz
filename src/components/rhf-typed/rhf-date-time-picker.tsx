@@ -15,7 +15,7 @@ export function RHFDateTimePicker({
   control,
   fullWidth = false,
   ...other
-}:any): JSX.Element {
+}: any): JSX.Element {
   return (
     <Controller
       name={name}

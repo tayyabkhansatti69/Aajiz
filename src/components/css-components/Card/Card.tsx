@@ -1,23 +1,22 @@
-import { memo } from 'react';
+import { memo } from "react";
 // import type { FC } from 'react';
 
-import resets from '../_resets.module.css';
+import resets from "../_resets.module.css";
 // import { _22Icon } from './_22Icon';
-import { ArrowUpRightIcon } from './ArrowUpRightIcon';
-import classes from './Card.module.css';
-import { RatingIcon } from './RatingIcon';
-import { Avatar } from '@mui/material';
-import Image from 'next/image';
-
+import { ArrowUpRightIcon } from "./ArrowUpRightIcon";
+import classes from "./Card.module.css";
+import { RatingIcon } from "./RatingIcon";
+import { Avatar } from "@mui/material";
+import Image from "next/image";
 
 /* @figmaId 8:185 */
-export const Card = memo(function Card(props:any) {
+export const Card = memo(function Card(props: any) {
   return (
     <div className={`${resets.storybrainResets} ${classes.root}`}>
       <div className={classes.image}>
-            <Image src={props.image} alt='kff '/>
-            {/* className={classes.frame1} */}
-        <div >
+        <Image src={props.image} alt="kff " />
+        {/* className={classes.frame1} */}
+        <div>
           {/* <div className={classes._22}>
           </div> */}
           {/* <div className={classes._8Hr12Mins}></div> */}
@@ -36,14 +35,14 @@ export const Card = memo(function Card(props:any) {
               </div>
             </div>
             <div className={classes.supportingText}>
-              Use Figma to get a job in UI Design, User Interface, User Experience design.
+              Use Figma to get a job in UI Design, User Interface, User
+              Experience design.
             </div>
           </div>
         </div>
         <div className={classes.avatarLabelGroup}>
           <div className={classes.avatar}>
-          <Avatar />
-
+            <Avatar />
           </div>
           <div className={classes.textAndSupportingText}>
             <div className={classes.text}>Jane Cooper</div>

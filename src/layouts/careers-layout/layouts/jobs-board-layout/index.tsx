@@ -9,7 +9,6 @@ export function CareerLayout({
 }: {
   children: ReactNode;
 }): JSX.Element {
-  
   return (
     <Box>
       {children}
@@ -38,14 +37,13 @@ export function CareerLayout({
             }}
           >
             <Link target="_blank" href="https://www.personnellibrary.co.uk/">
-            <Box>
-              {/* <Image src={footerLogo} alt="logo" style={{
+              <Box>
+                {/* <Image src={footerLogo} alt="logo" style={{
                 maxWidth: "150px",
                 height:"auto"
               }} /> */}
-            </Box>
+              </Box>
             </Link>
-            
           </Box>
         </Container>
       </Box>

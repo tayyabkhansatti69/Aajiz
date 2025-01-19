@@ -28,27 +28,30 @@ export function TableIconActions({
         variant="text"
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
-        onClick={(event: MouseEvent<HTMLButtonElement>) => { setAnchorEl(event.currentTarget) }}
+        onClick={(event: MouseEvent<HTMLButtonElement>) => {
+          setAnchorEl(event.currentTarget);
+        }}
         {...selectButtonProps}
       >
         {icon}
       </IconButton>
       <Menu
-        sx={{ '& ._list > li': { fontSize: "14px", pr: "40px" } }}
-        classes={{ list: '_list' }}
+        sx={{ "& ._list > li": { fontSize: "14px", pr: "40px" } }}
+        classes={{ list: "_list" }}
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         anchorOrigin={{
-          horizontal:'right',
-          vertical:'bottom'
+          horizontal: "right",
+          vertical: "bottom",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: "top",
+          horizontal: "right",
         }}
-        
-        onClose={() => { setAnchorEl(null) }}
+        onClose={() => {
+          setAnchorEl(null);
+        }}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}

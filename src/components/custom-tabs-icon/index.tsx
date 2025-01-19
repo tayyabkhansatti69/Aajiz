@@ -59,9 +59,8 @@ export function CustomTabsIcon(props: CustomTabsIconProps): JSX.Element {
         {arrayChildren.map((child, index) => {
           if (outerValue) {
             return <Box key={index}>{outerValue === index && child}</Box>;
-          } 
-            return <Box key={index}>{value === index && child}</Box>;
-          
+          }
+          return <Box key={index}>{value === index && child}</Box>;
         })}
       </Box>
     </Box>

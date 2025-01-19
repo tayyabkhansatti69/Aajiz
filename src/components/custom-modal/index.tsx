@@ -13,7 +13,7 @@ export function CustomModal({
   cancelButtonsProps,
   acceptButtonProps,
   acceptButtonLabel,
-  closeButtonProps,
+  // closeButtonProps,
   headerTypographyProps,
   rootSx,
   footer,
@@ -43,7 +43,11 @@ export function CustomModal({
               )}
             </Box>
           )}
-          <IconButton sx={{ ml: "auto" }} {...closeButtonProps}>
+          <IconButton
+            sx={{ ml: "auto" }}
+            // component="button"
+            // {...closeButtonProps}
+          >
             <CloseIcon />
           </IconButton>
         </Box>

@@ -1,7 +1,7 @@
 import { SvgIcon, SvgIconProps } from "@mui/material";
 import React from "react";
 
-function IconYoutube(props:SvgIconProps) {
+function IconYoutube(props: SvgIconProps) {
   return (
     <SvgIcon {...props}>
       <svg

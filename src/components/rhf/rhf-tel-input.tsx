@@ -19,7 +19,8 @@ export function RHFTelInput({
 
   const handleChange = (newPhone: string): void => {
     setValue(name, newPhone);
-    if ((other.isOptional && !newPhone) || matchIsValidTel(newPhone)) clearErrors(name);
+    if ((other.isOptional && !newPhone) || matchIsValidTel(newPhone))
+      clearErrors(name);
   };
 
   const validate = (newPhone: string): void => {

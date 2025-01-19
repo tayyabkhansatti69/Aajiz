@@ -10,14 +10,12 @@ export interface AuthState {
   access_token: string | null;
   refreshToken: string | null;
   isAuthenticated: boolean;
-  user:string
+  user: string;
   // Add other fields as needed
 }
 
-
 export const loginSuccess = (state: AuthState, action: LoginAction) => {
   const { data } = action.payload;
-  
 
   state.access_token = data.access_token;
   state.refreshToken = data.refreshToken;

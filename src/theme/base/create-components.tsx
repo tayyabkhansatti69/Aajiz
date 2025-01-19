@@ -17,14 +17,14 @@ export const createComponents = ({
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
-          backgroundColor: '#11052D !important',
+          backgroundColor: "#11052D !important",
           borderRadius: 8,
-          padding: '12px'
+          padding: "12px",
         },
         arrow: {
-          color: "#252525 !important"
-        }
-      }
+          color: "#252525 !important",
+        },
+      },
     },
     MuiAvatar: {
       styleOverrides: {
@@ -42,19 +42,19 @@ export const createComponents = ({
           textTransform: "none",
           ...(disableButtonsOnLoginAs && ownerState.variant === "contained"
             ? {
-              color: "#252525 !important",
-              background: "grey !important",
-              pointerEvents: "none",
-              backgroundColor: "rgba(16, 24, 40, 0.12) !important",
-              boxShadow: "none",
-            }
+                color: "#252525 !important",
+                background: "grey !important",
+                pointerEvents: "none",
+                backgroundColor: "rgba(16, 24, 40, 0.12) !important",
+                boxShadow: "none",
+              }
             : ownerState.variant === "outlined" &&
-            ownerState.className?.includes("operation") && {
-              color: "rgba(16, 24, 40, 0.38) !important",
-              border: "1px solid rgba(16, 24, 40, 0.12) !important",
-              pointerEvents: "none",
-              boxShadow: "none",
-            }),
+              ownerState.className?.includes("operation") && {
+                color: "rgba(16, 24, 40, 0.38) !important",
+                border: "1px solid rgba(16, 24, 40, 0.12) !important",
+                pointerEvents: "none",
+                boxShadow: "none",
+              }),
         }),
         sizeSmall: {
           padding: "8px 12px",
@@ -252,7 +252,10 @@ export const createComponents = ({
           borderStyle: "solid",
           borderWidth: 1,
           overflow: "hidden",
-          transition: muiTheme.transitions.create(["border-color", "box-shadow"]),
+          transition: muiTheme.transitions.create([
+            "border-color",
+            "box-shadow",
+          ]),
           "&:before": {
             display: "none",
           },
@@ -275,7 +278,10 @@ export const createComponents = ({
           lineHeight: "24px",
         },
         notchedOutline: {
-          transition: muiTheme.transitions.create(["border-color", "box-shadow"]),
+          transition: muiTheme.transitions.create([
+            "border-color",
+            "box-shadow",
+          ]),
         },
       },
     },

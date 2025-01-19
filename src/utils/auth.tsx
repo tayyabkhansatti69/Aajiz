@@ -1,6 +1,9 @@
-
 import { jwtDecode } from "jwt-decode";
-import { getSessionStorage, removeSessionStorage, setSessionStorage } from "./session-storage";
+import {
+  getSessionStorage,
+  removeSessionStorage,
+  setSessionStorage,
+} from "./session-storage";
 
 const isValidToken = (access_token: any): any => {
   if (!access_token) {

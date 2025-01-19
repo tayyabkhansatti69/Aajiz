@@ -22,4 +22,4 @@ export const scanStampApi = baseAPI.injectEndpoints({
   }),
 });
 
-export const { useScanCardMutation,useScanEStampMutation } = scanStampApi;
+export const { useScanCardMutation, useScanEStampMutation } = scanStampApi;

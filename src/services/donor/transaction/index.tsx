@@ -8,9 +8,9 @@ export const authAPI = baseAPI.injectEndpoints({
         url: `/get_donations`,
         method: "GET",
         params: {
-            limit: params.limit,
-            offset: params.offset
-          },
+          limit: params.limit,
+          offset: params.offset,
+        },
       }),
       providesTags: [DONOR_TRANSACTION],
     }),
@@ -19,14 +19,13 @@ export const authAPI = baseAPI.injectEndpoints({
         url: `/get_balance`,
         method: "GET",
         params: {
-            limit: params.limit,
-            offset: params.offset
-          },
+          limit: params.limit,
+          offset: params.offset,
+        },
       }),
       providesTags: [DONOR_TRANSACTION],
     }),
   }),
 });
 
-export const { useGetTransactionListQuery,useGetBalanceQuery  } =
-  authAPI;
+export const { useGetTransactionListQuery, useGetBalanceQuery } = authAPI;

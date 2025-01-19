@@ -8,15 +8,13 @@ export const authAPI = baseAPI.injectEndpoints({
         url: `/get_notifications`,
         method: "GET",
         params: {
-            limit: params.limit,
-            offset: params.offset
-          },
+          limit: params.limit,
+          offset: params.offset,
+        },
       }),
       providesTags: [DONOR_TRANSACTION],
     }),
-    
   }),
 });
 
-export const {useGetNotificationQuery } =
-  authAPI;
+export const { useGetNotificationQuery } = authAPI;

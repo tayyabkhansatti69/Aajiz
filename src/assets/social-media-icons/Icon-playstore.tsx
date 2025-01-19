@@ -1,7 +1,7 @@
 import { SvgIcon, SvgIconProps } from "@mui/material";
 import React from "react";
 
-function IconPlaystore(props:SvgIconProps) {
+function IconPlaystore(props: SvgIconProps) {
   return (
     <SvgIcon {...props}>
       <svg

@@ -103,5 +103,5 @@ export const {
   useSetNewPasswordMutation,
   useResetPasswordMutation,
   useDonorKycMutation,
-  usePartnerKycMutation
+  usePartnerKycMutation,
 } = authAPI;

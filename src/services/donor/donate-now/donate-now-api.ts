@@ -36,5 +36,5 @@ export const {
   useDonateNowMutation,
   useLoadCardMutation,
   useLazyGetIndustryTypeDropdownListQuery,
-  useAddBalanceMutation
+  useAddBalanceMutation,
 } = authAPI;

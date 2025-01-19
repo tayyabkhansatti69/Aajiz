@@ -121,7 +121,9 @@ export function MobileNavbar({
                   {addList.map((item) => (
                     <MenuItem key={item.id} onClick={handleCloseAdd}>
                       <StyledDropdownLink href={item.link}>
-                        <Typography variant="subtitle2">{item.title}</Typography>
+                        <Typography variant="subtitle2">
+                          {item.title}
+                        </Typography>
                       </StyledDropdownLink>
                     </MenuItem>
                   ))}
@@ -139,9 +141,7 @@ export function MobileNavbar({
           position: "relative",
         }}
       >
-        <Link href="/">
-          {/* <LogoRecruiting height="2rem" /> */}
-        </Link>
+        <Link href="/">{/* <LogoRecruiting height="2rem" /> */}</Link>
         <Box sx={{ position: "absolute", left: "28px", bottom: "-14px" }}>
           <Typography
             sx={{

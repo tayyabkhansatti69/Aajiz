@@ -30,7 +30,7 @@ const footerLinks = [
   },
 ];
 
-export default function CareersFooter(props:any): JSX.Element {
+export default function CareersFooter(props: any): JSX.Element {
   const theme: any = useTheme();
   return (
     <Box

@@ -5,7 +5,7 @@ import type { Theme } from "@mui/material";
 import { TableCell, TableRow, tableCellClasses } from "@mui/material";
 // ----------------------------------------------------------------------
 // STYLED COMPONENTS
-export const StyledTableCell = styled(TableCell)(({ }) => ({
+export const StyledTableCell = styled(TableCell)(({}) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "unset",
     height: 48,
@@ -32,11 +32,10 @@ export const StyledTableCell = styled(TableCell)(({ }) => ({
     borderBottom: "none",
     whiteSpace: "pre-wrap",
     padding: "10px 15px",
-    borderTop: '4px solid #F0FDFB',
-  // borderBottom: '1px solid #F0FDFB',
+    borderTop: "4px solid #F0FDFB",
+    // borderBottom: '1px solid #F0FDFB',
   },
 }));
-
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
   background: theme.palette.background.paper,

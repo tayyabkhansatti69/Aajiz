@@ -23,15 +23,15 @@ function validateCNICImage(file: File): Promise<boolean> {
 
     img.src = URL.createObjectURL(file);
     img.onload = () => {
-      const aspectRatio=img.width/img.height;
-      if(aspectRatio>1.5 && aspectRatio<1.7)
-      resolve(
-        // img.width === validDimensions.width &&
-        // img.height === validDimensions.height
-        true
-      );
-      else{
-        resolve(false)
+      const aspectRatio = img.width / img.height;
+      if (aspectRatio > 1.5 && aspectRatio < 1.7)
+        resolve(
+          // img.width === validDimensions.width &&
+          // img.height === validDimensions.height
+          true,
+        );
+      else {
+        resolve(false);
       }
     };
     img.onerror = () => resolve(false); // Handle errors loading the image
@@ -72,9 +72,7 @@ export function UploadSingleFile({
     onDropAccepted,
     ...other,
   });
-  const [validationError, setValidationError] = useState<any>(
-    null
-  );
+  const [validationError, setValidationError] = useState<any>(null);
   async function onDropAccepted(files: any): Promise<any> {
     const isValid = await validateCNICImage(files[0]);
     if (isValid) {
@@ -110,7 +108,10 @@ export function UploadSingleFile({
         }}
       >
         <input {...getInputProps()} />
-        <BlockContent supportedFormats={supportedFormats} validationError={validationError}/>
+        <BlockContent
+          supportedFormats={supportedFormats}
+          validationError={validationError}
+        />
         {isImage && (
           <Image
             alt="file preview"

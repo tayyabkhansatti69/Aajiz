@@ -8,7 +8,7 @@ export function CustomTelInput({
 }): JSX.Element {
   const [phone, setPhone] = useState("");
 
-  const handleChange = (newPhone:any): void => {
+  const handleChange = (newPhone: any): void => {
     setPhone(newPhone);
     matchIsValidTel(newPhone); // returns boolean for validation
   };

@@ -29,9 +29,9 @@ export function CustomJobStepper({
     >
       {steps.map((label) => (
         <Step key={label}>
-          <StepLabel >
+          <StepLabel>
             <Typography variant="body1" color="primary.main">
-            {label}
+              {label}
             </Typography>
           </StepLabel>
         </Step>

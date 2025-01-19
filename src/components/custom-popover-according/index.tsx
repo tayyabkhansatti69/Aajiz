@@ -19,7 +19,7 @@ interface CustomPopoverAccordingProps {
 }
 
 export function CustomPopoverAccording(
-  props: CustomPopoverAccordingProps
+  props: CustomPopoverAccordingProps,
 ): JSX.Element {
   const {
     AccordionProps,

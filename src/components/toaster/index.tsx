@@ -4,7 +4,9 @@ import { alpha } from "@mui/system/colorManipulator";
 // import { ToastErrorIcon, ToastSuccessIcon } from "../../assets";
 
 export function Toaster(): JSX.Element {
-  const { palette: { success, error, common, neutral } } = useTheme();
+  const {
+    palette: { success, error, common, neutral },
+  } = useTheme();
 
   return (
     <HotToaster
@@ -15,25 +17,25 @@ export function Toaster(): JSX.Element {
         success: {
           // icon: <ToastSuccessIcon />,
           style: {
-            background: success.main
-          }
+            background: success.main,
+          },
         },
         error: {
           // icon: <ToastErrorIcon />,
           style: {
-            background: error.main
-          }
+            background: error.main,
+          },
         },
         style: {
-          borderRadius: '4px',
+          borderRadius: "4px",
           background: alpha(neutral[900], 0.8),
           color: common.white,
           boxShadow: `0px 6px 20px 0px ${alpha(common.black, 0.3)}`,
-          padding: '12px',
-          fontSize: '14px',
+          padding: "12px",
+          fontSize: "14px",
           fontWeight: 600,
-          wordBreak:"break-word",
-          overflow:"auto"
+          wordBreak: "break-word",
+          overflow: "auto",
         },
       }}
     />

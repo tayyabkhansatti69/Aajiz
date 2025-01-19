@@ -1,4 +1,3 @@
-
 import {
   // Box,
   ListItem,
@@ -16,22 +15,25 @@ interface INavBarListProps {
   link: string;
   Icon: any;
   label: string;
-  setLinkName:any
-  
+  setLinkName: any;
 }
 
 function NavbarList(props: INavBarListProps) {
   const theme: any = useTheme();
-  const { open, link, Icon, label,setLinkName } = props;
-  
-  console.log(props,open);
+  const { open, link, Icon, label, setLinkName } = props;
+
+  console.log(props, open);
   const pathName = usePathname();
-  
+
   return (
     <ListItem sx={Styles.mainListItem(pathName, link)}>
-      <Link onClick={()=>{
-        setLinkName(label)
-      }} style={Styles.linkStyle} href={link}>
+      <Link
+        onClick={() => {
+          setLinkName(label);
+        }}
+        style={Styles.linkStyle}
+        href={link}
+      >
         <ListItemIcon sx={Styles.ListItemIconStyle(theme)}>
           <Icon sx={Styles.iconStyles()} />
           <ListItemText
@@ -79,36 +81,30 @@ const Styles = {
   },
   iconStyles: () => ({
     // backgroundColor: pathname === link ? "#ffff" : "#ffff",
-    
-
-    
   }),
   ListItemButtonStyle: (pathname: string, text: any, theme?: Theme) => ({
     padding: "6px 22px",
     px: 2.1,
     py: 1,
     borderRadius: "6px",
-    backgroundColor: pathname === text.link ? "#ffff" : theme?.palette?.common?.white,
+    backgroundColor:
+      pathname === text.link ? "#ffff" : theme?.palette?.common?.white,
     "&:hover": {
       bgColor: "#3CC2E0",
     },
   }),
   ListItemIconStyle: (theme: Theme) => ({
-
     minWidth: 0,
     justifyContent: "center",
-    color:theme? theme?.palette?.text?.secondary :'#FFF',
+    color: theme ? theme?.palette?.text?.secondary : "#FFF",
   }),
-  ListItemTextStyle: (props:any) => (
-    {
+  ListItemTextStyle: (props: any) => ({
     display: "flex",
     px: 3,
-    color:props?.theme?.palette?.text?.secondary,
+    color: props?.theme?.palette?.text?.secondary,
     lineHeight: "19.36px",
     fontWeight: 500,
     fontSize: "16px",
     // backgroundColor: props ? "#fefdfb" : '#fefdfb',
-    
-
   }),
 };

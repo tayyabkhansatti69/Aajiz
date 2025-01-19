@@ -66,9 +66,7 @@ export function DesktopNavbar({
           position: "relative",
         }}
       >
-        <Link href="/">
-          {/* <LogoRecruiting /> */}
-        </Link>
+        <Link href="/">{/* <LogoRecruiting /> */}</Link>
         <Box sx={{ position: "absolute", left: "98px", bottom: "-5px" }}>
           <Typography
             sx={{

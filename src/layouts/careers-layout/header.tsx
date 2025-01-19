@@ -9,10 +9,10 @@ import { useEffect, useState } from "react";
 
 export function CareersHeader({ logo }: any): JSX.Element {
   const [elevate, setElevate] = useState<boolean>(false);
-  
+
   const [imageUrl, setImageUrl] = useState("");
   const [error, setError] = useState(false);
-console.log(setElevate)
+  console.log(setElevate);
   useEffect(() => {
     // setElevate(true)
     setImageUrl(logo);
@@ -86,18 +86,17 @@ console.log(setElevate)
                     onError={() => {
                       setError(true);
                     }}
-                    
                     src={logo}
                     alt="logo"
                     width={80}
                     height={80}
                     style={{
-                      width:"auto"
+                      width: "auto",
                     }}
                   />
-                ) : (null
-                  // <Image src={orcaloLogo} alt="logo" />
-                )}
+                ) : null
+                // <Image src={orcaloLogo} alt="logo" />
+                }
               </Box>
             </Stack>
           </Stack>

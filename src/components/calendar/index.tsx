@@ -1,15 +1,9 @@
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import FullCalendar from "@fullcalendar/react";
-import {
-  Box,
-  Grid,
-  Typography,
-  IconButton,
-  Stack,
-} from "@mui/material";
+import { Box, Grid, Typography, IconButton, Stack } from "@mui/material";
 import dayjs from "dayjs";
-import {  useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
@@ -17,7 +11,6 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import "./calendar-style.scss";
 
 export function MyCalendar(): JSX.Element {
-  
   // let schedules = [];
   // let reminders = [];
   // date time filters
@@ -32,7 +25,7 @@ export function MyCalendar(): JSX.Element {
   // reminder modal data
   // const [reminderModalIsOpen, setReminderModalIsOpen] =
   //   useState<boolean>(false);
-console.log(setDateFilter)
+  console.log(setDateFilter);
   calendarRef.current?.getApi()?.gotoDate(dateFilter.date);
   const events = [{ title: "Course Name", start: new Date() }];
 
@@ -48,7 +41,7 @@ console.log(setDateFilter)
         return "#3269D3";
     }
   }
- 
+
   const [title, setTitle] = useState("");
 
   useEffect(() => {
@@ -68,8 +61,7 @@ console.log(setDateFilter)
   };
 
   const eff = calendarRef.current?.getApi();
-console.log(eff)
-  
+  console.log(eff);
 
   return (
     <>
@@ -97,8 +89,7 @@ console.log(eff)
           },
         }}
       >
-        <Stack flexDirection="row" alignItems={"center"} >
-        
+        <Stack flexDirection="row" alignItems={"center"}>
           <IconButton onClick={handlePrev}>
             <KeyboardArrowLeftIcon />
           </IconButton>
@@ -108,9 +99,7 @@ console.log(eff)
           <IconButton onClick={handleNext}>
             <KeyboardArrowRightIcon />
           </IconButton>
-          
-        
-      </Stack>
+        </Stack>
 
         <FullCalendar
           dayMaxEvents={2}

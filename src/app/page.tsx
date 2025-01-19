@@ -7,8 +7,6 @@ import { useEffect } from "react";
 // import SaleHeader from "../layouts/saleSite/header/Sale-header";
 // import MainSaleSite from "../sections/salesite";
 
-
-
 // export default function Home() {
 
 //   return (
@@ -16,18 +14,16 @@ import { useEffect } from "react";
 //        {/* <SaleHeader />
 //       <MainSaleSite />
 //       <SaleFooter/>  */}
-      
 
 //     </>
 //   );
 // }
 
-
 export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/sign-in');
+    router.push("/sign-in");
   }, [router]);
 
   return null; // or empty fragment <>

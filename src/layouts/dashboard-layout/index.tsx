@@ -69,7 +69,7 @@ const styles = {
     mt: theme.breakpoints.up("md") ? 8 : 2, // Add margin-top to avoid content overlap with TopNavBar
     mb: 3,
     px: 5,
-    py:2
+    py: 2,
   }),
 };
 

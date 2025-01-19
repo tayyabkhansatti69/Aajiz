@@ -14,13 +14,12 @@ import {
 // import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import { styles } from "./style";
 
-import  cameraIcon   from "@/src/assets/image/camera-icon.png";
+import cameraIcon from "@/src/assets/image/camera-icon.png";
 // import Image from "next/image";
 
 // import toast from "react-hot-toast";
 // import CircularProgress from "@mui/material/CircularProgress";
 import { ProfilePicture } from "../profile-picture";
-
 
 export function ProfileHeader(props: any): JSX.Element {
   const {
@@ -35,8 +34,7 @@ export function ProfileHeader(props: any): JSX.Element {
   const fullName = `${data?.firstName} ${data?.lastName}`;
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [img, setImg] = useState<string | undefined>();
-console.log(img)
-  
+  console.log(img);
 
   // function handleIconClick(event: React.MouseEvent<HTMLElement>): void {
   //   setAnchorEl(event.currentTarget);
@@ -147,11 +145,11 @@ console.log(img)
               />
             )} */}
             <CardMedia
-                sx={{ height: 150 }}
-                image={coverImg()}
-                // {`${awsBaseUrl}${coverImage}` ? coverImage : bg.src}
-                title="green iguana"
-              />
+              sx={{ height: 150 }}
+              image={coverImg()}
+              // {`${awsBaseUrl}${coverImage}` ? coverImage : bg.src}
+              title="green iguana"
+            />
             {/* {editFormState && (
               <IconButton
                 aria-label="Avatar Actions"

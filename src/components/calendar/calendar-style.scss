@@ -3,17 +3,17 @@
 }
 
 :root {
-  --fc-small-font-size: .85em;
+  --fc-small-font-size: 0.85em;
   --fc-page-bg-color: #fff;
   --fc-neutral-bg-color: rgba(208, 208, 208, 0.3);
   --fc-neutral-text-color: #808080;
   --fc-border-color: #ddd;
 
   --fc-button-text-color: #fff;
-  --fc-button-bg-color: #47B9D3;
-  --fc-button-border-color: #47B9D3;
-  --fc-button-hover-bg-color: #47B9D3;
-  --fc-button-hover-border-color: #47B9D3;
+  --fc-button-bg-color: #47b9d3;
+  --fc-button-border-color: #47b9d3;
+  --fc-button-hover-bg-color: #47b9d3;
+  --fc-button-hover-border-color: #47b9d3;
   --fc-button-active-bg-color: #1a252f;
   --fc-button-active-border-color: #151e27;
 
@@ -36,10 +36,10 @@
   --fc-today-bg-color: rgba(255, 220, 40, 0.15);
   --fc-now-indicator-color: red;
 }
-.fc .fc-toolbar{
+.fc .fc-toolbar {
   width: "100%";
 }
-.fc-toolbar-chunk{
+.fc-toolbar-chunk {
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -4,7 +4,6 @@ import { useFormContext, Controller } from "react-hook-form";
 import { FormHelperText, FormLabel, Stack } from "@mui/material";
 import { Editor } from "../editor";
 
-
 // ----------------------------------------------------------------------
 
 export function RHFEditor({ name, outerLabel, ...other }: any): JSX.Element {
