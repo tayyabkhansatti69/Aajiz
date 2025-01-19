@@ -23,7 +23,7 @@ export const DATE_FORMAT = {
 export function RHFDateRangePicker(props: any): JSX.Element {
   const theme = useTheme();
   const [anchorElDate, setAnchorElDate] = useState<HTMLButtonElement | null>(
-    null
+    null,
   );
   const handleClickDate = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorElDate(event?.currentTarget);
@@ -64,7 +64,7 @@ export function RHFDateRangePicker(props: any): JSX.Element {
                 },
               }}
               value={`${dayjs(field?.value?.startDate)?.format(
-                DATE_FORMAT?.UI
+                DATE_FORMAT?.UI,
               )} - ${dayjs(field?.value?.endDate)?.format(DATE_FORMAT?.UI)} `}
               InputProps={{
                 readOnly: true,

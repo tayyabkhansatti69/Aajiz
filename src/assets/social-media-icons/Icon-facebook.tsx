@@ -1,7 +1,7 @@
 import { SvgIcon, SvgIconProps } from "@mui/material";
 import React from "react";
 
-function IconFacebook(props:SvgIconProps) {
+function IconFacebook(props: SvgIconProps) {
   return (
     <SvgIcon {...props}>
       <svg

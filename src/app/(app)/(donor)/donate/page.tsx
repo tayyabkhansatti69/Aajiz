@@ -1,6 +1,5 @@
 "use client";
 
-
 import DonateNowSection from "@/src/sections/appsite/app/donor-dashboard-section/donate-now";
 import React from "react";
 

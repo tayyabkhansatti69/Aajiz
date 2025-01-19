@@ -124,7 +124,7 @@ function SaleFooter() {
         </Typography>
         <Box
           display="flex"
-          flexDirection= "row"
+          flexDirection="row"
           alignItems="center"
           gap={2}
           mt={{ xs: 2, sm: 0 }} // Add margin-top for mobile

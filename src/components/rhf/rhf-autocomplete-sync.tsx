@@ -32,7 +32,7 @@ export function RHFAutocompleteSync({
   isOptionEqualToValue = (option: any, newValue: any) =>
     option.id === newValue.id,
 
-  renderOption = (props:any, option: any, { selected }:any) => {
+  renderOption = (props: any, option: any, { selected }: any) => {
     return (
       <li {...props} key={option.id}>
         <Checkbox
@@ -46,8 +46,8 @@ export function RHFAutocompleteSync({
     );
   },
 
-  renderTags = (tagValue:any, getTagProps:any) => {
-    return tagValue.map((option: any, index:any) => (
+  renderTags = (tagValue: any, getTagProps: any) => {
+    return tagValue.map((option: any, index: any) => (
       <Chip
         {...getTagProps({ index })}
         key={option.id}

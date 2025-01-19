@@ -1,13 +1,12 @@
 import type { FC } from "react";
 import React, { memo } from "react";
 
-
 import { Box, Container, Stack, Tabs } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Carousel from "react-material-ui-carousel";
-import cardImg1 from "@/src/assets/png/card-img1.png"
-import cardImg2 from "@/src/assets/png/card-img-2.png"
-import cardImg3 from "@/src/assets/png/card-img-3.png"
+import cardImg1 from "@/src/assets/png/card-img1.png";
+import cardImg2 from "@/src/assets/png/card-img-2.png";
+import cardImg3 from "@/src/assets/png/card-img-3.png";
 import { Card } from "@/src/components";
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 }
 /* @figmaId 3:186 */
 export const Section: FC<Props> = memo(function Section(props = {}) {
-  console.log(props)
+  console.log(props);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -67,13 +66,18 @@ export const Section: FC<Props> = memo(function Section(props = {}) {
           </Tabs>
         </Stack>
       </Container>
-      <Box width={"100%"} px={4} mt={2} >
+      <Box width={"100%"} px={4} mt={2}>
         <Carousel index={3} swipe autoPlay>
-          <Stack flexDirection={"row"} gap={2} justifyContent={"center"} alignContent={"center"}
-          alignItems={"center"}>
-          <Card image={cardImg1}/>
-          <Card image={cardImg2} />
-          <Card image={cardImg3} />
+          <Stack
+            flexDirection={"row"}
+            gap={2}
+            justifyContent={"center"}
+            alignContent={"center"}
+            alignItems={"center"}
+          >
+            <Card image={cardImg1} />
+            <Card image={cardImg2} />
+            <Card image={cardImg3} />
           </Stack>
         </Carousel>
       </Box>

@@ -8,7 +8,6 @@ import {
 } from "./settings-context";
 import { Settings, SettingsContextType, State } from "@/src/types";
 
-
 interface SettingsProviderProps {
   children?: ReactNode;
   onReset?: () => void;
@@ -51,7 +50,7 @@ export function SettingsProvider(props: SettingsProviderProps): JSX.Element {
         ...newSettings,
       }));
     },
-    [onUpdate, settings]
+    [onUpdate, settings],
   );
 
   const handleReset = useCallback((): void => {

@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import {
   Checkbox,
@@ -29,7 +28,7 @@ function AsyncMultiselectRenderComponent(
   queryParams: any,
   setParams: any,
   onChangedMain: any,
-  params: any
+  params: any,
 ): JSX.Element {
   const {
     apiQuery,
@@ -43,8 +42,8 @@ function AsyncMultiselectRenderComponent(
     StartIcon,
     externalParams = {},
     transformResponse = (res: any) => res,
-    renderTags = (tagValue:any, getTagProps:any) => {
-      return tagValue?.map((option: any, index:any) => (
+    renderTags = (tagValue: any, getTagProps: any) => {
+      return tagValue?.map((option: any, index: any) => (
         <Chip
           {...getTagProps({ index })}
           key={getOptionId(option)}
@@ -180,7 +179,7 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
     gridProps,
   } = props;
   const [params, setParams] = useState<any>(
-    getDefaultParams({ tableHeaderData })
+    getDefaultParams({ tableHeaderData }),
   );
   const [show, setShow] = useState(!filterButtonShow);
 
@@ -252,7 +251,11 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
             )
           }
           onClick={() => {
-            show ? setShow(false) : setShow(true);
+            if (show) {
+              setShow(false);
+            } else {
+              setShow(true);
+            }
           }}
           sx={{
             color: "text.primary",
@@ -276,7 +279,7 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
               return (
                 <Grid2
                   key={data.FieldProps.name}
-                  size={{xs:12,md:4,lg:3}}
+                  size={{ xs: 12, md: 4, lg: 3 }}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -292,7 +295,7 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <SearchIcon sx={{color:"primary.main"}} />
+                          <SearchIcon sx={{ color: "primary.main" }} />
                         </InputAdornment>
                       ),
                     }}
@@ -303,7 +306,7 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
               return (
                 <Grid2
                   key={data.FieldProps.name}
-                  size={{xs:12,md:4,lg:2}}
+                  size={{ xs: 12, md: 4, lg: 2 }}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -334,7 +337,7 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
               return (
                 <Grid2
                   key={data.FieldProps.name}
-                  size={{xs:12,md:4,lg:2}}
+                  size={{ xs: 12, md: 4, lg: 2 }}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -397,7 +400,7 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
               return (
                 <Grid2
                   key={data.FieldProps.name}
-                  size={{xs:12,md:4,lg:2}}
+                  size={{ xs: 12, md: 4, lg: 2 }}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -408,7 +411,7 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
                     data.queryParams,
                     setParams,
                     onChanged,
-                    params
+                    params,
                   )}
                 </Grid2>
               );
@@ -416,7 +419,7 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
               return (
                 <Grid2
                   key={data.FieldProps.name}
-                  size={{xs:12,md:4,lg:3}}
+                  size={{ xs: 12, md: 4, lg: 3 }}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -453,7 +456,7 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
               return (
                 <Grid2
                   key={data.FieldProps.name}
-                  size={{xs:12,md:4,lg:2}}
+                  size={{ xs: 12, md: 4, lg: 2 }}
                   flexWrap="wrap"
                   justifyContent="center"
                   item
@@ -471,12 +474,11 @@ export function TableHeader(props: TableHeaderProps): JSX.Element {
                 </Grid2>
               );
             }
-            return null;
+            // return null;
           })}
           {showClearFilterButton && (
             <Grid2
-            size={{xs:12,md:4,lg:2}}
-              
+              size={{ xs: 12, md: 4, lg: 2 }}
               display="flex"
               flexWrap="wrap"
               justifyContent={{ xs: "flex-start", sm: "flex-end" }}

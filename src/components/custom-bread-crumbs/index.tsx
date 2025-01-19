@@ -8,7 +8,7 @@ import { Box } from "@mui/material";
 import type { BreadcrumbObjectTypes } from "./custom-bread-crumbs.types";
 import { styled } from "@mui/material/styles";
 
-export function CustomBreadCrumbs({ breadcrumbs}:any): JSX.Element {
+export function CustomBreadCrumbs({ breadcrumbs }: any): JSX.Element {
   return (
     <Box
       sx={{

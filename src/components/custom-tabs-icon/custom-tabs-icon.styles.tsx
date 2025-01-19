@@ -1,7 +1,7 @@
 import type { Theme } from "@mui/material";
 
 export const styles = {
-  tabRoot: (theme: Theme, MaxWidth: number, tabsRootSx:any) => ({
+  tabRoot: (theme: Theme, MaxWidth: number, tabsRootSx: any) => ({
     display: "flex",
     alignItems: "center",
     // width: "fit-content",

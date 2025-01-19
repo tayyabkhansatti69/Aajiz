@@ -3,6 +3,6 @@
 import { ScanStampSection } from "@/src/sections/appsite/app/partner-section/scan-stamp";
 
 function ScanStamp() {
-    return <ScanStampSection />
+  return <ScanStampSection />;
 }
 export default ScanStamp;

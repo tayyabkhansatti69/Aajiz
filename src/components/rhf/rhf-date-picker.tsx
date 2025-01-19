@@ -19,7 +19,7 @@ export function RHFDatePicker({
       control={control}
       render={({ field, fieldState: { error } }) => {
         return (
-          <Stack gap='0.6rem'>
+          <Stack gap="0.6rem">
             {outerLabel && <FormLabel>{outerLabel}</FormLabel>}
 
             <DatePicker
@@ -31,7 +31,7 @@ export function RHFDatePicker({
                   error: Boolean(error),
                   fullWidth: other.fullWidth,
                   size: other.size,
-                  variant:"outlined"
+                  variant: "outlined",
                 },
               }}
               label={label}

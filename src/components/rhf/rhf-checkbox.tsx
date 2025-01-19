@@ -68,7 +68,7 @@ export function RHFMultiCheckbox({
         const onSelected = (option: string): string[] => {
           if (field?.value?.includes(option))
             return field.value.filter(
-              (selectedOption: string) => selectedOption !== option
+              (selectedOption: string) => selectedOption !== option,
             );
           return [...(field?.value?.length ? field?.value : []), option];
         };

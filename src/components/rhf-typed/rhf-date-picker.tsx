@@ -32,8 +32,8 @@ export function RHFDatePicker({
             <DatePicker
               {...field}
               {...other}
-              views={yearOnly ? ['year'] : ['year', 'month', 'day']}
-              openTo={yearOnly ? 'year' : 'day'}
+              views={yearOnly ? ["year"] : ["year", "month", "day"]}
+              openTo={yearOnly ? "year" : "day"}
               slotProps={{
                 textField: {
                   helperText: error ? error.message : "",

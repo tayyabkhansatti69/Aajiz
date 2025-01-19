@@ -7,7 +7,14 @@ import { FormLabel, Stack } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
-export function RHFTimePicker({ name, label, outerLabel, control, fullWidth, ...other }: any): JSX.Element {
+export function RHFTimePicker({
+  name,
+  label,
+  outerLabel,
+  control,
+  fullWidth,
+  ...other
+}: any): JSX.Element {
   return (
     <Controller
       name={name}
@@ -24,7 +31,7 @@ export function RHFTimePicker({ name, label, outerLabel, control, fullWidth, ...
                 error: Boolean(error),
                 fullWidth,
                 variant: "outlined",
-                size: other?.size
+                size: other?.size,
               },
             }}
             label={label}

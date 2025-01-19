@@ -56,13 +56,11 @@ const persistor = persistStore(store);
 
 // Load Google Translate dynamically
 
-
-
-
-
-
 const loadGoogleTranslate = () => {
-  if (typeof window !== "undefined" && !(window as any).googleTranslateElementInit) {
+  if (
+    typeof window !== "undefined" &&
+    !(window as any).googleTranslateElementInit
+  ) {
     const script = document.createElement("script");
     script.src =
       "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
@@ -75,7 +73,7 @@ const loadGoogleTranslate = () => {
           pageLanguage: "en", // Default language
           autoDisplay: false,
         },
-        "google_translate_element"
+        "google_translate_element",
       );
       // const element = document.querySelector('.skiptranslate.goog-te-gadget');
 
@@ -83,7 +81,9 @@ const loadGoogleTranslate = () => {
       // Use MutationObserver to detect when the iframe is added to the DOM
       const observer = new MutationObserver(() => {
         // Look for iframe elements with the specific class
-        const iframe = document.querySelector("iframe.VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate");
+        const iframe = document.querySelector(
+          "iframe.VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate",
+        );
 
         if (iframe) {
           // Hide the iframe once it's found
@@ -98,10 +98,10 @@ const loadGoogleTranslate = () => {
   }
 };
 
-function getTextNodesInElement(element:any) {
-  const textNodes:any = [];
+function getTextNodesInElement(element: any) {
+  const textNodes: any = [];
   const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null);
-  let node:any;
+  let node: any;
   while ((node = walker.nextNode())) {
     textNodes.push(node);
   }
@@ -110,50 +110,48 @@ function getTextNodesInElement(element:any) {
 
 export function RootLayout(props: LayoutProps): JSX.Element {
   const { children, settings } = props;
- 
 
   useEffect(() => {
     loadGoogleTranslate();
-  
+
     // Apply custom styling once Google Translate dropdown is rendered
     const interval = setInterval(() => {
       const googleDropdown = document.querySelector(
-        "#google_translate_element select"
+        "#google_translate_element select",
       ) as HTMLSelectElement | null;
       const googleBranding = document.querySelector(
-        ".goog-te-gadget span"
+        ".goog-te-gadget span",
       ) as HTMLElement | null;
-      const poweredByDiv = document.querySelector('.skiptranslate.goog-te-gadget');
+      const poweredByDiv = document.querySelector(
+        ".skiptranslate.goog-te-gadget",
+      );
 
-            if (poweredByDiv) {
-              // Find all text nodes inside the div
-              const textNodes = getTextNodesInElement(poweredByDiv);
+      if (poweredByDiv) {
+        // Find all text nodes inside the div
+        const textNodes = getTextNodesInElement(poweredByDiv);
 
-              textNodes.forEach((node) => {
-                if (node.nodeValue && node.nodeValue.includes('Powered by')) {
-                  node.nodeValue = node.nodeValue.replace('Powered by', ''); // Remove only the "Powered by" text
-                }
-              });
-            }
-      
-      
+        textNodes.forEach((node) => {
+          if (node.nodeValue && node.nodeValue.includes("Powered by")) {
+            node.nodeValue = node.nodeValue.replace("Powered by", ""); // Remove only the "Powered by" text
+          }
+        });
+      }
+
       if (googleDropdown) {
         // Add custom class for dropdown styling
         googleDropdown.classList.add("custom-google-dropdown");
         googleDropdown.style.padding = "8px";
         googleDropdown.style.border = "1px solid #ccc";
         googleDropdown.style.borderRadius = "8px";
-  
+
         clearInterval(interval);
       }
-  
+
       if (googleBranding) {
         googleBranding.style.display = "none"; // Hide "Powered by Google"
       }
-      
     }, 500);
   }, []);
-  
 
   return (
     <NextAppDirEmotionCacheProvider options={{ key: "css" }}>
@@ -193,10 +191,7 @@ export function RootLayout(props: LayoutProps): JSX.Element {
                             borderRadius: "8px",
                             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                           }}
-                        >
-                          
-                        </div>
-                        
+                        ></div>
                       </AuthInitializer>
                       <Toaster />
                     </ThemeProvider>

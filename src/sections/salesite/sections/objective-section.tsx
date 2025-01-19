@@ -1,9 +1,4 @@
-import {
-  Container,
-  Typography,
-  useMediaQuery,
-  useTheme
-} from "@mui/material";
+import { Container, Typography, useMediaQuery, useTheme } from "@mui/material";
 function ObjectiveSection() {
   // const classes = useStyles()
   const theme: any = useTheme();

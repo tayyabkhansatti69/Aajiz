@@ -9,7 +9,6 @@ import {
 } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 
-
 const CheckoutPage = ({ amount }: { amount: number }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -33,17 +32,17 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
   }, [amount]);
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(true)
+    setLoading(true);
 
     if (!stripe || !elements) {
-      return
+      return;
     }
 
     const { error: submitError } = await elements.submit();
 
     if (submitError) {
       setErrorMessage(submitError.message);
-      setLoading(false)
+      setLoading(false);
       return;
     }
     const { error } = await stripe.confirmPayment({
@@ -51,26 +50,32 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
       clientSecret,
       confirmParams: {
         return_url: `http://localhost:3000/payment-success?amount=${amount}`,
-      }
+      },
     });
     if (error) {
-      setErrorMessage(error.message)
+      setErrorMessage(error.message);
+    } else {
     }
-    else {
-
-    }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
   if (!clientSecret || !stripe || !elements) {
-    <p>...loading</p>
+    <p>...loading</p>;
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ background: 'white', padding: '2rem' }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{ background: "white", padding: "2rem" }}
+    >
       {clientSecret && <PaymentElement />}
       {errorMessage && <div>{errorMessage}</div>}
-      <Button variant="contained" sx={{ mt: 3 }} disabled={!stripe || loading} type="submit">
-        {!loading ? `Pay ${amount}` : 'Processing...'}
+      <Button
+        variant="contained"
+        sx={{ mt: 3 }}
+        disabled={!stripe || loading}
+        type="submit"
+      >
+        {!loading ? `Pay ${amount}` : "Processing..."}
       </Button>
     </form>
   );

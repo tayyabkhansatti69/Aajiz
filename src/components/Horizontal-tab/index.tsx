@@ -29,7 +29,7 @@ export default function HorizontalTabs({
   } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
-    Index && setValue(Index);
+    if (Index) setValue(Index);
   }, [Index]);
 
   // Filter tabs and their corresponding children based on permissions
@@ -37,18 +37,18 @@ export default function HorizontalTabs({
     permissionsArray[index]?.id
       ? Object.prototype.hasOwnProperty.call(
           userPermissions,
-          permissionsArray[index].id
+          permissionsArray[index].id,
         )
-      : true
+      : true,
   );
 
   const filteredChildren = tabChildren.filter((_, index: any) =>
     permissionsArray[index]?.id
       ? Object.prototype.hasOwnProperty.call(
           userPermissions,
-          permissionsArray[index].id
+          permissionsArray[index].id,
         )
-      : true
+      : true,
   );
 
   // Adjust the index if the currently selected tab is not visible
@@ -81,7 +81,7 @@ export default function HorizontalTabs({
         (child, index) =>
           filteredIndex === index && (
             <Box key={`child${filteredIndex}`}>{child}</Box>
-          )
+          ),
       )}
     </Box>
   );

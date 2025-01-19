@@ -10,7 +10,6 @@ function IconSat(props: SvgIconProps) {
         viewBox="0 0 200 67"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        
       >
         <rect
           y="0.166016"

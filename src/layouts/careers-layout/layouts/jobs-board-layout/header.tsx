@@ -84,7 +84,7 @@
 //                     onError={() => {
 //                       setError(true);
 //                     }}
-                    
+
 //                     src={awsBaseUrl + logo}
 //                     alt="logo"
 //                     width={80}

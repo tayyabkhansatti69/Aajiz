@@ -13,7 +13,7 @@ function DonorSection() {
   return (
     <Container maxWidth={"xl"}>
       <Grid2 container>
-      <Grid2 size={{ md: 6 }}>
+        <Grid2 size={{ md: 6 }}>
           <Typography>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas
             consequuntur blanditiis rerum ullam aliquid quasi amet ut quo
@@ -42,7 +42,6 @@ function DonorSection() {
             Donor Defined Image
           </Typography>
         </Grid2>
-        
       </Grid2>
     </Container>
   );

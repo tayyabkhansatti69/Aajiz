@@ -1,8 +1,6 @@
 // import type { ReactNode } from "react";
 // import { useCallback, useEffect, useState } from "react";
 
-
-
 // import { useRouter } from "next/navigation";
 // import { paths } from "../../paths";
 // import { useSelector } from "@/store";

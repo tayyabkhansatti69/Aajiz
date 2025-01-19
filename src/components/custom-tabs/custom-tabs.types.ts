@@ -6,6 +6,6 @@ export interface CustomTabsProps {
   maxWidth?: number | undefined;
   tabsProps?: TabsProps;
   tabProps?: TabProps;
-  tabsRootSx?:object;
-  tabRootSx?:object;
+  tabsRootSx?: object;
+  tabRootSx?: object;
 }

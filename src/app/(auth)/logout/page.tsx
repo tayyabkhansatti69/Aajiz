@@ -15,7 +15,7 @@ export default function Logout() {
       hasShownToast.current = true; // Mark the toast as shown
     }
     clearLocalStorage();
-    router.push('/sign-in');
+    router.push("/sign-in");
   }, [router]);
 
   return null; // or empty fragment <>

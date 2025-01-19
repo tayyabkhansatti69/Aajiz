@@ -15,13 +15,13 @@ import { useRouter } from "next/navigation";
 
 function ProfileUpdate(profile_image) {
   const [updateProfile] = useUpdateProfileMutation();
-const router=useRouter()
+  const router = useRouter();
   const [imgSrc, setImgSrc] = useState<string>(profileImg?.src);
   useEffect(() => {
     if (profile_image) {
       setImgSrc(profile_image?.profile_image);
     }
-  }, [profile_image,router]);
+  }, [profile_image, router]);
 
   console.log(imgSrc);
   const onChange = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +74,7 @@ const router=useRouter()
         px={2}
         onClick={() => {
           const fileInput = document.getElementById(
-            "account-settings-upload-image"
+            "account-settings-upload-image",
           );
           if (fileInput) {
             (fileInput as HTMLInputElement).click(); // Ensure TypeScript understands it's an input element

@@ -5,7 +5,7 @@ import {
   Container,
   Grid,
   SvgIcon,
-  Typography
+  Typography,
 } from "@mui/material";
 
 function Section_one() {
@@ -14,7 +14,7 @@ function Section_one() {
       <Grid xs={12} item>
         <Box
           sx={{
-          //  backgroundImage: `url(${landingImage.src})`,
+            //  backgroundImage: `url(${landingImage.src})`,
             backgroundSize: "100%",
             backgroundRepeat: "no-repeat",
             display: "flex",
@@ -78,7 +78,6 @@ function Section_one() {
                       component="img"
                       src={landingImage.src}
                       alt="Landing Section Girl"
-                     
                     />
                   </Box>
                 </Grid>

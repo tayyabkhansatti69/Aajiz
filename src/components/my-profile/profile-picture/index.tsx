@@ -23,7 +23,7 @@ export function ProfilePicture(props: any): JSX.Element {
   function handleIconClick(event: React.MouseEvent<HTMLElement>): void {
     setAnchorEl(event.currentTarget);
   }
-  console.log(handleIconClick)
+  console.log(handleIconClick);
 
   function handleClose(): void {
     setAnchorEl(null);

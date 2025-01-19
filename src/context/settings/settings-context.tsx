@@ -1,7 +1,6 @@
 // import { Settings, SettingsContextType, State } from "@/types";
-import { Settings,SettingsContextType, State } from "@/src/types";
+import { Settings, SettingsContextType, State } from "@/src/types";
 import { createContext } from "react";
-
 
 export const defaultSettings: Settings = {
   direction: "ltr",

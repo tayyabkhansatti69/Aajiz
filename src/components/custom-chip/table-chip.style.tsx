@@ -1,7 +1,7 @@
 export const style = {
   root: (
     props: { color: string; bgcolor: string },
-    rootSx: object | undefined
+    rootSx: object | undefined,
   ) => ({
     fontSize: "14px",
     borderRadius: "8px",

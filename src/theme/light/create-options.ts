@@ -5,7 +5,6 @@ import { createPalette } from "./create-palette";
 import { createShadows } from "./create-shadows";
 import { ColorPreset, Contrast } from "@/src/types";
 
-
 interface Config {
   colorPreset?: ColorPreset;
   contrast?: Contrast;
