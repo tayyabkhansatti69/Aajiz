@@ -10,7 +10,7 @@ interface TableActionProps {
   selectButtonProps?: ButtonProps;
   menuProps?: MenuProps;
   placeholder?: string;
-  buttonStyles?: React.CSSProperties; 
+  buttonStyles?: React.CSSProperties;
   iconStyles?: React.CSSProperties;
 }
 
@@ -62,7 +62,7 @@ export function TableAction({
               theme.palette.mode === "light"
                 ? theme.palette.neutral[600]
                 : theme.palette.neutral[50],
-                ...iconStyles,
+            ...iconStyles,
           })}
         />
       </Button>

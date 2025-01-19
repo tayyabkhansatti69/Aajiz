@@ -3,7 +3,7 @@ import { Button, styled, Drawer, IconButton } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { useState } from "react";
@@ -24,7 +24,7 @@ const pagesNavbar = [
 
 function SaleHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
-const router=useRouter()
+  const router = useRouter();
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -164,7 +164,13 @@ const router=useRouter()
               {page.title}
             </StyledNavLink>
           ))}
-          <Box width={"10%"} ml="auto" display="flex" alignItems="center" justifyContent="right">
+          <Box
+            width={"10%"}
+            ml="auto"
+            display="flex"
+            alignItems="center"
+            justifyContent="right"
+          >
             <Button
               variant="contained"
               size="large"
@@ -172,7 +178,9 @@ const router=useRouter()
                 borderRadius: 5,
                 background: "#0b767a",
               }}
-              onClick={()=>{router.push("/sign-in")}}
+              onClick={() => {
+                router.push("/sign-in");
+              }}
             >
               Join Us
             </Button>

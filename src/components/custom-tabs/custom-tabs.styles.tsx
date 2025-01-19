@@ -2,8 +2,7 @@
 import type { Theme } from "@mui/material";
 
 export const styles = {
-  tabRoot: (theme: Theme, MaxWidth: number, tabsRootSx:any) => ({
-    
+  tabRoot: (theme: Theme, MaxWidth: number, tabsRootSx: any) => ({
     display: "flex",
     alignItems: "center",
     width: "fit-content",
@@ -19,7 +18,7 @@ export const styles = {
     },
     ...tabsRootSx,
   }),
-  tab: (theme: Theme, tabRootSx:any) => ({
+  tab: (theme: Theme, tabRootSx: any) => ({
     fontSize: 16,
     fontWeight: 600,
     lineHeight: "20px",
@@ -35,18 +34,18 @@ export const styles = {
       marginLeft: "0px !important",
       minWidth: 170,
       "&.Mui-selected": {
-       color:"#1582A5",
-      BorderBottom: "2px solid",
-      marginLeft: "0px !important",
-    },
+        color: "#1582A5",
+        BorderBottom: "2px solid",
+        marginLeft: "0px !important",
+      },
     },
     "&.Mui-selected": {
-       color:"#1582A5",
+      color: "#1582A5",
       BorderBottom: "2px solid !important",
       marginLeft: "0px !important",
-      fontWeight:"bold"
+      fontWeight: "bold",
     },
-   
+
     ...tabRootSx,
   }),
 };

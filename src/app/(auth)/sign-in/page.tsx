@@ -12,23 +12,25 @@ function SignIn() {
     // Hide the GIF after 6 seconds and trigger onComplete callback
     const timer = setTimeout(() => {
       setIsSplashComplete(false);
-
-
     }, 6000);
 
     return () => clearTimeout(timer);
   }, [isSplashComplete]);
   return (
     <>
-      {isSplashComplete ?
+      {isSplashComplete ? (
         <SplashScreen>
-          <img src={SplashScree?.src} alt="Loading..." style={{ width: '530px', height: 'auto' }} />
+          <img
+            src={SplashScree?.src}
+            alt="Loading..."
+            style={{ width: "530px", height: "auto" }}
+          />
         </SplashScreen>
-        :
+      ) : (
         <>
-        <SignInForm />
+          <SignInForm />
         </>
-        }
+      )}
     </>
   );
 }

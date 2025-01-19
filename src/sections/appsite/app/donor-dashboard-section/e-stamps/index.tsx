@@ -42,7 +42,7 @@ export function EStamps({ eStampData }: any) {
             };
           }
         });
-      })
+      }),
     );
   };
 
@@ -85,7 +85,7 @@ export function EStamps({ eStampData }: any) {
             console.error(`Failed to convert logo for ${item.id}:`, error);
             return { ...item, industry_logo: item.industry_logo }; // Fallback to original
           }
-        })
+        }),
       );
       setPreloadedData(stampsWithBase64);
     };
@@ -140,7 +140,7 @@ export function EStamps({ eStampData }: any) {
           xPosition,
           currentHeight,
           pdfWidth,
-          pdfHeight
+          pdfHeight,
         );
 
         if (itemsOnCurrentPage % itemsPerRow === itemsPerRow - 1) {

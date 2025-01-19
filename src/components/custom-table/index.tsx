@@ -103,7 +103,7 @@ export function CustomTable({
       },
       ...columns,
     ];
-  } else null;
+  }
 
   const table = useReactTable({
     data: data ?? EMPTY_ARRAY,
@@ -141,7 +141,7 @@ export function CustomTable({
                             ? null
                             : flexRender(
                                 header.column.columnDef.header,
-                                header.getContext()
+                                header.getContext(),
                               )}
                           {header.column.columnDef.isSortable &&
                             !isSorted(header.id) && <KeyboardArrowDownIcon />}
@@ -162,7 +162,7 @@ export function CustomTable({
                         <StyledTableCell key={cell.id}>
                           {flexRender(
                             cell.column.columnDef.cell,
-                            cell.getContext()
+                            cell.getContext(),
                           )}
                         </StyledTableCell>
                       ))}

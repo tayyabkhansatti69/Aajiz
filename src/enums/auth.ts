@@ -1,5 +1,4 @@
 export enum Issuer {
-    JWT = "JWT",
-    SLACK = "Slack",
-  }
-  
+  JWT = "JWT",
+  SLACK = "Slack",
+}

@@ -23,8 +23,7 @@ const validationSchema = Yup.object().shape({
     otherwise: (schema) => schema.notRequired(),
   }),
 
-  accountTitle: Yup.string()
-    .required("Account title is required"),
+  accountTitle: Yup.string().required("Account title is required"),
 });
 
 export default validationSchema;

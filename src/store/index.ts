@@ -21,7 +21,12 @@ import { persistReducer } from "redux-persist";
 // } from "@/utils";
 // import { authReducer } from "@/slices";
 import { baseAPI } from "../services/base-api";
-import { clearLocalStorage, clearSessionStorage, getLocalStorage, setLocalStorage } from "../utils";
+import {
+  clearLocalStorage,
+  clearSessionStorage,
+  getLocalStorage,
+  setLocalStorage,
+} from "../utils";
 import { authReducer } from "../slices";
 // import { baseAPI } from "@/services/base-api";
 

@@ -1,3 +1,3 @@
-import { SettingsContext } from './settings-context';
+import { SettingsContext } from "./settings-context";
 
 export const SettingsConsumer = SettingsContext.Consumer;

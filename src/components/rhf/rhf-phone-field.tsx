@@ -1,7 +1,20 @@
-'use client'
+"use client";
 import React, { useEffect } from "react";
-import { FormLabel, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
-import { defaultCountries, FlagEmoji, parseCountry, usePhoneInput } from "react-international-phone";
+import {
+  FormLabel,
+  InputAdornment,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import {
+  defaultCountries,
+  FlagEmoji,
+  parseCountry,
+  usePhoneInput,
+} from "react-international-phone";
 import type { CountryIso2 } from "react-international-phone";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -10,24 +23,19 @@ export function RHFPhoneField({
   readOnly = false,
   outerLabel,
   defaultCountry,
-  ...other }:any): JSX.Element {
-
+  ...other
+}: any): JSX.Element {
   const { control, setValue } = useFormContext();
 
-  const {
-    phone,
-    handlePhoneValueChange,
-    inputRef,
-    country,
-    setCountry
-  } = usePhoneInput({
-    defaultCountry,
-    countries: defaultCountries,
-  });
+  const { phone, handlePhoneValueChange, inputRef, country, setCountry } =
+    usePhoneInput({
+      defaultCountry,
+      countries: defaultCountries,
+    });
 
   useEffect(() => {
-    setValue(name, phone)
-  }, [name, phone, setValue])
+    setValue(name, phone);
+  }, [name, phone, setValue]);
 
   return (
     <Controller
@@ -38,7 +46,7 @@ export function RHFPhoneField({
           {outerLabel && <FormLabel>{outerLabel}</FormLabel>}
           <TextField
             {...field}
-            variant='outlined'
+            variant="outlined"
             value={field?.value || phone}
             error={Boolean(error)}
             helperText={error?.message}
@@ -54,13 +62,22 @@ export function RHFPhoneField({
                       sx: styles.MenuProps,
                       transformOrigin: {
                         vertical: "top",
-                        horizontal: "left"
-                      }
+                        horizontal: "left",
+                      },
                     }}
                     sx={styles._select}
                     value={country}
-                    onChange={(e) => { setCountry(e.target.value as CountryIso2) }}
-                    renderValue={(val) => <Typography variant="subtitle2" sx={{ textTransform: 'uppercase' }}>{val}</Typography>}
+                    onChange={(e) => {
+                      setCountry(e.target.value as CountryIso2);
+                    }}
+                    renderValue={(val) => (
+                      <Typography
+                        variant="subtitle2"
+                        sx={{ textTransform: "uppercase" }}
+                      >
+                        {val}
+                      </Typography>
+                    )}
                   >
                     {defaultCountries.map((c) => {
                       const _country = parseCountry(c);
@@ -70,24 +87,26 @@ export function RHFPhoneField({
                             iso2={_country.iso2}
                             style={{ marginRight: "8px" }}
                           />
-                          <Typography marginRight="8px">{_country.name}</Typography>
-                          <Typography color="gray">+{_country.dialCode}</Typography>
+                          <Typography marginRight="8px">
+                            {_country.name}
+                          </Typography>
+                          <Typography color="gray">
+                            +{_country.dialCode}
+                          </Typography>
                         </MenuItem>
                       );
                     })}
                   </Select>
                 </InputAdornment>
-              )
+              ),
             }}
             {...other}
           />
         </Stack>
       )}
     />
-  )
+  );
 }
-
-
 
 const styles = {
   MenuProps: {
@@ -98,20 +117,20 @@ const styles = {
   },
   _select: {
     width: "max-content",
-    '&:hover': { background: 'transparent' },
+    "&:hover": { background: "transparent" },
     fieldset: {
-      display: "none"
+      display: "none",
     },
     ".MuiSelect-select": {
       padding: "8px",
-      paddingRight: "24px !important"
+      paddingRight: "24px !important",
     },
     svg: {
-      right: 0
-    }
+      right: 0,
+    },
   },
   InputAdornment: {
-    marginRight: "2px", marginLeft: "-8px"
-  }
-}
-
+    marginRight: "2px",
+    marginLeft: "-8px",
+  },
+};

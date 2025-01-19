@@ -7,7 +7,6 @@ import { Box } from "@mui/material";
 import convertToSubCurrency from "@/lib/convertToSubcurrency";
 import CheckoutPage from "@/src/sections/appsite/app/stripe-payment-gateway";
 
-
 if (process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY === undefined) {
   throw new Error("NEXT_PUBLIC_STRIPE_PUBLIC_KEY is not defined");
 }
@@ -21,22 +20,21 @@ export default function Stripe() {
     <Box
       sx={{
         px: 5,
-        
+
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
         backgroundImage: "linear-gradient(#0b767a,#09a4a8,#09a4a8, #0b767a)",
         height: "100vh",
         border: "1px solid cyan",
-        borderRadius:'32px',
+        borderRadius: "32px",
       }}
     >
-      
       <Box
         sx={{
           width: "50%",
-           border: "1px solid #cafdf8",
-           p: 4,
+          border: "1px solid #cafdf8",
+          p: 4,
           mt: 2,
           borderRadius: 5,
           mx: "auto",

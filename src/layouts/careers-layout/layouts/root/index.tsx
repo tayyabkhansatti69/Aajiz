@@ -68,7 +68,7 @@
 //   const { children, settings } = props;
 
 //   const pathname = usePathname();
-  
+
 //   return (
 //     <NextAppDirEmotionCacheProvider options={{ key: "css" }}>
 //       <ReduxProvider store={store}>

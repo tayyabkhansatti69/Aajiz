@@ -15,6 +15,12 @@ interface TableChipProps {
   rootSx?: object;
 }
 
-export function CustomChip({ variant, ChipProps, rootSx }: TableChipProps): JSX.Element {
-  return <Chip sx={style.root(statusColorHandler(variant), rootSx)} {...ChipProps} />;
+export function CustomChip({
+  variant,
+  ChipProps,
+  rootSx,
+}: TableChipProps): JSX.Element {
+  return (
+    <Chip sx={style.root(statusColorHandler(variant), rootSx)} {...ChipProps} />
+  );
 }

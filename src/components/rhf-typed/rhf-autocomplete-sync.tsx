@@ -36,7 +36,7 @@ export function RHFAutocompleteSync<
   const onChanged = (
     e: React.SyntheticEvent,
     newValue: TOption | TOption[] | null,
-    onChange: (...event: unknown[]) => void
+    onChange: (...event: unknown[]) => void,
   ): void => {
     onChange(newValue);
   };
@@ -69,7 +69,7 @@ export function RHFAutocompleteSync<
           }
           onChange={(
             e: React.SyntheticEvent,
-            newValue: TOption | TOption[] | null
+            newValue: TOption | TOption[] | null,
           ) => {
             onChanged(e, newValue, form.field.onChange);
           }}

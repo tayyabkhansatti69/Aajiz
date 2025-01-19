@@ -16,7 +16,7 @@ import Image from "next/image";
 export function SignaturePad({ name, ...other }: any): JSX.Element {
   const { control } = useFormContext();
   const [showSignCanvas, setShowSignCanvas] = useState(
-    control._defaultValues[`${name}`]
+    control._defaultValues[`${name}`],
   );
 
   const theme: any = useTheme();
@@ -41,7 +41,7 @@ export function SignaturePad({ name, ...other }: any): JSX.Element {
       `File(${new Date().toLocaleDateString("en-US")}).png`,
       {
         type: mime,
-      }
+      },
     );
     return file;
   };

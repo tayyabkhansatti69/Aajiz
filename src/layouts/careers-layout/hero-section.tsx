@@ -7,12 +7,11 @@ import { Container, Typography, Box, Stack } from "@mui/material";
 
 export function HeroSection(props: any): JSX.Element {
   const { companyName } = props;
-  console.log(companyName)
+  console.log(companyName);
   // const { data } = useGetJobPostsInternalQuery({
   //   companyName,
   // });
-// const data=[]
-  
+  // const data=[]
 
   return (
     <>

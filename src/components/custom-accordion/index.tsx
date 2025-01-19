@@ -27,7 +27,7 @@ export function CustomAccordion({
   expended = false,
 }: CustomAccordionProps): JSX.Element {
   const [accordionExpanded, setAccordionExpanded] = useState<boolean>(false);
-  console.log(setAccordionExpanded)
+  console.log(setAccordionExpanded);
   return (
     <Accordion
       disabled={disabled}

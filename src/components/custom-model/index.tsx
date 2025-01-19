@@ -6,17 +6,14 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-
 
 import { LoadingButton } from "@mui/lab";
 import { DeleteIcon } from "@/src/assets/icons/delete-icon";
 import { styles } from "./modal.styles";
 import { ModalProps } from "./modal.types";
-
 
 function CustomModal(props: ModalProps): JSX.Element {
   const {
@@ -61,11 +58,7 @@ function CustomModal(props: ModalProps): JSX.Element {
             <Box sx={styles.head}>
               {headerIconShow && headerIcon && headerIcon}
               {title && (
-                <Typography
-                  variant="h6"
-                  color={"neutral.900"}
-                  {...titleProps}
-                >
+                <Typography variant="h6" color={"neutral.900"} {...titleProps}>
                   {title}
                 </Typography>
               )}

@@ -1,54 +1,58 @@
 import { useState } from "react";
-
-import type { ReactNode, MouseEvent } from "react";
+import type { ReactNode } from "react";
 import { Box, IconButton, Menu } from "@mui/material";
 import type { ButtonProps, MenuProps } from "@mui/material";
 
 interface TableIconActionProps {
   children: ReactNode;
-  selectButtonProps?: ButtonProps;
-  menuProps?: MenuProps;
-  icon?: ReactNode | JSX.Element;
+  selectButtonProps?: Omit<ButtonProps, 'onClick'>;
+  menuProps?: Omit<MenuProps, 'open' | 'onClose' | 'anchorEl'>;
+  icon?: ReactNode;
 }
 
 export function TableIconActions({
   children,
   menuProps,
-  selectButtonProps,
+  // selectButtonProps,
   icon,
 }: TableIconActionProps): JSX.Element {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box>
       <IconButton
+        component="button"
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
-        variant="text"
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
-        onClick={(event: MouseEvent<HTMLButtonElement>) => { setAnchorEl(event.currentTarget) }}
-        {...selectButtonProps}
+        onClick={handleClick}
+        // {...selectButtonProps}
       >
         {icon}
       </IconButton>
       <Menu
-        sx={{ '& ._list > li': { fontSize: "14px", pr: "40px" } }}
-        classes={{ list: '_list' }}
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
+        onClose={handleClose}
         anchorOrigin={{
-          horizontal:'right',
-          vertical:'bottom'
+          horizontal: "right",
+          vertical: "bottom",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: "top",
+          horizontal: "right",
         }}
-        
-        onClose={() => { setAnchorEl(null) }}
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}

@@ -11,7 +11,6 @@
 //     companyName,
 //   });
 
-  
 //   return (
 //     <>
 //       <CareersHeader logo={data?.data?.boardInfo.logo} />

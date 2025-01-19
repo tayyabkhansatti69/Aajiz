@@ -9,7 +9,6 @@ export function CareerLayout({
 }): JSX.Element {
   return (
     <Box>
-      
       {children}
       <CareersFooter />
     </Box>

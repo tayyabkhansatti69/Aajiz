@@ -1,5 +1,5 @@
 export const styles = {
-  mainAccordionStyling: (theme:any) => ({
+  mainAccordionStyling: (theme: any) => ({
     boxShadow: theme.shadows[3],
     marginTop: "20px",
     borderRadius: "5px",

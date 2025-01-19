@@ -36,7 +36,7 @@ function DonorKYCRequests() {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => (
+      accessorFn: () => (
         <Button variant="text" sx={{ textDecoration: "underline" }}>
           View Profile
         </Button>

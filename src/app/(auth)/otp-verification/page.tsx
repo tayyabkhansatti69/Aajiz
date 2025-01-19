@@ -3,12 +3,11 @@
 import OtpVerificationSection from "@/src/sections/appsite/auth/opt-verification/optVerification";
 
 function OtpVerification() {
-
   return (
     <>
-   <OtpVerificationSection/>
+      <OtpVerificationSection />
     </>
   );
 }
 
-export default OtpVerification
+export default OtpVerification;

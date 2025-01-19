@@ -44,7 +44,7 @@ export function RHFAutocompleteAsync({
     console.info("Rhf api data is not proper use transform Response ", res);
     return [];
   },
-  renderOption = (props:any, option: any, { selected }:any) => {
+  renderOption = (props: any, option: any, { selected }: any) => {
     return (
       <li {...props} key={getOptionId(option)}>
         <Checkbox
@@ -58,8 +58,8 @@ export function RHFAutocompleteAsync({
       </li>
     );
   },
-  renderTags = (tagValue:any, getTagProps:any) => {
-    return tagValue?.map((option: any, index:any) => (
+  renderTags = (tagValue: any, getTagProps: any) => {
+    return tagValue?.map((option: any, index: any) => (
       <Chip
         {...getTagProps({ index })}
         key={getOptionId(option)}

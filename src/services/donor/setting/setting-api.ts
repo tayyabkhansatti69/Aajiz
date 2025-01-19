@@ -10,12 +10,12 @@ export const authAPI = baseAPI.injectEndpoints({
       }),
     }),
     editPassword: builder.mutation({
-        query: (body: any) => ({
-          url: "/update_password",
-          method: "PUT",
-          body,
-        }),
+      query: (body: any) => ({
+        url: "/update_password",
+        method: "PUT",
+        body,
       }),
+    }),
     updateProfile: builder.mutation({
       query: (body: any) => ({
         url: "/profile_image",
@@ -41,7 +41,7 @@ export const authAPI = baseAPI.injectEndpoints({
 
 export const {
   useOrderCardMutation,
-    useEditPasswordMutation,
+  useEditPasswordMutation,
   useEditProfileMutation,
   useUpdateProfileMutation,
   useGetDonorProfileQuery,

@@ -44,7 +44,7 @@ export const Schema = () =>
     front_card: Yup.string().nullable(),
     back_card: Yup.string().nullable(),
     individual_or_company: Yup.string().required(
-      "Individual or company selection is required"
+      "Individual or company selection is required",
     ),
     industry_id: Yup.object().nullable().required("Industry type is required"),
   });
@@ -112,7 +112,7 @@ function PartnerKyc() {
 
         toast.success(
           response?.message ||
-            "Your request was sent for verification successfully!"
+            "Your request was sent for verification successfully!",
         );
         clearLocalStorage();
         router?.push("/sign-in");

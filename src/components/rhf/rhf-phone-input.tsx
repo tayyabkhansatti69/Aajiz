@@ -54,7 +54,7 @@ function PhoneInputComponent({
   onChange,
   placeholder,
   ...other
-}:any): JSX.Element {
+}: any): JSX.Element {
   return (
     <PhoneInput
       {...other}

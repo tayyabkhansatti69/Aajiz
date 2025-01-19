@@ -22,7 +22,7 @@ import NotificationIcon from "@/src/assets/icons/notification-icon";
 
 function TopNavBar(props: any) {
   const theme: any = useTheme();
-  const router=useRouter()
+  const router = useRouter();
   const { handleDrawer, leftopen } = props;
   // to handle drawer in different size
   const screenSizeHandler = useMediaQuery(theme.breakpoints.down("md"));
@@ -32,7 +32,7 @@ function TopNavBar(props: any) {
     ?.label;
   const myValue: any = localStorage.getItem("rememberMe");
   const data: any = JSON.parse(myValue);
-  console.log(data,"data")
+  console.log(data, "data");
   const capitalizeFirstLetter = (string) => {
     return string?.charAt(0)?.toUpperCase() + string?.slice(1);
   };
@@ -94,9 +94,14 @@ function TopNavBar(props: any) {
                 </Typography>
               </Box>
             </Box>
-            <IconButton onClick={()=>{router?.push('/notifications')}} sx={{cursor:'pointer'}}>
+            <IconButton
+              onClick={() => {
+                router?.push("/notifications");
+              }}
+              sx={{ cursor: "pointer" }}
+            >
               {/* <IconSetting sx={{ color: "#9A9A9A" }} /> */}
-              <NotificationIcon sx={{width:'40px',height:'40px'}}/>
+              <NotificationIcon sx={{ width: "40px", height: "40px" }} />
             </IconButton>
           </Box>
         </Grid>
