@@ -15,7 +15,7 @@ export const Schema = Yup.object().shape({
     .email("Invalid email address")
     .required("Email is required"),
   password: Yup.string()
-    .min(8, "Password must be at least 8 characters long")
+    // .min(8, "Password must be at least 8 characters long")
     .required("Password is required"),
 });
 
@@ -27,7 +27,7 @@ export const defaultValues = {
 
 // Custom hook
 export const UseSignInForm = () => {
-  const [loginPost,{isLoading}] = useLoginMutation();
+  const [loginPost, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
@@ -104,6 +104,6 @@ export const UseSignInForm = () => {
     onSubmit,
     handleClickShowPassword,
     showPassword,
-    isLoading
+    isLoading,
   };
 };
