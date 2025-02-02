@@ -1,24 +1,24 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { CustomTable } from "@/src/components";
-// import { useGetRecentScannedStampsListQuery } from "@/src/services/admin/scanned-stamp/scanned-stamp-api";
+import { useGetRecentScannedStampsPartnerListQuery } from "@/src/services/admin/scanned-stamp/scanned-stamp-api";
 import { Button } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useRouter } from "next/navigation";
 
 function PartnerScannedStamps() {
   const { push } = useRouter();
-  // const [params, setParams] = useState({ limit: 10, offSet: 0 });
-  // const { data, isLoading, isError, isFetching, isSuccess } =
-  //   useGetRecentScannedStampsListQuery(params);
-  const data = [
-    {
-      id: 1,
-      businessName: "KFC",
-      stampType: "Physical",
-      cardNumber: "5121754",
-      price: 500,
-    },
-  ];
+  const [params, setParams] = useState({ limit: 10, offSet: 0 });
+  const { data, isLoading, isError, isFetching, isSuccess } =
+    useGetRecentScannedStampsPartnerListQuery(params);
+  // const data = [
+  //   {
+  //     id: 1,
+  //     businessName: "KFC",
+  //     stampType: "Physical",
+  //     cardNumber: "5121754",
+  //     price: 500,
+  //   },
+  // ];
   const columns = [
     {
       accessorFn: (row: any) => row.businessName ?? "-",
@@ -68,21 +68,21 @@ function PartnerScannedStamps() {
   ];
   return (
     <CustomTable
-      data={data}
+      data={data?.notifications}
       columns={columns}
-      // isLoading={isLoading}
-      // isFetching={isFetching}
-      // isError={isError}
-      isSuccess={true}
+      isLoading={isLoading}
+      isFetching={isFetching}
+      isError={isError}
+      isSuccess={isSuccess}
       isPagination
       // showSerialNo
-      // totalPages={data?.total_pages ?? 1}
-      // currentPage={data?.current_page ?? 1}
-      // onPageChange={(onPageData: any) => {
-      //   setParams((prev) => {
-      //     return { ...prev, offset: (onPageData - 1) * 10 };
-      //   });
-      // }}
+      totalPages={data?.total_pages ?? 1}
+      currentPage={data?.current_page ?? 1}
+      onPageChange={(onPageData: any) => {
+        setParams((prev) => {
+          return { ...prev, offset: (onPageData - 1) * 10 };
+        });
+      }}
     />
   );
 }

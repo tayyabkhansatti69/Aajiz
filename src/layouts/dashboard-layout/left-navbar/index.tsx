@@ -79,8 +79,8 @@ function LeftNavbar(props: any) {
                 setLinkName={setLinkName}
               />
             ))}
-          {(loginUser?.Data_User?.account_type === "admin" ||
-            loginUser?.account_type === "admin") &&
+          {(loginUser?.Data_User?.account_type === "super_admin" ||
+            loginUser?.account_type === "super_admin") &&
             NavListDataAdmine.map(({ label, icon, link }, index) => (
               <NavbarList
                 key={index}
