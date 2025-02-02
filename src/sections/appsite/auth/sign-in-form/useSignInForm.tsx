@@ -90,6 +90,11 @@ export const UseSignInForm = () => {
 
         toast.success(respsone?.message || "Sign in successfully!");
         router.push("/dashboard");
+      } else if (respsone?.Data_User?.account_type === "super_admin") {
+        setLocalStorage("rememberMe", respsone);
+
+        toast.success(respsone?.message || "Sign in successfully!");
+        router.push("/dashboard");
       }
     } catch (error: any) {
       console.error(error);

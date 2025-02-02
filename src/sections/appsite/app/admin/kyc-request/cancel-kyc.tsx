@@ -1,15 +1,29 @@
 import { CustomTable } from "@/src/components";
+import HorizontalTabs from "@/src/components/Horizontal-tab";
+import {
+  useGetCancelDonorKycRequestsListQuery,
+  useGetCancelPartnerKycRequestsListQuery,
+} from "@/src/services/admin/kyc-requests/kyc-requests-api";
+import { useState } from "react";
 
 function CancelKYCRequests() {
-  const data = [
-    {
-      id: 1,
-      donorName: "KFC",
-      contactNumber: "Physical",
-      businessType: "123456",
-      profile: 2500,
-    },
-  ];
+  const [params, setParams] = useState({ limit: 10, offSet: 0 });
+  const [params1, setParams1] = useState({ limit: 10, offSet: 0 });
+
+  const {
+    data: donor,
+    isLoading: donorIsLoading,
+    isError: donorIsError,
+    isSuccess: donorIsSuccess,
+    isFetching: donorIsFetching,
+  } = useGetCancelDonorKycRequestsListQuery(params);
+  const {
+    data: partner,
+    isLoading,
+    isError,
+    isSuccess,
+    isFetching,
+  } = useGetCancelPartnerKycRequestsListQuery(params1);
   const columns = [
     {
       accessorFn: (row: any) => row.donorName ?? "-",
@@ -48,23 +62,41 @@ function CancelKYCRequests() {
     },
   ];
   return (
-    <CustomTable
-      data={data}
-      columns={columns}
-      //   isLoading={isLoading}
-      //   isFetching={isFetching}
-      //   isError={isError}
-      isSuccess={true}
-      isPagination
-      showSerialNo
-      //   totalPages={data?.pages ?? 1}
-      //   currentPage={data?.current_page ?? 1}
-      //   onPageChange={(onPageData: any) => {
-      //     setParams((prev) => {
-      //       return { ...prev, offset: (onPageData - 1) * 10 };
-      //     });
-      //   }}
-    />
+    <HorizontalTabs tabsArray={["Donor Cancel KYC", "Partner Cancel KYC"]}>
+      <CustomTable
+        data={donor?.body}
+        columns={columns}
+        isLoading={donorIsLoading}
+        isFetching={donorIsFetching}
+        isError={donorIsError}
+        isSuccess={donorIsSuccess}
+        isPagination
+        totalPages={donor?.total_pages ?? 1}
+        currentPage={donor?.current_page ?? 1}
+        onPageChange={(onPageData: any) => {
+          setParams((prev) => {
+            return { ...prev, offset: (onPageData - 1) * 10 };
+          });
+        }}
+      />
+      <CustomTable
+        data={partner?.body}
+        columns={columns}
+        isLoading={isLoading}
+        isFetching={isFetching}
+        isError={isError}
+        isSuccess={isSuccess}
+        isPagination
+        // showSerialNo
+        totalPages={partner?.total_pages ?? 1}
+        currentPage={partner?.current_page ?? 1}
+        onPageChange={(onPageData: any) => {
+          setParams1((prev) => {
+            return { ...prev, offset: (onPageData - 1) * 10 };
+          });
+        }}
+      />
+    </HorizontalTabs>
   );
 }
 export default CancelKYCRequests;

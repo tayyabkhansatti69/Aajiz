@@ -1,12 +1,24 @@
-import { CustomTable } from "@/src/components";
-import { useGetRecentScannedStampsListQuery } from "@/src/services/admin/scanned-stamp/scanned-stamp-api";
 import { useState } from "react";
+import { CustomTable } from "@/src/components";
+import { useGetRecentScannedStampsPartnerListQuery } from "@/src/services/admin/scanned-stamp/scanned-stamp-api";
+import { Button } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useRouter } from "next/navigation";
 
 function PartnerScannedStamps() {
+  const { push } = useRouter();
   const [params, setParams] = useState({ limit: 10, offSet: 0 });
   const { data, isLoading, isError, isFetching, isSuccess } =
-    useGetRecentScannedStampsListQuery(params);
-
+    useGetRecentScannedStampsPartnerListQuery(params);
+  // const data = [
+  //   {
+  //     id: 1,
+  //     businessName: "KFC",
+  //     stampType: "Physical",
+  //     cardNumber: "5121754",
+  //     price: 500,
+  //   },
+  // ];
   const columns = [
     {
       accessorFn: (row: any) => row.businessName ?? "-",
@@ -37,16 +49,26 @@ function PartnerScannedStamps() {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.price ?? "-",
-      id: "price",
-      cell: (info: any) => `${info.getValue()} RS.`,
+      accessorFn: (row: any) => row.action ?? "-",
+      id: "action",
+      cell: ({ row }: any) => (
+        <Button
+          variant="text"
+          startIcon={<VisibilityIcon />}
+          onClick={() => {
+            push(`view-scanned-stamp?id=${row?.original?.id}`);
+          }}
+        >
+          View
+        </Button>
+      ),
       header: () => <span>Action</span>,
       isSortable: false,
     },
   ];
   return (
     <CustomTable
-      data={data?.body}
+      data={data?.notifications}
       columns={columns}
       isLoading={isLoading}
       isFetching={isFetching}

@@ -16,6 +16,8 @@ function Home() {
       <DashboardSection />
     ) : data?.Data_User?.account_type === "partner" ? (
       <PartnerKyc />
+    ) : data?.Data_User?.account_type === "super_admin" ? (
+      <AdminDashboardSection />
     ) : (
       ""
     )
@@ -23,7 +25,7 @@ function Home() {
     <DonorDashboardSection />
   ) : data?.Data_User?.account_type === "partner" ? (
     <PartnerDashboardSection />
-  ) : data?.Data_User?.account_type === "admin" ? (
+  ) : data?.Data_User?.account_type === "super_admin" ? (
     <AdminDashboardSection />
   ) : (
     ""
