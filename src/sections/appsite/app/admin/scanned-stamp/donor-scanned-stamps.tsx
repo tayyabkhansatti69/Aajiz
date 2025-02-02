@@ -2,12 +2,12 @@ import { useState } from "react";
 import { CustomTable } from "@/src/components";
 import { Typography } from "@mui/material";
 import dayjs from "dayjs";
-import { useGetRecentScannedStampsListQuery } from "@/src/services/admin/scanned-stamp/scanned-stamp-api";
+import { useGetRecentScannedStampsDonorListQuery } from "@/src/services/admin/scanned-stamp/scanned-stamp-api";
 
 function DonorScannedStamps() {
   const [params, setParams] = useState({ limit: 10, offSet: 0 });
   const { data, isLoading, isError, isFetching, isSuccess } =
-    useGetRecentScannedStampsListQuery(params);
+    useGetRecentScannedStampsDonorListQuery(params);
 
   const columns = [
     {
@@ -18,8 +18,8 @@ function DonorScannedStamps() {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row?.Card_Type ?? "-",
-      id: "Card_Type",
+      accessorFn: (row: any) => row?.donation_type ?? "-",
+      id: "donation_type",
       cell: (info: any) => info.getValue(),
       header: () => <span>Stamp Type</span>,
       isSortable: false,
@@ -32,22 +32,22 @@ function DonorScannedStamps() {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.created_at ?? "-",
-      id: "created_at",
+      accessorFn: (row: any) => row.donation_date ?? "-",
+      id: "donation_date",
       cell: (info: any) => dayjs(info.getValue()).format("DD/MM/YYYY"),
       header: () => <span>Donation Date</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row?.created_at ?? "-",
-      id: "created_at",
+      accessorFn: (row: any) => row?.donation_date ?? "-",
+      id: "donation_date",
       cell: (info: any) => dayjs(info.getValue()).format("hh:mm:ss A"),
       header: () => <span>Donation Time</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row?.amount ?? "-",
-      id: "amount",
+      accessorFn: (row: any) => row?.donation_amount ?? "-",
+      id: "donation_amount",
       cell: (info: any) => (
         <Typography variant="body1" fontWeight={600} color="primary.main">
           {info.getValue()} RS.
@@ -59,7 +59,7 @@ function DonorScannedStamps() {
   ];
   return (
     <CustomTable
-      data={data?.notifications}
+      data={data?.donations}
       columns={columns}
       isLoading={isLoading}
       isFetching={isFetching}

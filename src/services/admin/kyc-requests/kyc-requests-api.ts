@@ -14,10 +14,24 @@ export const kycRequestsAPI = baseAPI.injectEndpoints({
         method: "GET",
       }),
     }),
+    getCancelPartnerKycRequestsList: builder.query({
+      query: () => ({
+        url: `/get_cancel_partner_kyc`,
+        method: "GET",
+      }),
+    }),
+    getCancelDonorKycRequestsList: builder.query({
+      query: () => ({
+        url: `/get_cancel_donor_kyc`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
 export const {
   useGetDonorKycRequestsListQuery,
   useGetPartnerKycRequestsListQuery,
+  useGetCancelDonorKycRequestsListQuery,
+  useGetCancelPartnerKycRequestsListQuery,
 } = kycRequestsAPI;

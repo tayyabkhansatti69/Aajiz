@@ -1,5 +1,6 @@
 import { CustomTable } from "@/src/components";
 import { useGetCampaignsListQuery } from "@/src/services/admin/create-campaigns/create-campaigns-api";
+import { Button } from "@mui/material";
 import { useState } from "react";
 
 function Campaign() {
@@ -9,7 +10,7 @@ function Campaign() {
 
   const columns = [
     {
-      accessorFn: (row: any) => row.donorName ?? "-",
+      accessorFn: (row: any) => row?.campaign_title ?? "-",
       id: "donorName",
       cell: (info: any) => info.getValue(),
       header: () => <span>Campaign Title</span>,
@@ -18,21 +19,25 @@ function Campaign() {
     {
       accessorFn: (row: any) => row.contactNumber ?? "-",
       id: "contactNumber",
-      cell: (info: any) => info.getValue(),
+      cell: (info: any) => `${info.getValue()} RS.`,
       header: () => <span>Min Donation</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.businessType ?? "-",
-      id: "businessType",
-      cell: (info: any) => info.getValue(),
+      accessorFn: (row: any) => row.donation_goal ?? "-",
+      id: "donation_goal",
+      cell: (info: any) => `${info.getValue()} RS.`,
       header: () => <span>Donation Goal</span>,
       isSortable: false,
     },
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
-      cell: (info: any) => `${info.getValue()} RS.`,
+      cell: () => (
+        <Button variant="text" sx={{ textDecoration: "underline" }}>
+          View Campaign
+        </Button>
+      ),
       header: () => <span>Campaigns</span>,
       isSortable: false,
     },
