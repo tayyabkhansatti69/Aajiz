@@ -1,6 +1,6 @@
 //======================================================================================
 // ICONS imports
-import AccountsIcons from "@/src/assets/icons/left-navbar-icons/accounts-icons";
+// import AccountsIcons from "@/src/assets/icons/left-navbar-icons/accounts-icons";
 
 import HomeIcons from "@/src/assets/icons/left-navbar-icons/home-icons";
 import InvestmentsIcons from "@/src/assets/icons/left-navbar-icons/investments-icons";
@@ -9,7 +9,7 @@ import TransactionIcon from "@/src/assets/icons/left-navbar-icons/transaction-ic
 import IconSetting from "@/src/assets/icons/dashboard-main/icon-setting";
 // import IconMassage from "@/src/assets/icons/dashboard-main/Icon-massage";
 
-import IconQuestionBank from "@/src/assets/icons/dashboard-main/icon-question-bank";
+// import IconQuestionBank from "@/src/assets/icons/dashboard-main/icon-question-bank";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 // import LogoutIcon from "@mui/icons-material/Logout";
@@ -89,22 +89,22 @@ export const NavListDataAdmine = [
   },
   {
     label: "Card Requests",
-    icon: IconQuestionBank,
+    icon: SettingsOutlinedIcon,
     link: "/card-requests",
   },
   {
     label: "Donors",
-    icon: IconQuestionBank,
+    icon: SettingsOutlinedIcon,
     link: "/donors",
   },
   {
     label: "Partners",
-    icon: IconQuestionBank,
+    icon: SettingsOutlinedIcon,
     link: "/partners",
   },
   {
     label: "Transaction",
-    icon: AccountsIcons,
+    icon: MonetizationOnOutlinedIcon,
     link: "/admin-transactions",
   },
   {

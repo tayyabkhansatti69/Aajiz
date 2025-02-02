@@ -33,7 +33,7 @@ function Campaign() {
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
-      cell: (info: any) => (
+      cell: () => (
         <Button variant="text" sx={{ textDecoration: "underline" }}>
           View Campaign
         </Button>
