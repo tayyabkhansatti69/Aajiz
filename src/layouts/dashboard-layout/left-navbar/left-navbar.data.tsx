@@ -14,6 +14,7 @@ import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlin
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 // import LogoutIcon from "@mui/icons-material/Logout";
 import LogOutIcon from "@/src/assets/icons/logout-icons";
+import StampIcons from "@/src/assets/icons/left-navbar-icons/stamp-icon";
 //==========================================================================================
 // CONST
 export const NavListData = [
@@ -78,7 +79,7 @@ export const NavListDataAdmine = [
   },
   {
     label: "Scanned Stamps",
-    icon: HomeIcons,
+    icon: StampIcons,
     link: "/scanned-stamps",
   },
   {
