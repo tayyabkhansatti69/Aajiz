@@ -18,8 +18,16 @@ export const authAPI = baseAPI.injectEndpoints({
       }),
       providesTags: [DONOR_DASHBOARD, WITHDRAW_AMOUNT, USE_CARD],
     }),
+    getActiveCampaigns: builder.query({
+      query: (params) => ({
+        url: `/get_active_campaign`,
+        method: "GET",
+        params,
+      }),
+      providesTags: [DONOR_DASHBOARD],
+    }),
   }),
 });
 
-export const { useGetTrustedPartnersListQuery, useGetDonorProfileQuery } =
+export const { useGetTrustedPartnersListQuery, useGetDonorProfileQuery,useGetActiveCampaignsQuery } =
   authAPI;

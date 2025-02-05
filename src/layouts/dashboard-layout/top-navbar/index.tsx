@@ -57,7 +57,7 @@ function TopNavBar(props: any) {
             </IconButton>
           )}
 
-          <Typography fontSize={"25px"} color={"#343C6A"} fontWeight={600}>
+          <Typography variant='h5' color={"#343C6A"} fontWeight={600}>
             {title}
           </Typography>
 
@@ -65,7 +65,8 @@ function TopNavBar(props: any) {
             ml={"auto"}
             display={"flex"}
             alignItems={"center"}
-            gap={2}
+            gap={1}
+            
             flexWrap={"wrap"}
           >
             <Box
