@@ -1,34 +1,32 @@
 import { CustomTable } from "@/src/components";
-import { Card, Stack, Typography } from "@mui/material";
+import { useGetCardsRequestListQuery } from "@/src/services/admin/cards-request/cards-request-api";
+import { Button, Card, Stack, Typography } from "@mui/material";
+import { useState } from "react";
 
 function CardRequestsSection() {
-  const data = [
-    {
-      id: 1,
-      donorName: "KFC",
-      contactNumber: "Physical",
-      businessType: "123456",
-      profile: 2500,
-    },
-  ];
+  const [params, setParams] = useState({ limit: 10, offSet: 0 });
+
+  const { data, isLoading, isSuccess, isError, isFetching } =
+    useGetCardsRequestListQuery(params);
+
   const columns = [
     {
-      accessorFn: (row: any) => row.donorName ?? "-",
-      id: "donorName",
+      accessorFn: (row: any) => row?.requester_name ?? "-",
+      id: "requester_name",
       cell: (info: any) => info.getValue(),
       header: () => <span>Donor Name</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.contactNumber ?? "-",
-      id: "contactNumber",
+      accessorFn: (row: any) => row.card_quantity ?? "-",
+      id: "card_quantity",
       cell: (info: any) => info.getValue(),
       header: () => <span>Card Quantity</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.contactNumber ?? "-",
-      id: "contactNumber",
+      accessorFn: (row: any) => row.requester_email ?? "-",
+      id: "requester_email",
       cell: (info: any) => info.getValue(),
       header: () => <span>Email</span>,
       isSortable: false,
@@ -43,7 +41,11 @@ function CardRequestsSection() {
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
-      cell: (info: any) => info.getValue(),
+      cell: (info: any) => (
+        <Button variant="text" sx={{ textDecoration: "underline" }}>
+          View Request{" "}
+        </Button>
+      ),
       header: () => <span>Actions</span>,
       isSortable: false,
     },
@@ -53,21 +55,20 @@ function CardRequestsSection() {
       <Typography variant="h5">Physical Card Requests</Typography>
       <Card sx={{ p: 4 }}>
         <CustomTable
-          data={data}
+          data={data?.body}
           columns={columns}
-          //   isLoading={isLoading}
-          //   isFetching={isFetching}
-          //   isError={isError}
-          isSuccess={true}
+          isLoading={isLoading}
+          isFetching={isFetching}
+          isError={isError}
+          isSuccess={isSuccess}
           isPagination
-          showSerialNo
-          //   totalPages={data?.pages ?? 1}
-          //   currentPage={data?.current_page ?? 1}
-          //   onPageChange={(onPageData: any) => {
-          //     setParams((prev) => {
-          //       return { ...prev, offset: (onPageData - 1) * 10 };
-          //     });
-          //   }}
+          totalPages={data?.total_pages ?? 1}
+          currentPage={data?.current_page ?? 1}
+          onPageChange={(onPageData: any) => {
+            setParams((prev) => {
+              return { ...prev, offset: (onPageData - 1) * 10 };
+            });
+          }}
         />
       </Card>
     </Stack>

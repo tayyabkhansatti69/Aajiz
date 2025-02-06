@@ -15,8 +15,8 @@ function PartnerKYCRequests() {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.contactNumber ?? "-",
-      id: "contactNumber",
+      accessorFn: (row: any) => row.industry ?? "-",
+      id: "industry",
       cell: (info: any) => info.getValue(),
       header: () => <span>Industry Type</span>,
       isSortable: false,
