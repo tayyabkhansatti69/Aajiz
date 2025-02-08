@@ -29,6 +29,13 @@ export const authAPI = baseAPI.injectEndpoints({
         body,
       }),
     }),
+    addDonation: builder.mutation({
+      query: (body: any) => ({
+        url: "/donate_campaign",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -37,4 +44,5 @@ export const {
   useLoadCardMutation,
   useLazyGetIndustryTypeDropdownListQuery,
   useAddBalanceMutation,
+  useAddDonationMutation
 } = authAPI;

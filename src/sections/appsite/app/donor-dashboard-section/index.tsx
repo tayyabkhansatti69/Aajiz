@@ -15,6 +15,7 @@ import LinearProgress, {
 } from "@mui/material/LinearProgress";
 import { useRouter } from "next/navigation";
 import {
+  useGetActiveCampaignsQuery,
   useGetDonorProfileQuery,
   useGetTrustedPartnersListQuery,
 } from "@/src/services/donor/donor-dashboard/donor-dashboard";
@@ -47,8 +48,10 @@ export function DonorDashboardSection() {
   const params = { limit: 10, offset: 0 };
   const { data: donorProfile } = useGetDonorProfileQuery({});
   const { data, isLoading } = useGetTrustedPartnersListQuery(params);
+  const { data: trustedPartnersData, isLoading: DonorLoading } =
+    useGetActiveCampaignsQuery(params,{refetchOnMountOrArgChange:true});
 
-  return isLoading ? (
+  return isLoading || DonorLoading ? (
     <Stack>
       <Stack direction="row" justifyContent="space-between">
         <Skeleton width={150} height={70} />
@@ -69,7 +72,7 @@ export function DonorDashboardSection() {
   ) : (
     <Stack gap={2.5}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
-        <Typography variant="h5">My Balance</Typography>
+        <Typography variant="h5">Balance</Typography>
         <Button
           variant="outlined"
           onClick={() => {
@@ -119,9 +122,9 @@ export function DonorDashboardSection() {
       </Stack>
       <Stack direction="row" justifyContent="space-between">
         <Typography variant="h5">Trusted Partner</Typography>
-        <Typography variant="subtitle1" fontWeight={600}>
-          See All
-        </Typography>
+        {/* <Typography variant="subtitle1" fontWeight={600}>
+          
+        </Typography> */}
       </Stack>
       <Box sx={{ width: "100%", overflow: "hidden" }}>
         <Swiper
@@ -141,7 +144,7 @@ export function DonorDashboardSection() {
                 <Avatar
                   src={item.Business_logo}
                   alt={`${item.Business_name} logo`}
-                  sx={{ width: 90, height: 90, margin: "auto", boxShadow: 1 }} // Smaller size to fit 10 per slide
+                  sx={{ width: 90, height: 90, margin: "auto", boxShadow: 6 }} // Smaller size to fit 10 per slide
                 />
                 <Typography variant="subtitle1" fontWeight={600} my={2}>
                   {item.Business_name}
@@ -154,9 +157,9 @@ export function DonorDashboardSection() {
 
       <Stack direction="row" justifyContent="space-between">
         <Typography variant="h5">Campaigns</Typography>
-        <Typography variant="subtitle1" fontWeight={600}>
+        <Button  variant='text' onClick={()=>{router.push('/dashboard/campaigns')}}>
           See All
-        </Typography>
+        </Button>
       </Stack>
       <Box
         sx={{
@@ -180,21 +183,32 @@ export function DonorDashboardSection() {
         }}
       >
         <Stack direction="row" spacing={3} sx={{ width: "max-content" }}>
-          {trustedPartnersData.map((items) => (
-            <Card key={items?.id} sx={{ minWidth: 200 }}>
+          {trustedPartnersData?.body?.map((items) => (
+            <Card key={items?.id} sx={{ width: 250 }}>
               <CardMedia
                 component="img"
-                src={items.image.src}
+                src={items.image_video}
                 alt="Landing Section Girl"
                 sx={{ height: "10rem" }}
               />
               <Stack py={1} px={1} gap={1}>
-                <Typography fontWeight={500}>{items?.name}</Typography>
-                <BorderLinearProgress variant="determinate" value={50} />
+                <Typography fontWeight={500} noWrap>
+                  {items?.campaign_title}
+                </Typography>
+                <BorderLinearProgress
+                  variant="determinate"
+                  value={
+                    items?.donation_goal && items?.donation_goal > 0
+                      ? (items.complete_goal / items.donation_goal) * 100
+                      : 0
+                  }
+                />
                 <Stack direction="row" justifyContent="space-between">
-                  <Typography variant="subtitle2">Raised - 1M</Typography>
+                  <Typography variant="subtitle2">
+                    Raised - {items?.complete_goal}
+                  </Typography>
                   <Typography variant="subtitle2" color="#0ebdbe">
-                    Goal - $1M
+                    Goal - {items?.donation_goal}
                   </Typography>
                 </Stack>
                 <Button
@@ -207,7 +221,7 @@ export function DonorDashboardSection() {
                     },
                   }}
                   onClick={() => {
-                    router.push("campaign-donation");
+                    router.push(`dashboard/campaign-donation?id=${items?.id}`);
                   }}
                 >
                   Donate

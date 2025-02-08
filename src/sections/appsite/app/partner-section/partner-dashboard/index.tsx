@@ -16,7 +16,7 @@ export function PartnerDashboardSection() {
   return (
     <>
       <Stack gap={2.5}>
-        <Typography variant="h5">My Balance</Typography>
+        <Typography variant="h5">Balance</Typography>
         <Stack
           direction={{ xl: "row", xs: "column" }}
           justifyContent="space-between"

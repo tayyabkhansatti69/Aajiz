@@ -127,6 +127,11 @@ export const NavListDataAdmine = [
     icon: IconSetting,
     link: "/super-admin",
   },
+  {
+    label: "Logout",
+    icon: LogOutIcon,
+    link: "/logout",
+  },
   // {
   //   label: "Logout",
   //   icon: IconSetting,

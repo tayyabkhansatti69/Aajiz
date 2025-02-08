@@ -26,6 +26,8 @@ import { SettingsConsumer, SettingsProvider } from "@/src/context";
 import { createTheme } from "@/src/theme";
 import { AuthInitializer } from "@/src/hoc/with-auth-initializer";
 import { Toaster } from "@/src/components";
+import { usePathname } from "next/navigation";
+import { AuthGuard } from "../gaurd";
 
 const SETTINGS_STORAGE_KEY = "app.settings";
 
@@ -110,7 +112,12 @@ function getTextNodesInElement(element: any) {
 
 export function RootLayout(props: LayoutProps): JSX.Element {
   const { children, settings } = props;
+  const pathname = usePathname();
 
+  // Define public routes that don't need authentication
+  const isPublicRoute = pathname?.startsWith('/sign-in') || 
+                       pathname?.startsWith('/sign-up') || 
+                       pathname?.startsWith('/forgot-password');
   useEffect(() => {
     loadGoogleTranslate();
 
@@ -177,12 +184,16 @@ export function RootLayout(props: LayoutProps): JSX.Element {
                       <CssBaseline />
                       <AuthInitializer handleTheme={themeSettings.handleUpdate}>
                         {/* Google Translate Dropdown */}
-                        {children}
+                        {isPublicRoute ? (
+                          children
+                        ) : (
+                          <AuthGuard>{children}</AuthGuard>
+                        )}
                         <div
                           id="google_translate_element"
                           style={{
                             position: "fixed",
-                            top: 16,
+                            top: 1,
                             left: "50%",
                             transform: "translateX(-50%)",
                             zIndex: 9999,

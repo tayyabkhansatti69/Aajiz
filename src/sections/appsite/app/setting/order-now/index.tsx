@@ -78,8 +78,8 @@ function OrderNowCard({ orderNow, setOrderNow, Curreaddress }: any) {
     >
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2} padding={2}>
-          <Typography variant="body2" fontWeight={"bold"}>
-            Select Order for Address{" "}
+          <Typography variant="body2" fontWeight={500} sx={{mt:1}}>
+            Select a Delivery Address{" "}
           </Typography>
           <Grid item xs={12}>
             <RHFRadioGroup

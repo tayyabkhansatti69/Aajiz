@@ -1,13 +1,12 @@
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup"; // Import the resolver
+import { yupResolver } from "@hookform/resolvers/yup";
 import { setLocalStorage } from "@/src/components/utils";
 import { useRouter } from "next/navigation";
 import { useLoginMutation } from "@/src/services/auth-api";
-// import { removeLocalStorage } from '@/src/utils';
 import toast from "react-hot-toast";
 import { useState } from "react";
-// import { useState } from 'react';
+import { setAuthData } from "@/src/utils/cookies-store";
 
 // Yup schema
 export const Schema = Yup.object().shape({
@@ -15,7 +14,6 @@ export const Schema = Yup.object().shape({
     .email("Invalid email address")
     .required("Email is required"),
   password: Yup.string()
-    // .min(8, "Password must be at least 8 characters long")
     .required("Password is required"),
 });
 
@@ -25,80 +23,76 @@ export const defaultValues = {
   password: "",
 };
 
-// Custom hook
+interface UserData {
+  id:any;
+  is_kyc: "applied" | "not_applied";
+  kyc_verify: boolean;
+  account_type: string;
+}
+
 export const UseSignInForm = () => {
   const [loginPost, { isLoading }] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => {
-    setShowPassword((prev) => !prev);
-  };
-
   const router = useRouter();
+
   const methods = useForm<any>({
-    resolver: yupResolver(Schema), // Pass Yup schema to the resolver
-    defaultValues: defaultValues,
+    resolver: yupResolver(Schema),
+    defaultValues,
   });
 
   const { handleSubmit } = methods;
 
-  async function onSubmit(data: any): Promise<any> {
-    const { username, password } = data;
+  const handleClickShowPassword = () => setShowPassword(prev => !prev);
 
-    // Save the 'remember me' data to local storage
+  const handleAuthSuccess = (Data_User: UserData, access_token: string, response: any) => {
+    // Set auth data in cookies for middleware
+    setAuthData(Data_User, access_token);
+    
+    // Store in localStorage if needed
+    setLocalStorage("rememberMe", response);
+    
+    toast.success(response?.message || "Sign in successful!");
+    
+    // Use replace instead of push to prevent back navigation to login
+    router.replace("/dashboard");
+  };
 
+  const handleKYCStatus = (Data_User: UserData, access_token: string, response: any) => {
+    const { is_kyc, kyc_verify, account_type } = Data_User;
+
+    // Super admin bypasses KYC checks
+    if (account_type === "super_admin") {
+      return handleAuthSuccess(Data_User, access_token, response);
+    }
+
+    // KYC verification pending
+    if (is_kyc === "applied" && !kyc_verify) {
+      toast.error("Your KYC verification is pending admin approval!");
+      return false;
+    }
+
+    // KYC not applied or KYC verified
+    if (is_kyc === "not_applied" || (is_kyc === "applied" && kyc_verify)) {
+      return handleAuthSuccess(Data_User, access_token, response);
+    }
+
+    return false;
+  };
+
+  async function onSubmit(data: any): Promise<void> {
     try {
-      const credentials = new URLSearchParams(); // Ensure form data is sent correctly
-      credentials.append("username", username);
-      credentials.append("password", password);
+      const credentials = new URLSearchParams();
+      credentials.append("username", data.username);
+      credentials.append("password", data.password);
 
-      // Perform login mutation using RTK Query
-      const respsone = await loginPost(credentials).unwrap();
-      if (
-        respsone?.Data_User?.is_kyc === "applied" &&
-        respsone?.Data_User?.kyc_verify === false
-      ) {
-        toast.error("Your KYC verification status is pending from admin side!");
-      } else if (
-        respsone?.Data_User?.is_kyc === "not_applied" &&
-        respsone?.Data_User?.kyc_verify === false
-      ) {
-        setLocalStorage("rememberMe", respsone);
+      const response = await loginPost(credentials).unwrap();
+      const { Data_User, access_token } = response;
 
-        toast.success(respsone?.message || "Sign in successfully!");
-        router.push("/dashboard");
-
-        // Role-based redirection logic
-        // switch (respsone?.Data_User?.account_type) {
-        //   case "donor":
-        //     router.push("/dashboard");
-        //     break;
-        //   case "partner":
-        //     router.push("/dashboard");
-        //     break;
-        //   case "admin":
-        //     router.push("/dashboard/admin");
-        //     break;
-        //   default:
-        //     null;
-        //     break;
-        // }
-      } else if (
-        respsone?.Data_User?.is_kyc === "applied" &&
-        respsone?.Data_User?.kyc_verify === true
-      ) {
-        setLocalStorage("rememberMe", respsone);
-
-        toast.success(respsone?.message || "Sign in successfully!");
-        router.push("/dashboard");
-      } else if (respsone?.Data_User?.account_type === "super_admin") {
-        setLocalStorage("rememberMe", respsone);
-
-        toast.success(respsone?.message || "Sign in successfully!");
-        router.push("/dashboard");
-      }
+      // Handle authentication based on KYC status
+      handleKYCStatus(Data_User, access_token, response);
+      
     } catch (error: any) {
-      console.error(error);
-
+      console.error("Login error:", error);
       toast.error(error?.data?.message || "Something went wrong!");
     }
   }

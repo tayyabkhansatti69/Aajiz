@@ -27,12 +27,17 @@ export function CustomPagination(props: any): JSX.Element {
     pageLimit = PAGINATION?.PAGE_LIMIT,
     currentPage = PAGINATION?.CURRENT_PAGE,
     onPageChange,
-    setPage,
     setPageLimit,
     totalRecords = PAGINATION?.TOTAL_RECORDS,
   } = props;
 
   const theme = useTheme();
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= count) {
+      onPageChange?.(newPage);
+    }
+  };
 
   return (
     <Box
@@ -44,7 +49,7 @@ export function CustomPagination(props: any): JSX.Element {
     >
       <Box>
         <Typography variant="subtitle1">
-          Showing {currentPage} of {totalRecords}
+          Showing {currentPage} of {count} page(s)
         </Typography>
       </Box>
       <Box display="flex" alignItems="center">
@@ -52,22 +57,25 @@ export function CustomPagination(props: any): JSX.Element {
           component="div"
           count={totalRecords}
           page={currentPage - 1}
-          onPageChange={(_: any, page) => onPageChange?.(page)}
+          onPageChange={(_: any, page) => handlePageChange(page + 1)}
           rowsPerPage={pageLimit}
           onRowsPerPageChange={(event: any) => {
             const newPageLimit = parseInt(event?.target?.value, 10);
             const newPage =
               Math.floor(((currentPage - 1) * pageLimit) / newPageLimit) + 1;
-
+            
             setPageLimit?.(newPageLimit);
-            setPage?.(newPage);
+            handlePageChange(newPage);
           }}
           rowsPerPageOptions={rowsPerPageOptions}
           sx={styles?.tablePaginationStyle(theme)}
+        
+          labelRowsPerPage={ "Results Per Page"}
+          
         />
         <IconButton
           disabled={currentPage === 1 || currentPage < 1}
-          onClick={() => setPage?.((page: any) => page - 1)}
+          onClick={() => handlePageChange(currentPage - 1)}
           sx={styles?.iconStyleTwo(theme)}
         >
           <KeyboardArrowLeftIcon />
@@ -75,9 +83,7 @@ export function CustomPagination(props: any): JSX.Element {
         <Pagination
           count={count}
           page={currentPage}
-          onChange={(_: any, page) => {
-            onPageChange?.(page);
-          }}
+          onChange={(_: any, page) => handlePageChange(page)}
           hidePrevButton
           hideNextButton
           variant="outlined"
@@ -85,7 +91,7 @@ export function CustomPagination(props: any): JSX.Element {
         />
         <IconButton
           disabled={currentPage === count}
-          onClick={() => setPage?.((page: any) => page + 1)}
+          onClick={() => handlePageChange(currentPage + 1)}
           sx={styles?.iconStyleTwo(theme)}
         >
           <KeyboardArrowRightIcon />
