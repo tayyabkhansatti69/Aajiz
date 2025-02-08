@@ -4,7 +4,14 @@ export const createCampaignsAPI = baseAPI.injectEndpoints({
   endpoints: (builder) => ({
     getCampaignsList: builder.query({
       query: ({ params }) => ({
-        url: `/get_campaign`,
+        url: `/get_active_campaign`,
+        method: "GET",
+        params,
+      }),
+    }),
+    getInactiveCampaignsList: builder.query({
+      query: ({ params }) => ({
+        url: `/get_inactive_campaign`,
         method: "GET",
         params,
       }),
@@ -12,4 +19,5 @@ export const createCampaignsAPI = baseAPI.injectEndpoints({
   }),
 });
 
-export const { useGetCampaignsListQuery } = createCampaignsAPI;
+export const { useGetCampaignsListQuery, useGetInactiveCampaignsListQuery } =
+  createCampaignsAPI;

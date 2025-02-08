@@ -1,14 +1,12 @@
 import { CustomTable } from "@/src/components";
-import HorizontalTabs from "@/src/components/Horizontal-tab";
-import { useGetCampaignsListQuery } from "@/src/services/admin/create-campaigns/create-campaigns-api";
+import { useGetInactiveCampaignsListQuery } from "@/src/services/admin/create-campaigns/create-campaigns-api";
 import { Button } from "@mui/material";
 import { useState } from "react";
-import InactiveCampaign from "./inactive-campaigns";
 
-function Campaign() {
+function InactiveCampaign() {
   const [params, setParams] = useState({ limit: 10, offset: 0 });
   const { data, isLoading, isError, isSuccess, isFetching } =
-    useGetCampaignsListQuery({ params });
+    useGetInactiveCampaignsListQuery(params);
 
   const columns = [
     {
@@ -45,26 +43,23 @@ function Campaign() {
     },
   ];
   return (
-    <HorizontalTabs tabsArray={["Active Campaigns", "Inactive Campaigns"]}>
-      <CustomTable
-        data={data?.body}
-        columns={columns}
-        isLoading={isLoading}
-        isFetching={isFetching}
-        isError={isError}
-        isSuccess={isSuccess}
-        isPagination
-        //   showSerialNo
-        totalPages={data?.total_pages ?? 1}
-        currentPage={data?.current_page ?? 1}
-        onPageChange={(onPageData: any) => {
-          setParams((prev) => {
-            return { ...prev, offset: (onPageData - 1) * 10 };
-          });
-        }}
-      />
-      <InactiveCampaign />
-    </HorizontalTabs>
+    <CustomTable
+      data={data?.body}
+      columns={columns}
+      isLoading={isLoading}
+      isFetching={isFetching}
+      isError={isError}
+      isSuccess={isSuccess}
+      isPagination
+      //   showSerialNo
+      totalPages={data?.total_pages ?? 1}
+      currentPage={data?.current_page ?? 1}
+      onPageChange={(onPageData: any) => {
+        setParams((prev) => {
+          return { ...prev, offset: (onPageData - 1) * 10 };
+        });
+      }}
+    />
   );
 }
-export default Campaign;
+export default InactiveCampaign;

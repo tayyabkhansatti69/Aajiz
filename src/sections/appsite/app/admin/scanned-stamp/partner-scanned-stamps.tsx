@@ -10,40 +10,31 @@ function PartnerScannedStamps() {
   const [params, setParams] = useState({ limit: 10, offSet: 0 });
   const { data, isLoading, isError, isFetching, isSuccess } =
     useGetRecentScannedStampsPartnerListQuery(params);
-  // const data = [
-  //   {
-  //     id: 1,
-  //     businessName: "KFC",
-  //     stampType: "Physical",
-  //     cardNumber: "5121754",
-  //     price: 500,
-  //   },
-  // ];
   const columns = [
     {
-      accessorFn: (row: any) => row.businessName ?? "-",
-      id: "businessName",
+      accessorFn: (row: any) => row.business_name ?? "-",
+      id: "business_name",
       cell: (info: any) => info.getValue(),
       header: () => <span>Business Name</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.stampType ?? "-",
-      id: "stampType",
+      accessorFn: (row: any) => row.Card_Type ?? "-",
+      id: "Card_Type",
       cell: (info: any) => info.getValue(),
       header: () => <span>Stamp Type</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.cardNumber ?? "-",
-      id: "cardNumber",
+      accessorFn: (row: any) => row.card_num ?? "-",
+      id: "card_num",
       cell: (info: any) => info.getValue(),
       header: () => <span>Card Number</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.price ?? "-",
-      id: "price",
+      accessorFn: (row: any) => row.amount ?? "-",
+      id: "amount",
       cell: (info: any) => `${info.getValue()} RS.`,
       header: () => <span>Price</span>,
       isSortable: false,
