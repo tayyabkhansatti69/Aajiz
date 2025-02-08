@@ -4,6 +4,7 @@ import {
   useGetCancelDonorKycRequestsListQuery,
   useGetCancelPartnerKycRequestsListQuery,
 } from "@/src/services/admin/kyc-requests/kyc-requests-api";
+import { Button } from "@mui/material";
 import { useState } from "react";
 
 function CancelKYCRequests() {
@@ -33,15 +34,15 @@ function CancelKYCRequests() {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.contactNumber ?? "-",
-      id: "contactNumber",
+      accessorFn: (row: any) => row.contact_num ?? "-",
+      id: "contact_num",
       cell: (info: any) => info.getValue(),
       header: () => <span>Contact No</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.businessType ?? "-",
-      id: "businessType",
+      accessorFn: (row: any) => row.email ?? "-",
+      id: "email",
       cell: (info: any) => info.getValue(),
       header: () => <span>Email</span>,
       isSortable: false,
@@ -49,15 +50,56 @@ function CancelKYCRequests() {
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
-      cell: (info: any) => `${info.getValue()} RS.`,
+      cell: (info: any) => info.getValue(),
       header: () => <span>Business Type</span>,
       isSortable: false,
     },
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
-      cell: (info: any) => `${info.getValue()} RS.`,
+      cell: (info: any) => info.getValue(),
       header: () => <span>Queries</span>,
+      isSortable: false,
+    },
+  ];
+  const columns1 = [
+    {
+      accessorFn: (row: any) => row.name ?? "-",
+      id: "name",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Business Name</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.industry ?? "-",
+      id: "industry",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Industry Type</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.email ?? "-",
+      id: "email",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Email</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.business_type ?? "-",
+      id: "business_type",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Business Type</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: () => (
+        <Button variant="text" sx={{ textDecoration: "underline" }}>
+          View Profile
+        </Button>
+      ),
+      id: "profile",
+      cell: (info: any) => info.getValue(),
+      header: () => <span>Profile</span>,
       isSortable: false,
     },
   ];
@@ -81,7 +123,7 @@ function CancelKYCRequests() {
       />
       <CustomTable
         data={partner?.body}
-        columns={columns}
+        columns={columns1}
         isLoading={isLoading}
         isFetching={isFetching}
         isError={isError}
