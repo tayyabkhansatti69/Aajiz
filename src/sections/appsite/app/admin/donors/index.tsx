@@ -1,6 +1,7 @@
 import { CustomTable } from "@/src/components";
 import { useGetDonorDBListQuery } from "@/src/services/admin/donor/donor-db-api";
 import { Button, Card, Stack, Typography } from "@mui/material";
+import dayjs from "dayjs";
 import { useState } from "react";
 
 function DonorAdminSection() {
@@ -32,20 +33,16 @@ function DonorAdminSection() {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.profile ?? "-",
-      id: "profile",
-      cell: (info: any) => info.getValue(),
+      accessorFn: (row: any) => row.last_login ?? "-",
+      id: "last_login",
+      cell: (info: any) => dayjs(info.getValue()).format("DD/MM/YYYY"),
       header: () => <span>Last Login</span>,
       isSortable: false,
     },
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
-      cell: (info: any) => (
-        <Button variant="text" sx={{ textDecoration: "underline" }}>
-          View Profile
-        </Button>
-      ),
+      cell: (info: any) => <Typography color="#F36F56" fontWeight={600}>Restricted User </Typography>,
       header: () => <span>Profile</span>,
       isSortable: false,
     },

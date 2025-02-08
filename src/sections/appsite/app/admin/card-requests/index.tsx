@@ -32,9 +32,35 @@ function CardRequestsSection() {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.businessType ?? "-",
-      id: "businessType",
-      cell: (info: any) => info.getValue(),
+      accessorFn: (row: any) => row?.status ?? "-",
+      id: "status",
+      cell: (info: any) => {
+        const status = info.getValue();
+        const backgroundColor =
+          status === "Pending"
+            ? "#F4F4F4"
+            : status === "Delivered"
+            ? "#ccf1f1"
+            : status === "Accepted"
+            ? "#E0EAFF"
+            : "transparent";
+
+        return (
+          <Typography
+            fontWeight={600}
+            sx={{
+              backgroundColor,
+              padding: "4px 8px",
+              borderRadius: 5,
+              display: "inline-block",
+              px: 2,
+              py: 1,
+            }}
+          >
+            {status}
+          </Typography>
+        );
+      },
       header: () => <span>Status</span>,
       isSortable: false,
     },
