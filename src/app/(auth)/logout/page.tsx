@@ -1,6 +1,7 @@
 "use client";
 
 import { clearLocalStorage } from "@/src/utils";
+import { clearAuthData } from "@/src/utils/cookies-store";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
@@ -14,6 +15,7 @@ export default function Logout() {
       toast.success("Logout successfully!");
       hasShownToast.current = true; // Mark the toast as shown
     }
+    clearAuthData()
     clearLocalStorage();
     router.push("/sign-in");
   }, [router]);

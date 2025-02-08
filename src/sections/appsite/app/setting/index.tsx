@@ -21,7 +21,7 @@ export const Schema = Yup.object().shape({
 });
 
 function SettingSection() {
-  const { data: profileData } = useGetDonorProfileQuery({});
+  const { data: profileData } = useGetDonorProfileQuery({},{refetchOnMountOrArgChange:true});
   const [enable, setEnable] = useState(true);
   const [orderNow, setOrderNow] = useState(false);
   const [editProfile] = useEditProfileMutation();

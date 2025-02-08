@@ -44,10 +44,10 @@ export const DonorsAllCampaigns = () => {
   const router = useRouter();
   const { data: trustedPartnersData, isLoading: DonorLoading } =
     useGetActiveCampaignsQuery(params);
-    const [page, setPage] = useState(trustedPartnersData?.current_page);
-    const [pageLimit, setPageLimit] = useState(10);
+    
   return (
     <>
+    <Typography variant="h6">Campaigns</Typography>
       {DonorLoading ? (
         <Stack>
           <Stack direction="row" justifyContent="space-between">
@@ -67,15 +67,15 @@ export const DonorsAllCampaigns = () => {
           </Stack>
         </Stack>
       ) : (
-        <Grid2 container spacing={2}>
+        <Grid2 container spacing={2} mt={2}>
           {trustedPartnersData?.body?.map((items) => (
             <Grid2 size={{xs:12, md:3}} key={items?.id}>
-              <Card sx={{ width: "100%" }}>
+              <Card sx={{ width: "100%",height:300 }}>
                 <CardMedia
                   component="img"
                   src={items.image_video}
                   alt="Landing Section Girl"
-                  sx={{ height: "10rem" }}
+                  sx={{ maxHeight: "13rem",height:'100%' }}
                 />
                 <Stack py={1} px={1} gap={1}>
                   <Typography fontWeight={500} noWrap>
@@ -107,7 +107,7 @@ export const DonorsAllCampaigns = () => {
                       },
                     }}
                     onClick={() => {
-                      router.push("campaign-donation");
+                      router.push(`/dashboard/campaign-donation?id=${items?.id}`);
                     }}
                   >
                     Donate
@@ -119,20 +119,19 @@ export const DonorsAllCampaigns = () => {
         </Grid2>
       )}
         <Box p={2}>
+            
             <CustomPagination
-              count={trustedPartnersData?.total_pages}
-              currentPage={page}
-              totalRecords={trustedPartnersData?.total_pages}
-              onPageChange={(newPage: any) => {
-                setPage?.(newPage);
-                setParams((prev) => {
-                  return { ...prev, offset: (newPage - 1) * 10 };
-                });
-              }}
-              setPage={setPage}
-              pageLimit={pageLimit}
-              setPageLimit={setPageLimit}
-            />
+                count={trustedPartnersData?.total_pages}
+                currentPage={params.offset}
+                totalRecords={trustedPartnersData?.total_pages}
+                onPageChange={(newPage: number) => {
+                  setParams((prev) => ({ ...prev, offset: newPage }));
+                }}
+                pageLimit={params.limit}
+                setPageLimit={(newLimit: number) => {
+                  setParams((prev) => ({ ...prev, limit: newLimit, offset: 1 }));
+                }}
+              />
           </Box>
     </>
   );

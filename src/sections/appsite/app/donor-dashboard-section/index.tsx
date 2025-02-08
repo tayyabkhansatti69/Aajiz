@@ -49,7 +49,7 @@ export function DonorDashboardSection() {
   const { data: donorProfile } = useGetDonorProfileQuery({});
   const { data, isLoading } = useGetTrustedPartnersListQuery(params);
   const { data: trustedPartnersData, isLoading: DonorLoading } =
-    useGetActiveCampaignsQuery(params);
+    useGetActiveCampaignsQuery(params,{refetchOnMountOrArgChange:true});
 
   return isLoading || DonorLoading ? (
     <Stack>
@@ -221,7 +221,7 @@ export function DonorDashboardSection() {
                     },
                   }}
                   onClick={() => {
-                    router.push("campaign-donation");
+                    router.push(`dashboard/campaign-donation?id=${items?.id}`);
                   }}
                 >
                   Donate
