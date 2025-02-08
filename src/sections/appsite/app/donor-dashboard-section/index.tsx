@@ -9,7 +9,7 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import { trustedPartnersData } from "./donor-dashboard-data";
+
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
