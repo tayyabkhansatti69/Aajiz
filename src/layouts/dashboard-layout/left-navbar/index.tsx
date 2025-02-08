@@ -27,9 +27,8 @@ function LeftNavbar(props: any) {
   const { open, handleDrawer, setLinkName } = props;
   const screenSizeHandler = useMediaQuery(theme.breakpoints.down("md"));
 
-  console.log(getLocalStorage("rememberMe"), "remn");
   const loginUser: any = getLocalStorage("rememberMe");
-  console.log(loginUser, "datata");
+  
 
   return (
     <Drawer variant="permanent" open={open}>

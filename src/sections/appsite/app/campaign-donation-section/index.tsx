@@ -7,6 +7,7 @@ import LinearProgress, {
 import dwatson from "@/src/assets/image/d-watson.png";
 import { FormProvider, RHFTextField } from "@/src/components/rhf";
 import { UseCampaignDonation } from "./use-campaign-donation";
+import { LoadingButton } from "@mui/lab";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 12,
@@ -26,7 +27,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 export function CampaignDonationSection() {
-  const { methods, handleSubmit, onSubmit, router } = UseCampaignDonation();
+  const { methods, handleSubmit, onSubmit, router,campaignData,donorProfile,isLoading } = UseCampaignDonation();
   return (
     <Stack>
       <Button
@@ -48,7 +49,9 @@ export function CampaignDonationSection() {
               style={{ boxShadow: "1", borderRadius: 3, height: "15rem" }}
             />
             <Stack mt="auto" gap={1} width="20rem">
-              <BorderLinearProgress variant="determinate" value={50} />
+              <BorderLinearProgress variant="determinate" value={ campaignData?.donation_goal && campaignData?.donation_goal > 0
+                        ? (campaignData.complete_goal / campaignData.donation_goal) * 100
+                        : 0} />
               <Stack
                 direction="row"
                 justifyContent="space-between"
@@ -56,27 +59,16 @@ export function CampaignDonationSection() {
               >
                 <Typography variant="subtitle2">Raised - 1M</Typography>
                 <Typography variant="subtitle2" color="#0ebdbe">
-                  Goal - $1M
+                  Goal - ${campaignData?.donation_goal}
                 </Typography>
               </Stack>
             </Stack>
           </Stack>
           <Typography variant="h5">
-            Big Charity: Build school for poor children
+            {campaignData?.campaign_title}
           </Typography>
           <Typography variant="body1" fontWeight={500}>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora
-            asperiores doloribus itaque odit beatae est placeat veniam, nam
-            corrupti a vitae dolorum dolorem eius voluptatibus aperiam quaerat
-            consequuntur? Molestiae cumque nam dicta corrupti inventore id
-            excepturi voluptates neque nisi, ullam possimus. Eius aliquam enim
-            placeat! Sed cumque nisi possimus. Aliquid neque recusandae atque
-            sint repudiandae, eligendi earum animi voluptatum quibusdam minus
-            quod laboriosam ratione labore aliquam numquam eveniet amet sunt
-            dolor quisquam qui soluta magnam expedita perspiciatis rerum.
-            Aspernatur sapiente corrupti, beatae harum qui sunt nesciunt quod
-            quaerat labore quisquam dolorum vel, aperiam illo, provident
-            perspiciatis distinctio mollitia laboriosam non.
+            {campaignData?.campaign_description}
           </Typography>
           <Typography
             sx={{
@@ -89,7 +81,7 @@ export function CampaignDonationSection() {
               width: "fit-content",
             }}
           >
-            Current Balance: 250000 RS
+            Current Balance: {donorProfile?.body?.current_balance ?? donorProfile?.body?.balance} RS
           </Typography>
           <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Stack gap={2}>
@@ -99,13 +91,14 @@ export function CampaignDonationSection() {
                 outerLabel="Enter Donation Amount"
                 placeholder="Enter Amount"
               />
-              <Button
+              <LoadingButton
                 variant="contained"
                 sx={{ width: "fit-content", px: 5, py: 1 }}
                 type="submit"
+                loading={isLoading}
               >
                 Donate Now
-              </Button>
+              </LoadingButton>
             </Stack>
           </FormProvider>
         </Stack>

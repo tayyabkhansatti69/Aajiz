@@ -27,10 +27,9 @@ export function AuthInitializer(props: AuthProviderProps): JSX.Element {
   //   (state: { auth: any; loginAs: { loginAs?: string } }) => state
   // );
   // const [mutation, { isLoading }] = useAuthMeMutation();
-  const { children, handleTheme } = props;
+  const { children,  } = props;
   // const dispatch = useDispatch();
-  console.log(handleTheme);
-
+  
   const initialize = useCallback(async (): Promise<void> => {
     // if (accessToken && refreshToken) {
     //   try {
