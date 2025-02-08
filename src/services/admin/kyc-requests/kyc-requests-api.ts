@@ -15,15 +15,17 @@ export const kycRequestsAPI = baseAPI.injectEndpoints({
       }),
     }),
     getCancelPartnerKycRequestsList: builder.query({
-      query: () => ({
+      query: (params) => ({
         url: `/get_cancel_partner_kyc`,
         method: "GET",
+        params
       }),
     }),
     getCancelDonorKycRequestsList: builder.query({
-      query: () => ({
+      query: (params) => ({
         url: `/get_cancel_donor_kyc`,
         method: "GET",
+        params
       }),
     }),
   }),

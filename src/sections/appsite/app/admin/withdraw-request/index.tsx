@@ -1,81 +1,54 @@
 import { CustomTable } from "@/src/components";
-import HorizontalTabs from "@/src/components/Horizontal-tab";
-import { Card, Stack, Typography } from "@mui/material";
+import { useGetWithdrawRequestListQuery } from "@/src/services/admin/withdrawal-request/withdrawal-request-api";
+import { Button, Card, Stack, Typography } from "@mui/material";
+import dayjs from "dayjs";
+import { useState } from "react";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 function WithdrawRequestSection() {
-  const data = [
-    {
-      id: 1,
-      donorName: "KFC",
-      contactNumber: "Physical",
-      businessType: "123456",
-      profile: 2500,
-    },
-  ];
+  const [params, setParams] = useState({ limit: 10, offSet: 0 });
+  const { data, isLoading, isError, isSuccess, isFetching } =
+    useGetWithdrawRequestListQuery(params);
+
   const columns = [
     {
-      accessorFn: (row: any) => row.donorName ?? "-",
-      id: "donorName",
-      cell: (info: any) => info.getValue(),
-      header: () => <span>Donor Name</span>,
-      isSortable: false,
-    },
-    {
-      accessorFn: (row: any) => row.contactNumber ?? "-",
-      id: "contactNumber",
-      cell: (info: any) => info.getValue(),
-      header: () => <span>Contact No</span>,
-      isSortable: false,
-    },
-    {
-      accessorFn: (row: any) => row.contactNumber ?? "-",
-      id: "contactNumber",
-      cell: (info: any) => info.getValue(),
-      header: () => <span>Email</span>,
-      isSortable: false,
-    },
-    {
-      accessorFn: (row: any) => row.businessType ?? "-",
-      id: "businessType",
-      cell: (info: any) => info.getValue(),
-      header: () => <span>Business Type</span>,
-      isSortable: false,
-    },
-    {
-      accessorFn: (row: any) => row.profile ?? "-",
-      id: "profile",
-      cell: (info: any) => `${info.getValue()} RS.`,
-      header: () => <span>Profile</span>,
-      isSortable: false,
-    },
-  ];
-  const columns1 = [
-    {
-      accessorFn: (row: any) => row.donorName ?? "-",
-      id: "donorName",
+      accessorFn: (row: any) => row.name_requester ?? "-",
+      id: "name_requester",
       cell: (info: any) => info.getValue(),
       header: () => <span>Partner Name</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.contactNumber ?? "-",
-      id: "contactNumber",
-      cell: (info: any) => info.getValue(),
+      accessorFn: (row: any) => row.request_time ?? "-",
+      id: "request_time",
+      cell: (info: any) => dayjs(info.getValue()).format("DD-MM-YYYY"),
       header: () => <span>Date</span>,
+      isSortable: false,
+    },
+    {
+      accessorFn: (row: any) => row.request_amount ?? "-",
+      id: "request_amount",
+      cell: (info: any) => (
+        <Typography color="primary.main" fontWeight={600}>
+          {info.getValue()} RS.
+        </Typography>
+      ),
+      header: () => <span>Amount</span>,
       isSortable: false,
     },
     {
       accessorFn: (row: any) => row.businessType ?? "-",
       id: "businessType",
-      cell: (info: any) => info.getValue(),
-      header: () => <span>Amount</span>,
-      isSortable: false,
-    },
-    {
-      accessorFn: (row: any) => row.profile ?? "-",
-      id: "profile",
-      cell: (info: any) => info.getValue(),
-      header: () => <span>Action </span>,
+      cell: () => (
+        <Button
+          variant="text"
+          sx={{ fontSize: "2rem" }}
+          startIcon={<RemoveRedEyeIcon />}
+        >
+          View
+        </Button>
+      ),
+      header: () => <span>Action</span>,
       isSortable: false,
     },
   ];
@@ -84,42 +57,22 @@ function WithdrawRequestSection() {
     <Stack rowGap={2}>
       <Typography variant="h5">Withdrawal Requests</Typography>
       <Card sx={{ p: 4 }}>
-        <HorizontalTabs tabsArray={["Donor", "Partner"]}>
-          <CustomTable
-            data={data}
-            columns={columns}
-            //   isLoading={isLoading}
-            //   isFetching={isFetching}
-            //   isError={isError}
-            isSuccess={true}
-            isPagination
-            showSerialNo
-            //   totalPages={data?.pages ?? 1}
-            //   currentPage={data?.current_page ?? 1}
-            //   onPageChange={(onPageData: any) => {
-            //     setParams((prev) => {
-            //       return { ...prev, offset: (onPageData - 1) * 10 };
-            //     });
-            //   }}
-          />
-          <CustomTable
-            data={data}
-            columns={columns1}
-            //   isLoading={hisltoryLoading}
-            //   isFetching={historyFetching}
-            //   isError={historyError}
-            //   isSuccess={historySuccess}
-            isPagination
-            showSerialNo
-            //   totalPages={getHistor?.pages ?? 1}
-            //   currentPage={getHistor?.current_page ?? 1}
-            //   onPageChange={(onPageData: any) => {
-            //     setParams((prev) => {
-            //       return { ...prev, offset: (onPageData - 1) * 10 };
-            //     });
-            //   }}
-          />
-        </HorizontalTabs>
+        <CustomTable
+          data={data?.body}
+          columns={columns}
+          isLoading={isLoading}
+          isFetching={isFetching}
+          isError={isError}
+          isSuccess={isSuccess}
+          isPagination
+          totalPages={data?.total_pages ?? 1}
+          currentPage={data?.current_page ?? 1}
+          onPageChange={(onPageData: any) => {
+            setParams((prev) => {
+              return { ...prev, offset: (onPageData - 1) * 10 };
+            });
+          }}
+        />
       </Card>
     </Stack>
   );
