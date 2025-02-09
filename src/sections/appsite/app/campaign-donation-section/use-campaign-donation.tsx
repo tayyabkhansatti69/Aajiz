@@ -23,7 +23,7 @@ export const UseCampaignDonation = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-  const {data}=useGetCampaignsByIDQuery({id})
+  const {data,isLoading:donorDataLoading}=useGetCampaignsByIDQuery({id})
   const { data: donorProfile } = useGetDonorProfileQuery({});
   const [addDonation,{isLoading}]=useAddDonationMutation()
   const campaignData=data?.body;
@@ -60,6 +60,7 @@ export const UseCampaignDonation = () => {
     router,
     campaignData,
     donorProfile,
-    isLoading
+    isLoading,
+    donorDataLoading
   };
 };

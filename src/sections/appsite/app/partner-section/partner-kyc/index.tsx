@@ -27,6 +27,7 @@ import { useState } from "react";
 import Image from "next/image";
 import partnerGif from "../../../../../assets/gif/partnerKyc.gif";
 import partnerGif1 from "../../../../../assets/gif/partnerKyc1.gif";
+import { RHFUploadSingleFileWithPreviewWithoutValidation } from "@/src/components/rhf/rhf-upload-with-preview";
 
 const steps = ["Basic Details", "Personal Identification"];
 export const Schema = () =>
@@ -158,7 +159,7 @@ function PartnerKyc() {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <RHFUploadSingleFileWithPreview
+                      <RHFUploadSingleFileWithPreviewWithoutValidation
                         name="business_logo"
                         outerLabel="Business Logo"
                       />

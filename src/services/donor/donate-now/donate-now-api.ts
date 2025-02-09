@@ -8,6 +8,7 @@ export const authAPI = baseAPI.injectEndpoints({
         method: "POST",
         body,
       }),
+    
     }),
     loadCard: builder.mutation({
       query: (body: any) => ({

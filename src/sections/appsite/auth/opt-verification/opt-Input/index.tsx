@@ -50,7 +50,9 @@ export const OtpInputPage = () => {
           // setLocalStorage('rememberMe', response?.body);
           toast.success(response?.message || "Signed up successfully!");
           setLocalStorage("rememberMe", response);
-          router.push("/dashboard");
+          if (response?.Data_User?.account_type === "donor")
+            router.push("/donor-kyc");
+          else router.push("/partner-kyc");
         } catch (error: any) {
           console.error(error);
           toast.error(error?.data?.message || "Something went wrong!");

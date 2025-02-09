@@ -24,26 +24,30 @@ export const UseAddBalance = () => {
   const paymentMethodType = watch("paymentMethod");
 
   const onSubmit = async (data: any): Promise<void> => {
+    console.log(data)
     const body = {
-      amount: data?.amount,
-      stamp_price: data?.cardAmount,
-      industry_id: data?.industryType?.id,
+      new_balance: data?.amount,
+      payment_method: data?.paymentMethod,
+      account_num:data?.cardNumber,
+      cvc:data?.cvc,
+      expire_date: data?.expireDate,
     };
     const loadCardData = {
-      card_num: data?.cardNo,
-      industry_id: data?.industryType?.id,
-      donation_amount: data?.amount,
+      phone_number:data?.phoneNumber,
+      cnic: data?.cnic,
+      new_balance: data?.amount,
+      payment_method: data?.paymentMethod,
     };
     try {
       if (paymentMethodType === "card") {
         const res: any = await addBalance(body).unwrap();
         reset();
-        // router.push("candidates");
+        router.push("/dashboard");
         toast.success(res?.message ?? `Added Successfully!`);
       } else {
         const res: any = await addBalance(loadCardData).unwrap();
         reset();
-        router.push("/donor-dashboard");
+        router.push("/dashboard");
         toast.success(res?.message ?? `Donated Successfully!`);
       }
     } catch (error: any) {
