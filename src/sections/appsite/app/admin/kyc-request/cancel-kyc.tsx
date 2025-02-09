@@ -27,8 +27,8 @@ function CancelKYCRequests() {
   } = useGetCancelPartnerKycRequestsListQuery(params1);
   const columns = [
     {
-      accessorFn: (row: any) => row.donorName ?? "-",
-      id: "donorName",
+      accessorFn: (row: any) => row.name ?? "-",
+      id: "name",
       cell: (info: any) => info.getValue(),
       header: () => <span>Donor Name</span>,
       isSortable: false,
