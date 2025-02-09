@@ -1,6 +1,6 @@
 import { CustomTable } from "@/src/components";
 import { useGetDonorDBListQuery } from "@/src/services/admin/donor/donor-db-api";
-import { Button, Card, Stack, Typography } from "@mui/material";
+import { Card, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useState } from "react";
 
@@ -42,7 +42,7 @@ function DonorAdminSection() {
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
-      cell: (info: any) => <Typography color="#F36F56" fontWeight={600}>Restricted User </Typography>,
+      cell: () => <Typography color="#F36F56" fontWeight={600}>Restricted User </Typography>,
       header: () => <span>Profile</span>,
       isSortable: false,
     },
