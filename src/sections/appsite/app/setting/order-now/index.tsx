@@ -30,14 +30,14 @@ export const Schema = (maxQuantity: number, value: string) =>
   });
 
 function OrderNowCard({ orderNow, setOrderNow, Curreaddress }: any) {
-  const { data: donorProfile } = useGetDonorProfileQuery({});
+  const { data: donorProfile } = useGetDonorProfileQuery({},{refetchOnMountOrArgChange:true});
   const [orderCard, { isLoading }] = useOrderCardMutation();
   const [value, setValue] = useState("currentAddess");
   const maxQuantity = donorProfile?.body?.balance / 100;
   console.log(maxQuantity, "maxQuantity", value);
   const methods = useForm<any>({
     resolver: yupResolver(Schema(maxQuantity, value)),
-    defaultValues: { addressValue: "currentAddess", address: Curreaddress },
+    defaultValues: { addressValue: "currentAddess", address: Curreaddress,quantity:0 },
   });
 
   const { handleSubmit, watch, reset } = methods;

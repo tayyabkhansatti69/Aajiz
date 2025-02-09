@@ -15,6 +15,7 @@ import CustomPagination from "@/src/components/custom-pagination";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter } from "next/navigation";
 import { NoContentFound } from "@/src/components";
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 // Extend dayjs with the relativeTime plugin
 dayjs.extend(relativeTime);
 
@@ -124,13 +125,18 @@ const NotificationItem = ({ title, time }) => {
           padding: "12px 0px",
         }}
       >
-        <Box>
+        <Box display='flex' justifyContent={'flex-start'} flexDirection={'row'} alignItems={'center'} gap={1}>
+          <Box>
+            <CircleNotificationsIcon sx={{color:'#0EBDBE',fontSize:'4rem'}}/>
+          </Box>
+          <Box >
           <Typography variant="body2" sx={{ fontWeight: 600 }}>
             {title}
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            {dayjs(time).fromNow()}
+            {dayjs(time)?.fromNow()}
           </Typography>
+          </Box>
         </Box>
 
         {/* Conditionally render the button if the message contains "expired" */}

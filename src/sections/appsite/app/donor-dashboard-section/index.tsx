@@ -57,7 +57,7 @@ export function DonorDashboardSection() {
         <Skeleton width={150} height={70} />
         <Skeleton width={100} height={70} />
       </Stack>
-      <Skeleton width={400} height={200} />
+      <Skeleton width={'100%'} height={200} />
       <Stack direction="row" justifyContent="space-between">
         <Skeleton width={150} height={70} />
         <Skeleton width={100} height={70} />
@@ -73,25 +73,12 @@ export function DonorDashboardSection() {
     <Stack gap={2.5}>
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Typography variant="h5">Balance</Typography>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            router.push("/add-balance");
-          }}
-          sx={{
-            ":hover": {
-              backgroundColor: "primary.main",
-              color: "white",
-            },
-          }}
-        >
-          Add Balance
-        </Button>
+       
       </Stack>
       <Stack
-        direction={{ xl: "row", xs: "column" }}
+        direction={{ md: "row", xs: "column" }}
         justifyContent="space-between"
-        width="30%"
+        width="100%"
         bgcolor="#F8FFFE"
         p={2}
         borderRadius={2}
@@ -105,10 +92,11 @@ export function DonorDashboardSection() {
             Current Balance
           </Typography>
         </Box>
+        <Box display='flex' gap={2}>
         <Button
           variant="outlined"
           onClick={() => {
-            router?.push("/donate");
+            router?.push("/dashboard/donate");
           }}
           sx={{
             ":hover": {
@@ -119,6 +107,21 @@ export function DonorDashboardSection() {
         >
           Donate Now
         </Button>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            router.push("/dashboard/add-balance");
+          }}
+          sx={{
+            ":hover": {
+              backgroundColor: "primary.main",
+              color: "white",
+            },
+          }}
+        >
+          Add Balance
+        </Button>
+        </Box>
       </Stack>
       <Stack direction="row" justifyContent="space-between">
         <Typography variant="h5">Trusted Partner</Typography>

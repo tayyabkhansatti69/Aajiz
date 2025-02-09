@@ -97,9 +97,14 @@ export const styles = {
     padding: 5,
   }),
   pagination: (theme: any) => ({
-    ".Mui-selected": {
+    "& .MuiPaginationItem-root": {
+      borderRadius: "8px",
+    },
+    "& .Mui-selected": {
       backgroundColor: `${theme.palette.primary.main} !important`,
-      color: "#FFFFFF",
+      color: "#FFFFFF !important",
+      fontWeight: "bold",
     },
   }),
+  
 };

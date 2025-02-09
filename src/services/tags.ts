@@ -3,8 +3,9 @@ export const DONOR_DASHBOARD = "DONOR_DASHBOARD";
 export const DONOR_TRANSACTION = "DONOR_TRANSACTION";
 export const WITHDRAW_AMOUNT = "WITHDRAW_AMOUNT";
 export const USE_CARD = "USE_CARD";
+export const SETTINGS="SETTINGS"
 
-export const TAGS = [USERS];
+export const TAGS = [USERS,SETTINGS];
 export const generateTags = (result: any, TAG: string) => {
   return result
     ? [

@@ -75,7 +75,7 @@ const loadGoogleTranslate = () => {
           pageLanguage: "en", // Default language
           autoDisplay: false,
         },
-        "google_translate_element",
+        "google_translate_element"
       );
       // const element = document.querySelector('.skiptranslate.goog-te-gadget');
 
@@ -84,7 +84,7 @@ const loadGoogleTranslate = () => {
       const observer = new MutationObserver(() => {
         // Look for iframe elements with the specific class
         const iframe = document.querySelector(
-          "iframe.VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate",
+          "iframe.VIpgJd-ZVi9od-ORHb-OEVmcd.skiptranslate"
         );
 
         if (iframe) {
@@ -115,22 +115,25 @@ export function RootLayout(props: LayoutProps): JSX.Element {
   const pathname = usePathname();
 
   // Define public routes that don't need authentication
-  const isPublicRoute = pathname?.startsWith('/sign-in') || 
-                       pathname?.startsWith('/sign-up') || 
-                       pathname?.startsWith('/forgot-password');
+  const isPublicRoute =
+    pathname?.startsWith("/sign-in") ||
+    pathname?.startsWith("/sign-up") ||
+    pathname?.startsWith("/forgot-password") ||
+    pathname?.startsWith("/otp-verification") ||
+    pathname?.startsWith("/reset-password")||pathname?.startsWith("/donor-kyc") || pathname?.startsWith("/partner-kyc");
   useEffect(() => {
     loadGoogleTranslate();
 
     // Apply custom styling once Google Translate dropdown is rendered
     const interval = setInterval(() => {
       const googleDropdown = document.querySelector(
-        "#google_translate_element select",
+        "#google_translate_element select"
       ) as HTMLSelectElement | null;
       const googleBranding = document.querySelector(
-        ".goog-te-gadget span",
+        ".goog-te-gadget span"
       ) as HTMLElement | null;
       const poweredByDiv = document.querySelector(
-        ".skiptranslate.goog-te-gadget",
+        ".skiptranslate.goog-te-gadget"
       );
 
       if (poweredByDiv) {

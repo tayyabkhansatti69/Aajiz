@@ -180,7 +180,7 @@ export function EStamps({ eStampData }: any) {
       <Card sx={{ p: 2, height: "80vh", overflow: "scroll" }}>
         <Grid container px={2} spacing={2} ref={gridContainerRef}>
           {preloadedData.map((item) => (
-            <Grid item xl={3} md={6} xs={12} key={item.id}>
+            <Grid item md={6} xs={12} key={item.id}>
               <Card
                 sx={{
                   backgroundColor: "primary.main",
@@ -188,7 +188,7 @@ export function EStamps({ eStampData }: any) {
                   m: "auto",
                 }}
               >
-                <Stack textAlign="center" rowGap={4} py={3} px={8}>
+                <Stack textAlign="center" rowGap={2} py={3} px={8}>
                   <Box>
                     <Image src={eStampLogo} alt="Aajiz e-Stamp" />
                   </Box>

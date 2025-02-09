@@ -43,6 +43,7 @@ function SettingSection() {
   });
   const { handleSubmit: handleSubmit2 } = methods2;
   const { handleSubmit, setValue } = methods;
+const [image,setImage]=useState(null)
 
   useEffect(() => {
     if (profileData?.body) {
@@ -51,6 +52,7 @@ function SettingSection() {
       setValue("contact_num", profileData?.body?.contact_num);
       setValue("email", profileData?.body?.email);
       setValue("address", profileData?.body?.address);
+      setImage(profileData?.body?.profile_image)
     }
   }, [profileData, setValue]);
 
@@ -92,7 +94,7 @@ function SettingSection() {
           alignItems="center"
           gap={1}
         >
-          <ProfileUpdate profile_image={profileData?.body?.profile_image} />
+          <ProfileUpdate profile_image={image} />
           <Box display="flex" flexDirection="column" gap={2}>
             <Button
               variant="outlined"
