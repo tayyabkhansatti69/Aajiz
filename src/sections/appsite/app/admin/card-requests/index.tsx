@@ -67,7 +67,7 @@ function CardRequestsSection() {
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
-      cell: (info: any) => (
+      cell: () => (
         <Button variant="text" sx={{ textDecoration: "underline" }}>
           View Request{" "}
         </Button>

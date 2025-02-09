@@ -41,7 +41,7 @@ function PartnerAdminSection() {
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
-      cell: (info: any) => (
+      cell: () => (
         <Button variant="text" sx={{ textDecoration: "underline" }}>
           View Profile
         </Button>
@@ -52,7 +52,7 @@ function PartnerAdminSection() {
     {
       accessorFn: (row: any) => row.profile ?? "-",
       id: "profile",
-      cell: (info: any) => (
+      cell: () => (
         <Typography color="#F36F56" fontWeight={600}>
           Restricted User{" "}
         </Typography>
