@@ -1,10 +1,10 @@
-import { Button, Card, Stack, Typography, styled } from "@mui/material";
+import { Button, Card, Skeleton, Stack, Typography, styled } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import Image from "next/image";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-import dwatson from "@/src/assets/image/d-watson.png";
+
 import { FormProvider, RHFTextField } from "@/src/components/rhf";
 import { UseCampaignDonation } from "./use-campaign-donation";
 import { LoadingButton } from "@mui/lab";
@@ -27,7 +27,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 export function CampaignDonationSection() {
-  const { methods, handleSubmit, onSubmit, router,campaignData,donorProfile,isLoading } = UseCampaignDonation();
+  const { methods, handleSubmit, onSubmit, router,campaignData,donorProfile,isLoading,donorDataLoading } = UseCampaignDonation();
   return (
     <Stack>
       <Button
@@ -35,16 +35,29 @@ export function CampaignDonationSection() {
         startIcon={<KeyboardBackspaceIcon />}
         sx={{ mr: "auto" }}
         onClick={() => {
-          router.push("dashboard");
+          router.push("/dashboard");
         }}
       >
         Back
       </Button>
+      {donorDataLoading ? (<Stack>
+      <Stack direction="row" justifyContent="space-between" width={'50%'} gap={2}>
+        <Skeleton width={180} height={150} />
+        <Skeleton width={100} height={10} />
+      </Stack>
+      <Skeleton width={'100%'} height={20} />
+      <Skeleton width={'100%'} height={200} />
+      <Skeleton width={220} height={100} />
+      
+      <Skeleton width={"100%"} height={200} />
+    </Stack>):(
       <Card sx={{ p: 2 }}>
         <Stack gap={3}>
-          <Stack direction="row">
+          <Stack direction="row" gap={2}>
             <Image
-              src={dwatson}
+              src={campaignData?.image_video}
+              width={180}
+              height={150}
               alt="D-Watson"
               style={{ boxShadow: "1", borderRadius: 3, height: "15rem" }}
             />
@@ -103,6 +116,7 @@ export function CampaignDonationSection() {
           </FormProvider>
         </Stack>
       </Card>
+      ) }
     </Stack>
   );
 }

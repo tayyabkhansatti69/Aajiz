@@ -22,7 +22,7 @@ export function AddBalanceSection() {
         startIcon={<KeyboardBackspaceIcon />}
         sx={{ mr: "auto" }}
         onClick={() => {
-          router.push("dashboard");
+          router.push("/dashboard");
         }}
       >
         Back
@@ -42,7 +42,7 @@ export function AddBalanceSection() {
                   outerLabel="Select Payment Method"
                   options={[
                     { id: 1, label: "Credit/Debit Card", value: "card" },
-                    { id: 2, label: "JazzCash", value: "jazzCash" },
+                    { id: 2, label: "JazzCash", value: "jazzcash" },
                     { id: 3, label: "Easypaisa", value: "easypaisa" },
                   ]}
                 />
