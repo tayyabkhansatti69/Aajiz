@@ -75,6 +75,7 @@ function TopNavBar(props: any) {
               alignItems={"center"}
               flexDirection={"row"}
               border={"1px solid  var(--Color-Gray-100, #EDEDED)"}
+              borderRadius={'8px'}
               gap={1}
             >
               <IconButton>
