@@ -26,6 +26,21 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     }),
   },
 }));
+const formatNumber = (num: number): string => {
+  if (num >= 1_000_000_000) {
+    return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "B";
+  } else if (num >= 100_000_00) {
+    return (num / 100_000_00).toFixed(1).replace(/\.0$/, "") + "Cr"; // Crore
+  } else if (num >= 1_000_000) {
+    return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+  } else if (num >= 100_000) {
+    return (num / 100_000).toFixed(1).replace(/\.0$/, "") + "Lac";
+  } else if (num >= 1_000) {
+    return (num / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
+  } else {
+    return num.toString();
+  }
+};
 export function CampaignDonationSection() {
   const { methods, handleSubmit, onSubmit, router,campaignData,donorProfile,isLoading,donorDataLoading } = UseCampaignDonation();
   return (
@@ -70,9 +85,9 @@ export function CampaignDonationSection() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <Typography variant="subtitle2">Raised - 1M</Typography>
+                <Typography variant="subtitle2">Raised - {formatNumber(campaignData?.complete_goal)}</Typography>
                 <Typography variant="subtitle2" color="#0ebdbe">
-                  Goal - ${campaignData?.donation_goal}
+                  Goal - {formatNumber(campaignData?.donation_goal)}
                 </Typography>
               </Stack>
             </Stack>

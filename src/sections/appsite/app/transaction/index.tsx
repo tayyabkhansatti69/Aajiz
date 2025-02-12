@@ -6,31 +6,38 @@ import {
 } from "@/src/services/donor/transaction";
 import { Box, Grid, Paper } from "@mui/material";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useState,  } from "react";
+
 function TransactionSection() {
-  const [param, setParams] = useState({
+  const [donationParams, setDonationParams] = useState({
     offset: 0,
     limit: 10,
+    page: 1
+  });
+  
+  const [withdrawalParams, setWithdrawalParams] = useState({
+    offset: 0,
+    limit: 10,
+    page: 1
   });
 
-  const { data, isLoading, isFetching, isError, isSuccess } =
-    useGetTransactionListQuery({ ...param });
+  const { 
+    data: donationData, 
+    isLoading, 
+    isFetching, 
+    isError, 
+    isSuccess 
+  } = useGetTransactionListQuery(donationParams);
+
   const {
-    data: getHistor,
-    isLoading: hisltoryLoading,
+    data: withdrawalData,
+    isLoading: historyLoading,
     isFetching: historyFetching,
     isError: historyError,
     isSuccess: historySuccess,
-  } = useGetBalanceQuery({ ...param });
-  const columns = [
-    // {
-    //     accessorFn: (row: any) => row.recipientNumber ?? "-",
-    //     id: "recipientNumber",
-    //     cell: (info: any) => info.getValue(),
-    //     header: () => <span>Recipient Number</span>,
-    //     isSortable: false,
-    // },
+  } = useGetBalanceQuery(withdrawalParams);
 
+  const columns = [
     {
       accessorFn: (row: any) => row.donation_date ?? "-",
       id: "donationDate",
@@ -49,42 +56,12 @@ function TransactionSection() {
       accessorFn: (row: any) => row.donation_type ?? "-",
       id: "paymentMethod",
       cell: (info: any) => info.getValue(),
-      header: () => <span>Payment Method</span>,
+      header: () => <span>Donation Method</span>,
       isSortable: false,
     },
-    // {
-    //     accessorFn: (row: any) => row.status ?? "-",
-    //     id: "status",
-    //     cell: (info: any) => {
-    //         return (
-    //             <Box
-    //                 display="flex"
-    //                 justifyContent="flex-start"
-    //                 alignItems="flex-start"
-    //             >
-    //                 <CustomChip
-    //                     variant={info.getValue() === "Confirmed" ? "success" : "danger"}
-    //                     rootSx={{
-    //                         fontSize: 11,
-    //                     }}
-    //                     ChipProps={{ label: `${info.getValue()}` }}
-    //                 />
-    //             </Box>
-    //         );
-    //     },
-    //     header: () => <span>Status</span>,
-    //     isSortable: false,
-    // },
   ];
-  const columnsHistory = [
-    // {
-    //     accessorFn: (row: any) => row.payment_method ?? "-",
-    //     id: "payment_method",
-    //     cell: (info: any) => info.getValue(),
-    //     header: () => <span>Payment Method</span>,
-    //     isSortable: false,
-    // },
 
+  const columnsHistory = [
     {
       accessorFn: (row: any) => row.date_and_time ?? "-",
       id: "date_and_time",
@@ -112,17 +89,11 @@ function TransactionSection() {
       cell: (info: any) => {
         const statusValue = info.getValue() === true ? "Approved" : "Pending";
         return (
-          <Box
-            display="flex"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-          >
+          <Box display="flex" justifyContent="flex-start" alignItems="flex-start">
             <CustomChip
               variant={info.getValue() === true ? "success" : "danger"}
-              rootSx={{
-                fontSize: 11,
-              }}
-              ChipProps={{ label: `${statusValue}` }}
+              rootSx={{ fontSize: 11 }}
+              ChipProps={{ label: statusValue }}
             />
           </Box>
         );
@@ -132,13 +103,29 @@ function TransactionSection() {
     },
   ];
 
+  const handleDonationPageChange = (newPage: number) => {
+    setDonationParams(prev => ({
+      ...prev,
+      offset: (newPage - 1) * prev.limit,
+      page: newPage
+    }));
+  };
+
+  const handleWithdrawalPageChange = (newPage: number) => {
+    setWithdrawalParams(prev => ({
+      ...prev,
+      offset: (newPage - 1) * prev.limit,
+      page: newPage
+    }));
+  };
+
   return (
     <Grid pt={2} container>
       <Grid xs={12} item>
         <Paper variant="elevation" elevation={2}>
           <HorizontalTabs tabsArray={["Stamp Transactions", "Withdrawals"]}>
             <CustomTable
-              data={data?.donations}
+              data={donationData?.donations}
               columns={columns}
               isLoading={isLoading}
               isFetching={isFetching}
@@ -146,30 +133,22 @@ function TransactionSection() {
               isSuccess={isSuccess}
               isPagination
               showSerialNo
-              totalPages={data?.pages ?? 1}
-              currentPage={data?.current_page ?? 1}
-              onPageChange={(onPageData: any) => {
-                setParams((prev) => {
-                  return { ...prev, offset: (onPageData - 1) * 10 };
-                });
-              }}
+              totalPages={donationData?.pages ?? 1}
+              currentPage={donationParams.page}
+              onPageChange={handleDonationPageChange}
             />
             <CustomTable
-              data={getHistor?.body}
+              data={withdrawalData?.body}
               columns={columnsHistory}
-              isLoading={hisltoryLoading}
+              isLoading={historyLoading}
               isFetching={historyFetching}
               isError={historyError}
               isSuccess={historySuccess}
               isPagination
               showSerialNo
-              totalPages={getHistor?.pages ?? 1}
-              currentPage={getHistor?.current_page ?? 1}
-              onPageChange={(onPageData: any) => {
-                setParams((prev) => {
-                  return { ...prev, offset: (onPageData - 1) * 10 };
-                });
-              }}
+              totalPages={withdrawalData?.pages ?? 1}
+              currentPage={withdrawalParams.page}
+              onPageChange={handleWithdrawalPageChange}
             />
           </HorizontalTabs>
         </Paper>
