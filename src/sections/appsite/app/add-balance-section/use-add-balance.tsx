@@ -4,9 +4,10 @@ import { useAddBalanceMutation } from "@/src/services/donor/donate-now/donate-no
 import toast from "react-hot-toast";
 import validationSchema from "./validation-schema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
 export const UseAddBalance = () => {
   const router = useRouter();
-
+  const [amountAdd, setAmountAdd] = useState("");
   const methods = useForm<any>({
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -22,18 +23,21 @@ export const UseAddBalance = () => {
   const { handleSubmit, watch, reset } = methods;
   const [addBalance] = useAddBalanceMutation();
   const paymentMethodType = watch("paymentMethod");
-
+  const amountAdded = watch("amount");
+  useEffect(() => {
+    setAmountAdd(amountAdded);
+  }, [amountAdded]);
   const onSubmit = async (data: any): Promise<void> => {
-    console.log(data)
+    console.log(data);
     const body = {
       new_balance: data?.amount,
       payment_method: data?.paymentMethod,
-      account_num:data?.cardNumber,
-      cvc:data?.cvc,
+      account_num: data?.cardNumber,
+      cvc: data?.cvc,
       expire_date: data?.expireDate,
     };
     const loadCardData = {
-      phone_number:data?.phoneNumber,
+      phone_number: data?.phoneNumber,
       cnic: data?.cnic,
       new_balance: data?.amount,
       payment_method: data?.paymentMethod,
@@ -61,5 +65,6 @@ export const UseAddBalance = () => {
     onSubmit,
     router,
     paymentMethodType,
+    amountAdd,
   };
 };

@@ -36,7 +36,7 @@ const roleBasedRoutes: Record<string, string[]> = {
     "/dashboard",
     "/transactions",
     "/support",
-    "/setting"
+    "/settings"
   ]
 };
 

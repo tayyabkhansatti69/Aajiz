@@ -10,7 +10,7 @@ export interface CustomModalProps {
   children?: ReactNode;
   cancelButtonsProps?: ButtonProps;
   acceptButtonProps?: ButtonProps;
-  closeButtonProps?: ButtonProps;
+  closeButtonProps?: any;
   headerTypographyProps?: TypographyProps;
   rootSx?: object | undefined;
   headerSubLabel?: string | ReactNode;

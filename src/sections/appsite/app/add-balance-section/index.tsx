@@ -13,7 +13,7 @@ import { LoadingButton } from "@mui/lab";
 import addBalanceGif from "../../../../assets/gif/addBalance.gif";
 
 export function AddBalanceSection() {
-  const { methods, handleSubmit, onSubmit, router, paymentMethodType } =
+  const { methods, handleSubmit, onSubmit, router, paymentMethodType,amountAdd } =
     UseAddBalance();
   return (
     <Stack>
@@ -99,7 +99,7 @@ export function AddBalanceSection() {
                 >
                   <Typography fontWeight={600}>Total Payment</Typography>
                   <Typography color="#0EBDBE" fontWeight={600}>
-                    5000 Rs.
+                    {amountAdd} Rs.
                   </Typography>
                 </Stack>
               </Stack>

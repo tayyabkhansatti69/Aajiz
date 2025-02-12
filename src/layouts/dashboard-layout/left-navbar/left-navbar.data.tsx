@@ -24,12 +24,12 @@ export const NavListData = [
     link: "/dashboard",
   },
   {
-    label: "Transaction",
+    label: "Transactions",
     icon: MonetizationOnOutlinedIcon,
     link: "/transaction",
   },
   {
-    label: "Setting",
+    label: "Settings",
     icon: SettingsOutlinedIcon,
     link: "/setting",
   },
@@ -51,7 +51,7 @@ export const NavListDataStudent = [
     link: "/add-account",
   },
   {
-    label: "Transaction",
+    label: "Transactions",
     icon: MonetizationOnOutlinedIcon,
     link: "/transactions",
   },
@@ -63,7 +63,7 @@ export const NavListDataStudent = [
   {
     label: "Settings",
     icon: SettingsOutlinedIcon,
-    link: "/setting",
+    link: "/settings",
   },
   {
     label: "Logout",
