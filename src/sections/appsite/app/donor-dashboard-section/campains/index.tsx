@@ -44,6 +44,21 @@ export const DonorsAllCampaigns = () => {
   const router = useRouter();
   const { data: trustedPartnersData, isLoading: DonorLoading } =
     useGetActiveCampaignsQuery(params);
+    const formatNumber = (num: number): string => {
+      if (num >= 1_000_000_000) {
+        return (num / 1_000_000_000).toFixed(1).replace(/\.0$/, "") + "B";
+      } else if (num >= 100_000_00) {
+        return (num / 100_000_00).toFixed(1).replace(/\.0$/, "") + "Cr"; // Crore
+      } else if (num >= 1_000_000) {
+        return (num / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M";
+      } else if (num >= 100_000) {
+        return (num / 100_000).toFixed(1).replace(/\.0$/, "") + "Lac";
+      } else if (num >= 1_000) {
+        return (num / 1_000).toFixed(1).replace(/\.0$/, "") + "K";
+      } else {
+        return num.toString();
+      }
+    };
     
   return (
     <>
@@ -91,10 +106,10 @@ export const DonorsAllCampaigns = () => {
                   />
                   <Stack direction="row" justifyContent="space-between">
                     <Typography variant="subtitle2">
-                      Raised - {items?.complete_goal}
+                      Raised - {formatNumber(items?.complete_goal)}
                     </Typography>
                     <Typography variant="subtitle2" color="#0ebdbe">
-                      Goal - {items?.donation_goal}
+                      Goal - {formatNumber(items?.donation_goal)}
                     </Typography>
                   </Stack>
                   <Button

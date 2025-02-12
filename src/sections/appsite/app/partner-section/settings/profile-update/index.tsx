@@ -3,7 +3,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 // import { styled } from "@mui/system"; // Added styled import
 import { ChangeEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-// import profileImg from "../../../../../assets/image/profile.png";
+
 import { useRouter } from "next/navigation";
 
 // const ImgStyled = styled("img")(({ theme }) => ({
