@@ -61,6 +61,11 @@ export const NavListDataStudent = [
     link: "/support",
   },
   {
+    label: "Queries",
+    icon: SettingsOutlinedIcon,
+    link: "/tickets-status",
+  },
+  {
     label: "Settings",
     icon: SettingsOutlinedIcon,
     link: "/setting",
