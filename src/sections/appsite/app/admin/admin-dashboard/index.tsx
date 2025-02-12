@@ -3,15 +3,15 @@ import Image from "next/image";
 import DonorIcon from "../../../../../assets/donorIcon.png";
 import DonationIcon from "../../../../../assets/donationIcon.png";
 import PartnerIcon from "../../../../../assets/partnerIcon.png";
-import UpIcon from "../../../../../assets/upIcon.png";
-import DownIcon from "../../../../../assets/downIcon.png";
+import { useGetAdminDashboardDataQuery } from "@/src/services/admin/admin-dashboard/admin-dashboard-api";
 
 function AdminDashboardSection() {
+  const { data: dashboardData } = useGetAdminDashboardDataQuery({});
   const data = [
     {
       id: 1,
       title: "Total Donors",
-      amount: "450",
+      amount: dashboardData?.body?.total_donor,
       percentage: "8.5%",
       status: "up",
       icon: DonorIcon,
@@ -19,7 +19,7 @@ function AdminDashboardSection() {
     {
       id: 1,
       title: "Total Donations",
-      amount: "RS.89k",
+      amount: dashboardData?.body?.total_donation,
       percentage: "1.5%",
       status: "down",
       icon: DonationIcon,
@@ -27,7 +27,7 @@ function AdminDashboardSection() {
     {
       id: 1,
       title: "Total Earning",
-      amount: "RS.85k",
+      amount: dashboardData?.body?.total_earning,
       percentage: "4.5%",
       status: "up",
       icon: PartnerIcon,
@@ -35,7 +35,7 @@ function AdminDashboardSection() {
     {
       id: 1,
       title: "Total Partners",
-      amount: "45",
+      amount: dashboardData?.body?.total_partner,
       percentage: "8.5%",
       status: "down",
       icon: PartnerIcon,
@@ -68,23 +68,6 @@ function AdminDashboardSection() {
                   <Box>
                     <Image src={items?.icon} alt="" />
                   </Box>
-                </Stack>
-                <Stack direction="row" alignItems="center" spacing={1}>
-                  <Image
-                    src={items?.status === "up" ? UpIcon : DownIcon}
-                    alt=""
-                  />
-                  <Typography>
-                    <Typography
-                      component="span"
-                      sx={{
-                        color: items?.status === "up" ? "#00B69B" : "#F93C65",
-                      }}
-                    >
-                      {items?.percentage}{" "}
-                    </Typography>
-                    {items?.status === "up" ? "Up" : "Down"} from past week
-                  </Typography>
                 </Stack>
               </Stack>
             </Card>
