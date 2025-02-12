@@ -1,8 +1,10 @@
 import { CustomTable } from "@/src/components";
 import { useGetDonorKycRequestsListQuery } from "@/src/services/admin/kyc-requests/kyc-requests-api";
 import { Button } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 function DonorKYCRequests() {
+  const { push } = useRouter();
   const { data, isLoading, isError, isSuccess, isFetching } =
     useGetDonorKycRequestsListQuery({});
 
@@ -36,8 +38,14 @@ function DonorKYCRequests() {
       isSortable: false,
     },
     {
-      accessorFn: () => (
-        <Button variant="text" sx={{ textDecoration: "underline" }}>
+      accessorFn: (row: any) => (
+        <Button
+          variant="text"
+          sx={{ textDecoration: "underline" }}
+          onClick={() => {
+            push(`/kyc-requests/view-profile?id=${row?.id}`);
+          }}
+        >
           View Profile
         </Button>
       ),
