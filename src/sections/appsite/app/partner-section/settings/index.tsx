@@ -10,7 +10,7 @@ import {
 } from "@/src/services/donor/setting/setting-api";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
-
+import { DiscountSection } from "../discount-section";
 
 export const Schema = Yup.object().shape({
   address: Yup.string().required("Address is required"),
@@ -21,7 +21,10 @@ export const Schema = Yup.object().shape({
 });
 
 function PartnerSettingSection() {
-  const { data: profileData } = useGetDonorProfileQuery({},{refetchOnMountOrArgChange:true});
+  const { data: profileData } = useGetDonorProfileQuery(
+    {},
+    { refetchOnMountOrArgChange: true }
+  );
   const [enable, setEnable] = useState(true);
 
   const [editProfile] = useEditProfileMutation();
@@ -43,7 +46,7 @@ function PartnerSettingSection() {
   });
   const { handleSubmit: handleSubmit2 } = methods2;
   const { handleSubmit, setValue } = methods;
-const [image,setImage]=useState(null)
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     if (profileData?.body) {
@@ -52,7 +55,7 @@ const [image,setImage]=useState(null)
       setValue("contact_num", profileData?.body?.contact_num);
       setValue("email", profileData?.body?.email);
       setValue("address", profileData?.body?.address);
-      setImage(profileData?.body?.profile_image)
+      setImage(profileData?.body?.profile_image);
     }
   }, [profileData, setValue]);
 
@@ -103,7 +106,6 @@ const [image,setImage]=useState(null)
             >
               Edit Profile
             </Button>
-          
           </Box>
         </Box>
 
@@ -172,7 +174,7 @@ const [image,setImage]=useState(null)
             </Grid>
           </Grid>
         </FormProvider>
-
+        <DiscountSection enable={enable} setEnable={setEnable} />
         {/* Password Update Form */}
         <FormProvider methods={methods2} onSubmit={handleSubmit2(onSubmit2)}>
           <Grid container>
@@ -219,7 +221,6 @@ const [image,setImage]=useState(null)
           </Grid>
         </FormProvider>
       </Stack>
-    
     </div>
   );
 }

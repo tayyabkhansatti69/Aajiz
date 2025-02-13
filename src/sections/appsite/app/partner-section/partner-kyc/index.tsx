@@ -1,6 +1,7 @@
 import {
   FormProvider,
   RHFAutocompleteAsync,
+  RHFCustomSelect,
   RHFRadioGroup,
   RHFTextField,
 } from "@/src/components/rhf";
@@ -39,13 +40,23 @@ export const Schema = () =>
       .required("Business Email is required"),
     address: Yup.string().required("Address is required"),
     contact_num: Yup.string().required("Contact number is required"),
-
+    discount: Yup.number()
+      .nullable()
+      .notRequired()
+      .transform(
+        (value, originalValue) => (originalValue === "" ? null : value) // Convert empty string to null
+      )
+      .test(
+        "min-5-or-null",
+        "Discount must be at least 5",
+        (value: any) => value === null || value >= 5
+      ),
     ntn: Yup.string().required("NTN is required"),
     id_card_num: Yup.string().nullable(),
     front_card: Yup.string().nullable(),
     back_card: Yup.string().nullable(),
     individual_or_company: Yup.string().required(
-      "Individual or company selection is required",
+      "Individual or company selection is required"
     ),
     industry_id: Yup.object().nullable().required("Industry type is required"),
   });
@@ -55,15 +66,15 @@ function PartnerKyc() {
   const [partnerKyc] = usePartnerKycMutation();
   const router = useRouter();
   const methods = useForm({
-    // resolver: yupResolver(Schema(companyType)),
+    // resolver: yupResolver(Schema()),
     defaultValues: {
       business_name: "",
       business_logo: "",
       business_email: "",
       individual_or_company: "individual",
+      discount: 0,
       address: "",
       contact_num: "",
-      description: "",
       ntn: "",
       id_card_num: "",
       front_card: "",
@@ -94,7 +105,7 @@ function PartnerKyc() {
         data.individual_or_company === "individual" ? true : false;
       try {
         const formData = new FormData(); // Use FormData for multipart/form-data
-
+        formData.append("discount_manager", data.discount);
         formData.append("business_name", data.business_name);
         formData.append("business_logo", data.business_logo);
         formData.append("business_email", data.business_email);
@@ -113,7 +124,7 @@ function PartnerKyc() {
 
         toast.success(
           response?.message ||
-            "Your request was sent for verification successfully!",
+            "Your request was sent for verification successfully!"
         );
         clearLocalStorage();
         router?.push("/sign-in");
@@ -150,7 +161,7 @@ function PartnerKyc() {
               {/* Conditional rendering based on active step */}
               {activeStep === 0 && (
                 <>
-                  <Grid item lg={6} xs={12} container>
+                  <Grid item lg={6} xs={12} container spacing={1}>
                     <Grid item xs={12}>
                       <RHFTextField
                         name="business_name"
@@ -183,6 +194,18 @@ function PartnerKyc() {
                         name="address"
                         outerLabel="Address"
                         size="small"
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <RHFCustomSelect
+                        name="discount"
+                        outerLabel="Discount"
+                        options={[
+                          { id: 1, label: "5 %", value: 5 },
+                          { id: 2, label: "10 %", value: 10 },
+                          { id: 3, label: "15 %", value: 15 },
+                          { id: 4, label: "20 %", value: 20 },
+                        ]}
                       />
                     </Grid>
                     <Grid item xs={12}>
