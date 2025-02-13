@@ -1,6 +1,7 @@
 import {
   FormProvider,
   RHFAutocompleteAsync,
+  RHFCustomSelect,
   RHFRadioGroup,
   RHFTextField,
 } from "@/src/components/rhf";
@@ -196,11 +197,15 @@ function PartnerKyc() {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <RHFTextField
+                      <RHFCustomSelect
                         name="discount"
                         outerLabel="Discount"
-                        size="small"
-                        type={"number"}
+                        options={[
+                          { id: 1, label: "5 %", value: 5 },
+                          { id: 2, label: "10 %", value: 10 },
+                          { id: 3, label: "15 %", value: 15 },
+                          { id: 4, label: "20 %", value: 20 },
+                        ]}
                       />
                     </Grid>
                     <Grid item xs={12}>
