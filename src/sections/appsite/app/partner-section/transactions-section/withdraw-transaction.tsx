@@ -12,14 +12,14 @@ export function WithdrawTransactionSection() {
     {
       accessorFn: (row: any) => row.transaction_id ?? "-",
       id: "transaction_id",
-      cell: (info: any) => dayjs(info.getValue()).format("DD/MM/YYYY"),
+      cell: (info: any) => info.getValue(),
       header: () => <span>Transaction Id</span>,
       isSortable: false,
     },
     {
       accessorFn: (row: any) => row.bank_name ?? "-",
       id: "bank_name",
-      cell: (info: any) => `RS ${info.getValue()}`,
+      cell: (info: any) => info.getValue(),
       header: () => <span>Withdrawal Method</span>,
       isSortable: false,
     },
@@ -40,7 +40,7 @@ export function WithdrawTransactionSection() {
     {
       accessorFn: (row: any) => row.request_amount ?? "-",
       id: "request_amount",
-      cell: (info: any) => info.getValue(),
+      cell: (info: any) => `RS ${info.getValue()}`,
       header: () => <span>Amount</span>,
       isSortable: false,
     },
