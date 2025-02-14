@@ -5,9 +5,11 @@ import {
   useGetCancelPartnerKycRequestsListQuery,
 } from "@/src/services/admin/kyc-requests/kyc-requests-api";
 import { Button } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 function CancelKYCRequests() {
+  const { push } = useRouter();
   const [params, setParams] = useState({ limit: 10, offSet: 0 });
   const [params1, setParams1] = useState({ limit: 10, offSet: 0 });
 
@@ -48,14 +50,24 @@ function CancelKYCRequests() {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.profile ?? "-",
-      id: "profile",
+      accessorFn: (row: any) => row.businessType ?? "-",
+      id: "businessType",
       cell: (info: any) => info.getValue(),
       header: () => <span>Business Type</span>,
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.profile ?? "-",
+      accessorFn: (row: any) => (
+        <Button
+          variant="text"
+          sx={{ textDecoration: "underline" }}
+          onClick={() => {
+            push(`/kyc-requests/view-profile?id=${row?.id}`);
+          }}
+        >
+          View Queries
+        </Button>
+      ),
       id: "profile",
       cell: (info: any) => info.getValue(),
       header: () => <span>Queries</span>,
@@ -92,14 +104,20 @@ function CancelKYCRequests() {
       isSortable: false,
     },
     {
-      accessorFn: () => (
-        <Button variant="text" sx={{ textDecoration: "underline" }}>
-          View Profile
+      accessorFn: (row: any) => (
+        <Button
+          variant="text"
+          sx={{ textDecoration: "underline" }}
+          onClick={() => {
+            push(`/kyc-requests/view-profile?id=${row?.id}`);
+          }}
+        >
+          View Queries
         </Button>
       ),
       id: "profile",
       cell: (info: any) => info.getValue(),
-      header: () => <span>Profile</span>,
+      header: () => <span>Queries</span>,
       isSortable: false,
     },
   ];

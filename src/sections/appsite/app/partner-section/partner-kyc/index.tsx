@@ -1,6 +1,7 @@
 import {
   FormProvider,
   RHFAutocompleteAsync,
+  RHFCustomSelect,
   RHFRadioGroup,
   RHFTextField,
 } from "@/src/components/rhf";
@@ -81,7 +82,7 @@ export const Schema = (companyType, activeStep) =>
               }
             )
         : Yup.mixed(),
-
+     discount: Yup?.number(),
     individual_or_company:
       activeStep === 1
         ? Yup.string().required("Type is required")
@@ -89,63 +90,7 @@ export const Schema = (companyType, activeStep) =>
     industry_id:activeStep === 1 ? Yup.object().nullable().required("Industry type is required"):Yup.object().nullable(),
   });
 
-// export const Schema = (companyType, activeStep) => {
-//   return Yup.object().shape({
-//     address: Yup.string().required("Address is required"),
-//     contact_num: Yup.string()
-//       .required("Contact number is required")
-//       .matches(/^\d+$/, "Contact number must be numeric"),
-//     description: Yup.string().required("Description is required"),
-//     company_name:
-//       typeofRegistery === "company" && activeStep === 1
-//         ? Yup.string().required("Company name is required")
-//         : Yup.string(),
-//     ntn:
-//       typeofRegistery === "company" && activeStep === 1
-//         ? Yup.string().required("NTN is required")
-//         : Yup.string(),
-//     id_card_num:
-//       typeofRegistery === "individual" && activeStep === 1
-//         ? Yup.string().required("ID card number is required")
-//         : Yup.string(),
-//     front_card:
-//       typeofRegistery === "individual" && activeStep === 1
-//         ? Yup.mixed()
-//             .required("Front card is required")
-//             .test(
-//               "fileRequired",
-//               "A file must be uploaded for the front card",
-//               (value) => {
-//                 if (!value) return false; // Required validation
-//                 if (typeof value === "string") return value.trim().length > 0; // String validation
-//                 if (value instanceof File) return value.size > 0; // File validation
-//                 return false;
-//               },
-//             )
-//         : Yup.mixed(),
 
-//     back_card:
-//       typeofRegistery === "individual" && activeStep === 1
-//         ? Yup.mixed()
-//             .required("Back card is required")
-//             .test(
-//               "fileRequired",
-//               "A file must be uploaded for the back card",
-//               (value) => {
-//                 if (!value) return false; // Required validation
-//                 if (typeof value === "string") return value.trim().length > 0; // String validation
-//                 if (value instanceof File) return value.size > 0; // File validation
-//                 return false;
-//               },
-//             )
-//         : Yup.mixed(),
-
-//     individual_or_company:
-//       activeStep === 1
-//         ? Yup.string().required("Type is required")
-//         : Yup?.string(),
-//   });
-// };
 function PartnerKyc() {
   const [companyType, setCompanyType] = useState<any>("individual");
   const [activeStep, setActiveStep] = useState(0);
@@ -159,9 +104,9 @@ function PartnerKyc() {
       business_logo: "",
       business_email: "",
       individual_or_company: "individual",
+      discount: 0,
       address: "",
       contact_num: "",
-      description: "",
       ntn: "",
       id_card_num: "",
       front_card: "",
@@ -192,7 +137,7 @@ function PartnerKyc() {
         data.individual_or_company === "individual" ? true : false;
       try {
         const formData = new FormData(); // Use FormData for multipart/form-data
-
+        formData.append("discount_manager", data.discount);
         formData.append("business_name", data.business_name);
         formData.append("business_logo", data.business_logo);
         formData.append("business_email", data.business_email);
@@ -248,7 +193,7 @@ function PartnerKyc() {
               {/* Conditional rendering based on active step */}
               {activeStep === 0 && (
                 <>
-                  <Grid item lg={6} xs={12} container>
+                  <Grid item lg={6} xs={12} container spacing={1}>
                     <Grid item xs={12}>
                       <RHFTextField
                         name="business_name"
@@ -283,7 +228,19 @@ function PartnerKyc() {
                         size="small"
                       />
                     </Grid>
-                    <Grid item xs={12} mt={1}>
+                    <Grid item xs={12}>
+                      <RHFCustomSelect
+                        name="discount"
+                        outerLabel="Discount"
+                        options={[
+                          { id: 1, label: "5 %", value: 5 },
+                          { id: 2, label: "10 %", value: 10 },
+                          { id: 3, label: "15 %", value: 15 },
+                          { id: 4, label: "20 %", value: 20 },
+                        ]}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
                       <RHFTextField
                         name="description"
                         size="small"
