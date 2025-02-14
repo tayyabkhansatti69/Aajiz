@@ -82,14 +82,26 @@ export const Schema = (companyType, activeStep) =>
               }
             )
         : Yup.mixed(),
-     discount: Yup?.number(),
+    discount: Yup.number()
+      .nullable()
+      .notRequired()
+      .transform(
+        (value, originalValue) => (originalValue === "" ? null : value) // Convert empty string to null
+      )
+      .test(
+        "min-5-or-null",
+        "Discount must be at least 5",
+        (value: any) => value === null || value >= 5
+      ),
     individual_or_company:
       activeStep === 1
         ? Yup.string().required("Type is required")
         : Yup?.string(),
-    industry_id:activeStep === 1 ? Yup.object().nullable().required("Industry type is required"):Yup.object().nullable(),
+    industry_id:
+      activeStep === 1
+        ? Yup.object().nullable().required("Industry type is required")
+        : Yup.object().nullable(),
   });
-
 
 function PartnerKyc() {
   const [companyType, setCompanyType] = useState<any>("individual");
