@@ -23,39 +23,137 @@ import toast from "react-hot-toast";
 import { useLazyGetIndustryTypeDropdownListQuery } from "@/src/services/donor/donate-now/donate-now-api";
 // import { yupResolver } from "@hookform/resolvers/yup";
 import { clearLocalStorage } from "@/src/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import partnerGif from "../../../../../assets/gif/partnerKyc.gif";
 import partnerGif1 from "../../../../../assets/gif/partnerKyc1.gif";
 import { RHFUploadSingleFileWithPreviewWithoutValidation } from "@/src/components/rhf/rhf-upload-with-preview";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const steps = ["Basic Details", "Personal Identification"];
-export const Schema = () =>
+export const Schema = (companyType, activeStep) =>
   Yup.object().shape({
     business_name: Yup.string().required("Business Name is required"),
-    business_logo: Yup.string().required("Business Logo is required"),
+    business_logo: Yup.mixed().required("Business Logo is required"),
     business_email: Yup.string()
       .email("Invalid email")
       .required("Business Email is required"),
     address: Yup.string().required("Address is required"),
     contact_num: Yup.string().required("Contact number is required"),
+    description: Yup.string().required("Description is required"),
 
-    ntn: Yup.string().required("NTN is required"),
-    id_card_num: Yup.string().nullable(),
-    front_card: Yup.string().nullable(),
-    back_card: Yup.string().nullable(),
-    individual_or_company: Yup.string().required(
-      "Individual or company selection is required",
-    ),
-    industry_id: Yup.object().nullable().required("Industry type is required"),
+    ntn:
+      companyType === "company" && activeStep === 1
+        ? Yup.string().required("NTN is required")
+        : Yup.string(),
+    id_card_num:
+      companyType === "individual" && activeStep === 1
+        ? Yup.string().required("ID card number is required")
+        : Yup.string(),
+    front_card:
+      companyType === "individual" && activeStep === 1
+        ? Yup.mixed()
+            .required("Front card is required")
+            .test(
+              "fileRequired",
+              "A file must be uploaded for the front card",
+              (value) => {
+                if (!value) return false; // Required validation
+                if (typeof value === "string") return value.trim().length > 0; // String validation
+                if (value instanceof File) return value.size > 0; // File validation
+                return false;
+              }
+            )
+        : Yup.mixed(),
+
+    back_card:
+      companyType === "individual" && activeStep === 1
+        ? Yup.mixed()
+            .required("Back card is required")
+            .test(
+              "fileRequired",
+              "A file must be uploaded for the back card",
+              (value) => {
+                if (!value) return false; // Required validation
+                if (typeof value === "string") return value.trim().length > 0; // String validation
+                if (value instanceof File) return value.size > 0; // File validation
+                return false;
+              }
+            )
+        : Yup.mixed(),
+
+    individual_or_company:
+      activeStep === 1
+        ? Yup.string().required("Type is required")
+        : Yup?.string(),
+    industry_id:activeStep === 1 ? Yup.object().nullable().required("Industry type is required"):Yup.object().nullable(),
   });
+
+// export const Schema = (companyType, activeStep) => {
+//   return Yup.object().shape({
+//     address: Yup.string().required("Address is required"),
+//     contact_num: Yup.string()
+//       .required("Contact number is required")
+//       .matches(/^\d+$/, "Contact number must be numeric"),
+//     description: Yup.string().required("Description is required"),
+//     company_name:
+//       typeofRegistery === "company" && activeStep === 1
+//         ? Yup.string().required("Company name is required")
+//         : Yup.string(),
+//     ntn:
+//       typeofRegistery === "company" && activeStep === 1
+//         ? Yup.string().required("NTN is required")
+//         : Yup.string(),
+//     id_card_num:
+//       typeofRegistery === "individual" && activeStep === 1
+//         ? Yup.string().required("ID card number is required")
+//         : Yup.string(),
+//     front_card:
+//       typeofRegistery === "individual" && activeStep === 1
+//         ? Yup.mixed()
+//             .required("Front card is required")
+//             .test(
+//               "fileRequired",
+//               "A file must be uploaded for the front card",
+//               (value) => {
+//                 if (!value) return false; // Required validation
+//                 if (typeof value === "string") return value.trim().length > 0; // String validation
+//                 if (value instanceof File) return value.size > 0; // File validation
+//                 return false;
+//               },
+//             )
+//         : Yup.mixed(),
+
+//     back_card:
+//       typeofRegistery === "individual" && activeStep === 1
+//         ? Yup.mixed()
+//             .required("Back card is required")
+//             .test(
+//               "fileRequired",
+//               "A file must be uploaded for the back card",
+//               (value) => {
+//                 if (!value) return false; // Required validation
+//                 if (typeof value === "string") return value.trim().length > 0; // String validation
+//                 if (value instanceof File) return value.size > 0; // File validation
+//                 return false;
+//               },
+//             )
+//         : Yup.mixed(),
+
+//     individual_or_company:
+//       activeStep === 1
+//         ? Yup.string().required("Type is required")
+//         : Yup?.string(),
+//   });
+// };
 function PartnerKyc() {
-  // const [companyType, setCompanyType] = useState<any>('')
+  const [companyType, setCompanyType] = useState<any>("individual");
+  const [activeStep, setActiveStep] = useState(0);
   const industryTypeDropdownList = useLazyGetIndustryTypeDropdownListQuery();
   const [partnerKyc] = usePartnerKycMutation();
   const router = useRouter();
   const methods = useForm({
-    // resolver: yupResolver(Schema(companyType)),
+    resolver: yupResolver(Schema(companyType, activeStep)),
     defaultValues: {
       business_name: "",
       business_logo: "",
@@ -73,12 +171,12 @@ function PartnerKyc() {
   });
 
   const { handleSubmit, watch } = methods;
-  const [activeStep, setActiveStep] = useState(0);
+
   const typeValue = watch("individual_or_company");
 
-  // useEffect(() => {
-  //     setCompanyType(typeValue)
-  // }, [typeValue])
+  useEffect(() => {
+    setCompanyType(typeValue);
+  }, [typeValue]);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -113,7 +211,7 @@ function PartnerKyc() {
 
         toast.success(
           response?.message ||
-            "Your request was sent for verification successfully!",
+            "Your request was sent for verification successfully!"
         );
         clearLocalStorage();
         router?.push("/sign-in");
@@ -185,7 +283,7 @@ function PartnerKyc() {
                         size="small"
                       />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} mt={1}>
                       <RHFTextField
                         name="description"
                         size="small"
